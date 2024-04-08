@@ -3,8 +3,18 @@
 @tailwind utilities;
 
 body{
-  background-color: gray;
+  font-family: "Poppins", "Montserrat", "Raleway",'Roboto', sans-serif;
+  /* background-image: url("/public/4500x2500.jpg"); */
+  background-image: linear-gradient(
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)
+  ), url("/public/2500x1900.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
+
+
 
 .btn-primary {
   @apply bg-violet-600 hover:bg-violet-800 text-white py-2 px-4 rounded-lg transition-all;

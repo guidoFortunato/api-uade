@@ -10,7 +10,7 @@ export const Home = () => {
           <button className="btn-primary mb-5 sm:mb-0 w-[90%]">Iniciar sesión</button>
         </Link>
         <Link to="/auth/register" className="w-full">
-          <button className="btn-primary w-[90%]">Registrarse</button>
+          <button className="btn-primary w-[90%]">Crear cuenta</button>
         </Link>
       </div>
     </div>

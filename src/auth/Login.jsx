@@ -7,8 +7,8 @@ export const Login = () => {
   };
 
   return (
-    <div className="bg-violet-dark p-7 rounded-lg">
-      <form className="mx-auto bg-violet-dark" onSubmit={handleSubmit}>
+    <div className="bg-violet-dark p-7 rounded-lg bg-opacity-85 ">
+      <form className="mx-auto" onSubmit={handleSubmit}>
         <h3 className="text-white text-center text-3xl sm:text-4xl">
           Iniciar sesión
         </h3>
@@ -22,8 +22,7 @@ export const Login = () => {
           <input
             type="email"
             id="email"
-            className="bg-violet-light border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
-            placeholder="ejemplo@test.com"
+            className="bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
           />
         </div>
         <div className="mb-5">

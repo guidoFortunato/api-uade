@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 export const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("click ingresar");
+    console.log("click crear cuenta");
   };
 
   return (
     <div className="bg-violet-dark p-7 rounded-lg">
       <form className="mx-auto bg-violet-dark" onSubmit={handleSubmit}>
         <h3 className="text-white text-center text-3xl sm:text-4xl">
-          Crear cuenta
+          Registrarse
         </h3>
         <div className="my-8">
           <label
@@ -22,7 +22,7 @@ export const Register = () => {
           <input
             type="text"
             id="name"
-            className="bg-violet-light border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
+            className="bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
           />
         </div>
         <div className="my-8">
@@ -35,8 +35,8 @@ export const Register = () => {
           <input
             type="email"
             id="emailConfirm"
-            className="bg-violet-light border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
-            placeholder="ejemplo@test.com"
+            className="bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
+
           />
         </div>
         <div className="my-8">
@@ -49,8 +49,7 @@ export const Register = () => {
           <input
             type="email"
             id="emailConfirm"
-            className="bg-violet-light border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
-            placeholder="ejemplo@test.com"
+            className="bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
           />
         </div>
         <div className="mb-5">
@@ -63,7 +62,7 @@ export const Register = () => {
           <input
             type="text"
             id="password"
-            className="bg-violet-light border border-[violet-light] font-semibold text-white text-sm rounded-lg focus:ring-violet-600 focus:border-violet-600 block w-full p-2.5 "
+            className="bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-600 focus:border-violet-600 block w-full p-2.5 "
           />
         </div>
         <div className="mb-5">
@@ -81,7 +80,7 @@ export const Register = () => {
         </div>
         <div className="flex justify-center w-full mb-3">
           <button type="submit" className="btn-primary w-[200px]">
-            Registrarse
+            Crear cuenta
           </button>
         </div>
         <div className="flex justify-end text-white">
