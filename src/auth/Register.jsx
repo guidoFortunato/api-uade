@@ -33,7 +33,6 @@ export const Register = () => {
             Correo electrónico
           </label>
           <input
-            type="email"
             id="emailConfirm"
             className="bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
           />
