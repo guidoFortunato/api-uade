@@ -19,3 +19,9 @@ body{
 .btn-primary {
   @apply bg-violet-600 hover:bg-violet-800 text-white py-2 px-4 rounded-lg transition-all;
 }
+
+@media screen and (width: 1024px) and (height: 600px) {
+  .form-note{
+    margin: 20px 0
+  }
+}

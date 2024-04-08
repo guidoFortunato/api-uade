@@ -7,7 +7,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="bg-violet-dark p-7 rounded-lg bg-opacity-65">
+    <div className="bg-violet-dark p-7 rounded-lg bg-opacity-65 my-10">
       <form className="mx-auto" onSubmit={handleSubmit}>
         <h3 className="text-white text-center text-3xl sm:text-4xl">
           Iniciar sesión
@@ -20,6 +20,7 @@ export const Login = () => {
             Correo electrónico
           </label>
           <input
+            type="text"
             id="email"
             className="bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
           />
