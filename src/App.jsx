@@ -1,6 +1,6 @@
 import { AuthRouter, HomeRouter } from "./router";
 
-const auth = true;
+const auth = false;
 
 function App() {
   if (auth) return <HomeRouter />;
