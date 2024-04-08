@@ -6,8 +6,8 @@ body{
   font-family: "Poppins", "Montserrat", "Raleway",'Roboto', sans-serif;
   /* background-image: url("/public/4500x2500.jpg"); */
   background-image: linear-gradient(
-    rgba(0,0,0,0.5),
-    rgba(0,0,0,0.5)
+    rgba(0,0,0,0.7),
+    rgba(0,0,0,0.7)
   ), url("/public/2500x1900.jpg");
   background-size: cover;
   background-repeat: no-repeat;
