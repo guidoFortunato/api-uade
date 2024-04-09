@@ -58,11 +58,6 @@ export const Register = () => {
             Correo electrónico
           </label>
           <input
-<<<<<<< HEAD
-            id="emailConfirm"
-            type="text"
-            className="bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
-=======
             type="text"
             id="email"
             className={clsx(
@@ -84,7 +79,6 @@ export const Register = () => {
                 message: "Ingrese un correo electrónico válido",
               },
             })}
->>>>>>> dev
           />
           {errors.email && (
             <span className="text-red-600 text-xs block mt-1 font-semibold">
