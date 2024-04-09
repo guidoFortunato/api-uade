@@ -1,16 +1,16 @@
-import clsx from "clsx";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
+import { UserContext } from "../context/UserProvider";
 
 export const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm();
+  const { handleAuth } = useContext(UserContext);
+  const { register, handleSubmit, formState: { errors }, watch } = useForm();
+
   const onSubmit = handleSubmit((data) => {
     console.log({ data });
+    handleAuth(true);
   });
 
   return (

@@ -1,16 +1,16 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
+import { useContext } from "react";
+import { UserContext } from "../context/UserProvider";
 
 export const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { handleAuth } = useContext(UserContext);
 
   const onSubmit = handleSubmit((data) => {
     console.log({ data });
+    handleAuth(true);
   });
 
   return (
@@ -49,14 +49,13 @@ export const Login = () => {
               },
             })}
           />
-           <div className={
-            clsx(
-              "text-red-600 font-semibold block mt-1",
-              {
-                "hidden": errors.email,
-              }
-            )
-           }> </div>
+          <div
+            className={clsx("text-red-600 font-semibold block mt-1", {
+              hidden: errors.email,
+            })}
+          >
+            {" "}
+          </div>
           {errors.email && (
             <span className="text-red-600 font-semibold text-xs block mt-1">
               {errors.email.message}
