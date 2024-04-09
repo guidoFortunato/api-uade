@@ -1,5 +1,5 @@
 export const SeeLater = () => {
   return (
-    <div>SeeLater</div>
+    <div className="text-white">SeeLater</div>
   )
 }
