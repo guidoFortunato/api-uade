@@ -7,7 +7,7 @@ export const Register = () => {
   };
 
   return (
-    <div className="bg-violet-dark p-7 rounded-lg bg-opacity-65 my-10">
+    <div className="bg-violet-dark p-7 rounded-lg bg-opacity-65 my-100">
       <form className="mx-auto flex flex-col gap-4" onSubmit={handleSubmit}>
         <h3 className="text-white text-center text-3xl sm:text-4xl">
           Registrarse
