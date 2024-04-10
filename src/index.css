@@ -20,7 +20,7 @@ body {
       rgba(16, 4, 44, 0.829),
       rgba(51, 14, 97, 0.575)
     ),
-    url("/2500x1900.jpg");
+    url("/public/Backgound_Landing.jpeg");
   /* opacity: 0.7; */
   background-size: cover;
   background-repeat: no-repeat;
