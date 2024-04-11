@@ -7,7 +7,7 @@ export const SideBar = () => {
   const { handleAuth } = useContext(UserContext);
 
   return (
-    <Navbar fluid rounded>
+    <Navbar fluid>
       <Link to="/" className="flex items-center">
         <img
           src="/logo.png"
