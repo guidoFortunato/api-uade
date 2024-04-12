@@ -2,14 +2,15 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { useContext } from "react";
-import { UserContext } from "../context/UserProvider";
+import { UserContext } from "../../context/UserProvider";
+
 
 export const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { handleAuth } = useContext(UserContext);
 
   const onSubmit = handleSubmit((data) => {
-    // console.log({ data });
+    console.log({ data });
     handleAuth(true);
   });
 
@@ -70,7 +71,7 @@ export const Login = () => {
             Contraseña
           </label>
           <input
-            type="text"
+            type="password"
             id="password"
             className={clsx(
               "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",

@@ -10,7 +10,7 @@ export const SideBar = () => {
     <Navbar fluid>
       <Link to="/" className="flex items-center">
         <img
-          src="/logo.png"
+          src="/Logo.png"
           className="h-6 sm:h-9"
           alt="Flowbite React Logo"
         />
@@ -58,7 +58,7 @@ export const SideBar = () => {
           }
           aria-current="page"
         >
-          Home
+          Dashboard
         </NavLink>
 
         <NavLink
