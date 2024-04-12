@@ -1,6 +1,6 @@
+import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { UserContext } from "../../context/UserProvider";
 
 export const SideBar = () => {
@@ -15,7 +15,7 @@ export const SideBar = () => {
           alt="Flowbite React Logo"
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          FrameLand
+          <em>FrameLand</em>
         </span>
       </Link>
 
