@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
-import { UserContext } from "../context/UserProvider";
+import { UserContext } from "../../context/UserProvider";
+
 
 export const Register = () => {
   const { handleAuth } = useContext(UserContext);

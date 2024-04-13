@@ -58,7 +58,7 @@ export const SideBar = () => {
           }
           aria-current="page"
         >
-          Home
+          Dashboard
         </NavLink>
 
         <NavLink
