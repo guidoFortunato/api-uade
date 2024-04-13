@@ -19,6 +19,7 @@ export const Dashboard = () => {
           title={movie.title}
           image={movie.backdrop_path}
           description={movie.overview}
+          movie={movie}
         />
       ))}
     </div>

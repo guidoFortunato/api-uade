@@ -1,10 +1,11 @@
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { FaSearch } from "react-icons/fa";
 import { UserContext } from "../../context/UserProvider";
 
 export const SideBar = () => {
-  const { handleAuth } = useContext(UserContext);
+  const { handleAuth, handleSearchBar, searchBarOpen } = useContext(UserContext);
 
   return (
     <Navbar fluid className="bg-transparent text-white">
@@ -19,7 +20,8 @@ export const SideBar = () => {
         </span>
       </Link>
 
-      <div className="flex md:order-2">
+      <div className="flex justify-center items-center md:order-2">
+        <FaSearch className="mr-3 cursor-pointer" onClick={() => handleSearchBar(!searchBarOpen)} />
         <Dropdown
           arrowIcon={false}
           inline
