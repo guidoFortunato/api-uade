@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const Home = () => {
   return (
     <div className="grid grid-cols-1 text-center text-white gap-6">
-      <h1 className="text-4xl sm:text-6xl font-semibold "><em>FrameLand</em></h1>
+      <h1 className="text-4xl sm:text-6xl font-semibold italic">FrameLand</h1>
       <p className="sm:text-xl">Disfrutá de las mejores películas y series</p>
       <div className="flex flex-col sm:flex-row sm:justify-between">
         <Link to="/auth/login" className="w-full">

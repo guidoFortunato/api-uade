@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthLayout } from "../layout";
 
-import { Home, PassRecover } from "../pages";
-import { Login, Register } from "../pages/auth";
+import { Login, PassRecover, Register } from "../pages/auth";
+import { Home } from "../pages";
 
 export const AuthRouter = () => {
   return (

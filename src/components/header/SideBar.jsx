@@ -7,15 +7,15 @@ export const SideBar = () => {
   const { handleAuth } = useContext(UserContext);
 
   return (
-    <Navbar fluid>
+    <Navbar fluid className="bg-transparent text-white">
       <Link to="/" className="flex items-center">
         <img
           src="/Logo.png"
           className="h-6 sm:h-9"
           alt="Flowbite React Logo"
         />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          <em>FrameLand</em>
+        <span className="self-center whitespace-nowrap text-xl font-semibold italic">
+          FrameLand
         </span>
       </Link>
 
@@ -53,7 +53,7 @@ export const SideBar = () => {
           to="/"
           className={({ isActive }) =>
             `block px-3 mb-1 md:mb-0 ${
-              isActive ? "bg-blue-500 text-white md:text-blue-700" : ""
+              isActive ? "bg-violet-light text-white md:text-violet-light" : ""
             }  rounded md:bg-transparent md:p-0`
           }
           aria-current="page"
@@ -65,7 +65,7 @@ export const SideBar = () => {
           to="/favoritos"
           className={({ isActive }) =>
             `block px-3 mb-1 md:mb-0 ${
-              isActive ? "bg-blue-500 text-white md:text-blue-700" : ""
+              isActive ? "bg-violet-light text-white md:text-violet-light" : ""
             }  rounded md:bg-transparent md:p-0`
           }
         >
@@ -75,7 +75,7 @@ export const SideBar = () => {
           to="/ver-mas-tarde"
           className={({ isActive }) =>
             `block px-3 ${
-              isActive ? "bg-blue-500 text-white md:text-blue-700" : ""
+              isActive ? "bg-violet-light text-white md:text-violet-light" : ""
             }  rounded md:bg-transparent md:p-0`
           }
         >

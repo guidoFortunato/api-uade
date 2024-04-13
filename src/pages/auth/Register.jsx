@@ -10,7 +10,7 @@ export const Register = () => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
   const onSubmit = handleSubmit((data) => {
-    console.log({ data });
+    // console.log({ data });
     handleAuth(true);
   });
 

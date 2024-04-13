@@ -1,50 +1,35 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getEnvVariables } from "../../helpers";
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
+import { getEnvVariables } from "../../helpers";
 
 const { VITE_API_IMAGE } = getEnvVariables()
 
 
 export const MovieCard = ({ title, image, description }) => {
+  const [like, setLike] = useState(false);
+
+  const newDescription = description.length > 100 ? description.slice(0, 100) + "..." : description
+
+
+
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+    <div className="max-w-sm rounded-lg relative hover:cursor-pointer">
       <Link to="/">
         <img
-          className="rounded-t-lg"
+          className="rounded-lg"
           src={`${VITE_API_IMAGE}/${image}`}
           alt={title}
         />
       </Link>
-      <div className="p-5">
-        <Link to="#">
-          <h5 className="mb-2 text-base md:text-xl font-bold tracking-tight text-gray-900">
-            { title }
-          </h5>
-        </Link>
-        {/* <p className="mb-3 font-normal text-gray-700">
-          { description }
-        </p> */}
-        <Link
-          to="/"
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-        >
-          Read more
-          <svg
-            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 10"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M1 5h12m0 0L9 1m4 4L9 9"
-            />
-          </svg>
-        </Link>
+      <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white rounded-lg transition-all">
+       <span className="whitespace-normal text-xs md:text-sm font-semibold flex justify-center items-center h-full text-center">{title}</span>
+       <span>
+        {
+          like ? <FaHeart onClick={()=> setLike( prev => !prev )} className="absolute text-red-500 top-3 left-4 " /> : <FaRegHeart onClick={()=> setLike( prev => !prev )} className="absolute top-3 left-4 text-gray-300" /> 
+        }
+       </span>
       </div>
     </div>
   );

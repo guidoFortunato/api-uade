@@ -10,7 +10,7 @@ export const Login = () => {
   const { handleAuth } = useContext(UserContext);
 
   const onSubmit = handleSubmit((data) => {
-    console.log({ data });
+    // console.log({ data });
     handleAuth(true);
   });
 
