@@ -23,7 +23,7 @@ export const PassRecover = () => {
             id="email"
             className="bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg focus:ring-violet-500 focus:border-violet-600 block w-full p-2.5 "
           />
-          <p className="mt-2 text-sm text-violet-light hover:text-violet-500">
+          <p className="mt-2 text-xs text-violet-light">
            
               Se le enviará un código al mail indicando los pasos a seguir
            
