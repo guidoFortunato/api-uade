@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserProvider";
 
 export const Favorites = () => {
   const { favoritesMovies } = useContext(UserContext);
+  // console.log({favoritesMovies})
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
       { favoritesMovies.length > 0 ? favoritesMovies.map((movie) => (

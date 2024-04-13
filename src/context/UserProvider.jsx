@@ -10,9 +10,10 @@ const UserProvider = ({ children }) => {
   const [auth, setAuth] = useState(true);
   const [movies, setMovies] = useState([]);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
-  const [favoritesMovies, setFavoritesMovies] = useState([]);
+  const [favoritesMovies, setFavoritesMovies] = useState( JSON.parse(localStorage.getItem("favorites")) || [] );
   const [iconLike, setIconLike] = useState(false);
   const [iconFavorite, setIconFavorite] = useState(false);
+
   // const [searchKey, setSearchKey] = useState([]);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const UserProvider = ({ children }) => {
         `${VITE_API_URL}/movie/now_playing?api_key=${VITE_API_KEY}`
       );
       const data = await res.json();
-      console.log({ data });
+      // console.log({ data });
       setMovies(data.results);
     };
     getMovies();
@@ -44,14 +45,20 @@ const UserProvider = ({ children }) => {
   };
 
   const handleFavoritesMovies = (movie) => {
-    console.log({movie})
-    
-    const isFavorite = favoritesMovies.some( favoriteMovie => favoriteMovie.id === movie.id)
+    console.log({ movie });
+
+    const isFavorite = favoritesMovies.some( (favoriteMovie) => favoriteMovie.id === movie.id );
+
     if (!isFavorite) {
-      setFavoritesMovies([...favoritesMovies, movie]);
+      const updatedFavorites = [...favoritesMovies, movie];
+      console.log({updatedFavorites})
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      setFavoritesMovies(updatedFavorites);
+    } else {
+      const updatedFavorites = favoritesMovies.filter( favoriteMovie => favoriteMovie.id !== movie.id);
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      setFavoritesMovies(updatedFavorites);
     }
-
-
   };
 
   return (

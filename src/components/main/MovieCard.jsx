@@ -7,6 +7,7 @@ import { UserContext } from "../../context/UserProvider";
 
 const { VITE_API_IMAGE } = getEnvVariables();
 
+
 export const MovieCard = ({ title, image, description, movie }) => {
   const {
     handleFavoritesMovies,
@@ -15,12 +16,10 @@ export const MovieCard = ({ title, image, description, movie }) => {
     handleIconLike,
     handleIconFavorites,
   } = useContext(UserContext);
-
+  
+ 
   const [like, setLike] = useState(false);
-  const [favorite, setFavorite] = useState(false);
-
-  const newDescription =
-    description.length > 100 ? description.slice(0, 100) + "..." : description;
+  const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem('favorites')).find((favorite) => favorite.id  === movie.id) ? true : false);
 
   const handleLike = () => {
     setLike( prev => !prev )

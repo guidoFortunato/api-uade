@@ -6,7 +6,7 @@ import { MovieCard } from "../components/";
 
 export const Dashboard = () => {
   const { movies } = useContext(UserContext);
-  console.log({ movies });
+  // console.log({ movies });
 
   // const [movies, setMovies] = useState([]);
   // const [searchKey, setSearchKey] = useState([]);
