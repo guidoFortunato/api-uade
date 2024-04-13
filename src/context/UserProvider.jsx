@@ -7,7 +7,7 @@ export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const UserProvider = ({ children }) => {
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("auth")) || false);
   const [movies, setMovies] = useState([]);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
   const [favoritesMovies, setFavoritesMovies] = useState( JSON.parse(localStorage.getItem("favorites")) || [] );

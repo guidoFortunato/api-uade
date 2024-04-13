@@ -7,6 +7,11 @@ import { UserContext } from "../../context/UserProvider";
 export const SideBar = () => {
   const { handleAuth, handleSearchBar, searchBarOpen } = useContext(UserContext);
 
+  const handleLogout = ()=>{
+    handleAuth(false)
+    localStorage.setItem("auth", JSON.stringify(false));
+  }
+
   return (
     <Navbar fluid className="bg-transparent text-white">
       <Link to="/" className="flex items-center">
@@ -44,8 +49,8 @@ export const SideBar = () => {
           </Link>
 
           <Dropdown.Divider />
-          <Dropdown.Item onClick={() => handleAuth(false)}>
-            Sign out
+          <Dropdown.Item onClick={ handleLogout }>
+            Log out
           </Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />

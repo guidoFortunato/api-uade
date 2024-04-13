@@ -12,6 +12,7 @@ export const Register = () => {
   const onSubmit = handleSubmit((data) => {
     // console.log({ data });
     handleAuth(true);
+    localStorage.setItem("auth", JSON.stringify(true));
   });
 
   return (
@@ -133,7 +134,7 @@ export const Register = () => {
             Contraseña
           </label>
           <input
-            type="text"
+            type="password"
             id="password"
             className={clsx(
               "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
@@ -173,7 +174,7 @@ export const Register = () => {
             Confirmar contraseña
           </label>
           <input
-            type="text"
+            type="password"
             id="confirmPassword"
             className={clsx(
               "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",

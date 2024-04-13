@@ -12,6 +12,7 @@ export const Login = () => {
   const onSubmit = handleSubmit((data) => {
     // console.log({ data });
     handleAuth(true);
+    localStorage.setItem("auth", JSON.stringify(true));
   });
 
   return (

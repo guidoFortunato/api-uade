@@ -1,14 +1,11 @@
 export const SearchBar = () => {
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('click en buscar')
-  }
-  
-
+    console.log("click en buscar");
+  };
 
   return (
-    <form className="max-w-lg mx-auto px-5 md:px-0" onSubmit={ handleSubmit }>
+    <form className="max-w-lg mx-auto px-5 md:px-0" onSubmit={handleSubmit}>
       <label
         htmlFor="default-search"
         className="mb-2 text-sm font-medium text-gray-900 sr-only"
