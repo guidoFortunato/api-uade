@@ -1,8 +1,37 @@
+import { useState } from "react";
+import { alertaWarning, getData, getEnvVariables } from "../../helpers";
+const { VITE_API_URL } = getEnvVariables();
+
 export const SearchBar = () => {
+
+  const [value, setValue] = useState("");
+
+  const handleValue = (e)=>{
+    if(!e.target.value.trim()){
+      setValue("")
+      return
+    }
+    setValue(e.target.value)
+  }
+
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("click en buscar");
+    if (value.length === 0) {
+      alertaWarning("Debe ingresar un evento");
+      return;
+    }
+    console.log({value})
+    const getMovie = async()=>{
+      const data = await getData( `${VITE_API_URL}/search/movie?query=${value}` );
+      console.log({data})
+    }
+    getMovie()
+    
   };
+
 
   return (
     <form className="max-w-lg mx-auto px-5 md:px-0" onSubmit={handleSubmit}>
@@ -35,7 +64,9 @@ export const SearchBar = () => {
           id="default-search"
           className="block w-full p-4 ps-10 pr-24 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-violet-800 focus:border-violet-800"
           placeholder="Buscar película por título, autor, género..."
-          required
+          value={ value }
+          onChange={ handleValue }
+          
         />
         <button
           type="submit"

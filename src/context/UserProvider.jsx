@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { getEnvVariables } from "../helpers/";
+import { getData, getEnvVariables } from "../helpers/";
 
-const { VITE_API_URL, VITE_API_KEY } = getEnvVariables();
+const { VITE_API_URL } = getEnvVariables();
 
 export const UserContext = createContext();
 
@@ -17,11 +17,9 @@ const UserProvider = ({ children }) => {
   // const [searchKey, setSearchKey] = useState([]);
 
   useEffect(() => {
+
     const getMovies = async () => {
-      const res = await fetch(
-        `${VITE_API_URL}/movie/now_playing?api_key=${VITE_API_KEY}`
-      );
-      const data = await res.json();
+      const data = await getData( `${VITE_API_URL}/movie/now_playing` );
       // console.log({ data });
       setMovies(data.results);
     };
