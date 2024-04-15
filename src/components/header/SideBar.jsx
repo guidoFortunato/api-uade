@@ -18,7 +18,7 @@ export const SideBar = () => {
         <img
           src="/Logo.png"
           className="h-6 sm:h-9"
-          alt="Flowbite React Logo"
+          alt="Frameland"
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold italic">
           FrameLand

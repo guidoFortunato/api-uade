@@ -14,7 +14,7 @@ export const Favorites = () => {
         <MovieCard
           key={movie.id}
           title={movie.title}
-          image={ movie.backdrop_path ? `${VITE_API_IMAGE}/${movie.backdrop_path}` : "https://placehold.co/300x170" }
+          image={ movie.backdrop_path ? `${VITE_API_IMAGE}${movie.backdrop_path}` : "https://placehold.co/300x170" }
           description={movie.overview}
           movie={movie}
         />

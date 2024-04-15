@@ -11,6 +11,7 @@ export const getData = async (url) => {
         Authorization: `Bearer ${VITE_API_TOKEN}`
       },
     });
+    console.log({response})
 
     if (!response.ok) {
       const data = {

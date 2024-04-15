@@ -28,7 +28,7 @@ export const SearchMovies = () => {
       setIsLoading(true);
       const getMovie = async () => {
         const data = await getData(
-          `${VITE_API_URL}/search/movie?query=${query}`
+          `${VITE_API_URL}search/movie?query=${query}`
         );
         console.log({ data });
         setMovies(data.results);
