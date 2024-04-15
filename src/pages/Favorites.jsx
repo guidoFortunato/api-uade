@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { MovieCard } from "../components"
 import { UserContext } from "../context/UserProvider";
+import { getEnvVariables } from "../helpers";
+
+const { VITE_API_IMAGE } = getEnvVariables();
 
 export const Favorites = () => {
   const { favoritesMovies } = useContext(UserContext);
@@ -11,7 +14,7 @@ export const Favorites = () => {
         <MovieCard
           key={movie.id}
           title={movie.title}
-          image={movie.backdrop_path}
+          image={ movie.backdrop_path ? `${VITE_API_IMAGE}/${movie.backdrop_path}` : "https://placehold.co/300x170" }
           description={movie.overview}
           movie={movie}
         />

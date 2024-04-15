@@ -1,37 +1,30 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { alertaWarning, getData, getEnvVariables } from "../../helpers";
+
 const { VITE_API_URL } = getEnvVariables();
 
 export const SearchBar = () => {
-
+  let navigate = useNavigate();
   const [value, setValue] = useState("");
 
-  const handleValue = (e)=>{
-    if(!e.target.value.trim()){
-      setValue("")
-      return
+  const handleValue = (e) => {
+    if (!e.target.value.trim()) {
+      setValue("");
+      return;
     }
-    setValue(e.target.value)
-  }
-
-
-
+    setValue(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (value.length === 0) {
-      alertaWarning("Debe ingresar un evento");
+      alertaWarning();
       return;
     }
-    console.log({value})
-    const getMovie = async()=>{
-      const data = await getData( `${VITE_API_URL}/search/movie?query=${value}` );
-      console.log({data})
-    }
-    getMovie()
-    
+    navigate(`/busqueda-peliculas/search?q=${value}`);
+    setValue("");
   };
-
 
   return (
     <form className="max-w-lg mx-auto px-5 md:px-0" onSubmit={handleSubmit}>
@@ -64,9 +57,8 @@ export const SearchBar = () => {
           id="default-search"
           className="block w-full p-4 ps-10 pr-24 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-violet-800 focus:border-violet-800"
           placeholder="Buscar película por título, autor, género..."
-          value={ value }
-          onChange={ handleValue }
-          
+          value={value}
+          onChange={handleValue}
         />
         <button
           type="submit"

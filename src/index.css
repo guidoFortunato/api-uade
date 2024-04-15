@@ -39,3 +39,23 @@ body {
 .btn-primary {
   @apply bg-violet-600 hover:bg-violet-800 text-white py-2 px-4 rounded-lg transition-all;
 }
+
+
+ /* spinner */
+
+ .spinner{
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+  color: rgb(201, 194, 194);
+}
+
+.spinning{
+  animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+  to{
+    transform: rotate(360deg);
+  }
+}

@@ -38,7 +38,7 @@ export const MovieCard = ({ title, image, description, movie }) => {
       <Link to="/">
         <img
           className="rounded-lg"
-          src={`${VITE_API_IMAGE}/${image}`}
+          src={image}
           alt={title}
         />
       </Link>

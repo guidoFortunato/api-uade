@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { HomeLayout } from "../layout";
-import { Favorites, SeeLater, Dashboard } from "../pages";
+import { Favorites, SeeLater, Dashboard, SearchMovies } from "../pages";
 
 export const HomeRouter = () => {
   return (
@@ -9,6 +9,7 @@ export const HomeRouter = () => {
         <Route index element={<Dashboard />} />
         <Route path="favoritos" element={<Favorites />} />
         <Route path="ver-mas-tarde" element={<SeeLater />} />
+        <Route path="busqueda-peliculas/:name" element={<SearchMovies />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
