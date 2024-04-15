@@ -28,7 +28,7 @@ export const SearchMovies = () => {
       setIsLoading(true);
       const getMovie = async () => {
         const data = await getData(
-          `${VITE_API_URL}search/movie?query=${query}`
+          `https://api.themoviedb.org/3/search/movie?query=${query}`
         );
         console.log({ data });
         setMovies(data.results);
@@ -60,7 +60,7 @@ export const SearchMovies = () => {
               title={movie.title}
               image={
                 movie.backdrop_path
-                  ? `${VITE_API_IMAGE}/${movie.backdrop_path}`
+                  ? `https://image.tmdb.org/t/p/original//${movie.backdrop_path}`
                   : "https://placehold.co/300x170"
               }
               description={movie.overview}

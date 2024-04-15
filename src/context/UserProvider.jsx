@@ -19,7 +19,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
 
     const getMovies = async () => {
-      const data = await getData( `${VITE_API_URL}movie/now_playing` );
+      const data = await getData( `https://api.themoviedb.org/3/movie/now_playing` );
       // console.log({ data });
       setMovies(data.results);
     };
