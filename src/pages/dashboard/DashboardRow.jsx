@@ -1,13 +1,13 @@
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { MovieCard } from "../../components";
 
-export const DashboardRow = ({ title = "titulo", movies }) => {
+export const DashboardRow = ({ title, movies, id }) => {
   const slideLeft = () => {
-    let slider = document.getElementById("slider");
+    let slider = document.getElementById("slider" + id);
     slider.scrollLeft = slider.scrollLeft - 500;
   };
   const slideRight = () => {
-    let slider = document.getElementById("slider");
+    let slider = document.getElementById("slider" + id);
     slider.scrollLeft = slider.scrollLeft + 500;
   };
 
@@ -16,13 +16,13 @@ export const DashboardRow = ({ title = "titulo", movies }) => {
       <h2 className="text-white font-bold md:text-left">{title}</h2>
       <div className="relative flex items-center group">
         <MdChevronLeft
-          className="bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 z-10 hidden group-hover:block"
+          className="bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 z-10 cursor-pointer hidden group-hover:block"
           size={40}
           onClick={ slideLeft }
         />
         <div
           className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide"
-          id="slider"
+          id={"slider" + id}
         >
           {movies.map((movie) => (
             <MovieCard

@@ -38,7 +38,7 @@ export const MovieCard = ({ title, image, description, movie }) => {
   };
 
   return (
-    <div className="rounded-lg w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2">
+    <div className="rounded-lg w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative mx-1">
       <Link to="/" className="w-full h-full block">
         <img className="rounded-lg " src={image} alt={title} />
       </Link>
