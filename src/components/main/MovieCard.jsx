@@ -37,30 +37,30 @@ export const MovieCard = ({ title, image, description, movie }) => {
         <img className="rounded-lg" src={image} alt={title} />
       </Link>
       <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white rounded-lg transition-all">
-        <span className="whitespace-normal text-xs md:text-sm font-semibold flex justify-center items-center h-full text-center">
+        <span className="whitespace-normal text-[0.7rem] md:text-sm font-semibold flex justify-center items-center h-full text-center">
           {title}
         </span>
         <span>
           {like ? (
             <FaHeart
               onClick={handleLike}
-              className="absolute text-red-500 top-3 left-4 "
+              className="absolute text-red-500 top-1 md:top-3 left-4 "
             />
           ) : (
             <FaRegHeart
               onClick={handleLike}
-              className="absolute top-3 left-4 text-gray-300"
+              className="absolute top-1 md:top-3 left-4 text-gray-300"
             />
           )}
           {favorite ? (
             <FaStar
               onClick={handleFavorites}
-              className="absolute text-yellow-300 top-3 left-10 "
+              className="absolute text-yellow-300 top-1 md:top-3 left-10 "
             />
           ) : (
             <FaRegStar
               onClick={handleFavorites}
-              className="absolute top-3 left-10  text-gray-300"
+              className="absolute top-1 md:top-3 left-10  text-gray-300"
             />
           )}
         </span>

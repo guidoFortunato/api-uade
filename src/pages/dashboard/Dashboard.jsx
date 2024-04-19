@@ -1,10 +1,8 @@
-// import { useState } from "react"
-
+/* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserProvider";
-import { MovieCard, Spinner } from "../../components";
-import { getEnvVariables } from "../../helpers";
 import { DashboardRow } from "./";
+import { Spinner } from "../../components";
 
 export const Dashboard = () => {
   const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies } = useContext(UserContext);
@@ -12,6 +10,7 @@ export const Dashboard = () => {
   // console.log({ nowPlayingMovies });
 
   useEffect(() => {
+    console.log('veces')
     if (nowPlayingMovies.length > 0) {
       setTotalMovies([
         { id: 1, title: "Continuar viendo", movies: nowPlayingMovies },
@@ -20,7 +19,7 @@ export const Dashboard = () => {
         { id: 4, title: "Próximamente", movies: upcomingMovies },
       ]);
     }
-  }, [nowPlayingMovies]);
+  }, [nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies]);
 
   if (nowPlayingMovies.length === 0) return <Spinner />;
 

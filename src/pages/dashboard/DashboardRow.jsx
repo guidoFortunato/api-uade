@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import Slider from "react-slick";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { MovieCard, Spinner } from "../../components";
 
 import "slick-carousel/slick/slick.css";
