@@ -6,11 +6,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export const DashboardRow = ({ title, movies }) => {
+
+  
   
   const settings = {
     slidesToShow: 5,
     slidesToScroll: 5,
-    infinite: true,
+    lazyLoad: true,
+    speed: 1000,
+    infinite: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -24,7 +28,6 @@ export const DashboardRow = ({ title, movies }) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          initialSlide: 2,
         },
       },
       {

@@ -73,3 +73,8 @@ body {
 }
  
 } */
+
+.slick-disabled{
+  /* display: none !important; */
+  cursor: default !important;
+}
