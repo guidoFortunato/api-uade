@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { MovieCard, Spinner } from "../components";
-import { getData, getEnvVariables } from "../helpers";
+import { MovieCard, Spinner } from "../../components";
+import { getData, getEnvVariables } from "../../helpers";
 
 const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
 

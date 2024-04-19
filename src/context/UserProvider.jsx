@@ -7,21 +7,53 @@ export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const UserProvider = ({ children }) => {
-  const [auth, setAuth] = useState(JSON.parse(localStorage.getItem("auth")) || false);
-  const [movies, setMovies] = useState([]);
+  const [auth, setAuth] = useState( JSON.parse(localStorage.getItem("auth")) || false );
+  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMoviesg] = useState([]);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
-  const [favoritesMovies, setFavoritesMovies] = useState( JSON.parse(localStorage.getItem("favorites")) || [] );
+  const [favoritesMovies, setFavoritesMovies] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
   const [iconLike, setIconLike] = useState(false);
   const [iconFavorite, setIconFavorite] = useState(false);
 
   // const [searchKey, setSearchKey] = useState([]);
 
   useEffect(() => {
-
     const getMovies = async () => {
-      const data = await getData( `https://api.themoviedb.org/3/movie/now_playing` );
+      const data = await getData(
+        `https://api.themoviedb.org/3/movie/now_playing`
+      );
       // console.log({ data });
-      setMovies(data.results);
+      setNowPlayingMovies(data.results);
+    };
+    getMovies();
+  }, []);
+  useEffect(() => {
+    const getMovies = async () => {
+      const data = await getData(`https://api.themoviedb.org/3/movie/popular`);
+      // console.log({ data });
+      setPopularMovies(data.results);
+    };
+    getMovies();
+  }, []);
+  useEffect(() => {
+    const getMovies = async () => {
+      const data = await getData(
+        `https://api.themoviedb.org/3/movie/top_rated`
+      );
+      // console.log({ data });
+      setTopRatedMovies(data.results);
+    };
+    getMovies();
+  }, []);
+  useEffect(() => {
+    const getMovies = async () => {
+      const data = await getData(`https://api.themoviedb.org/3/movie/upcoming`);
+      // console.log({ data });
+      setUpcomingMoviesg(data.results);
     };
     getMovies();
   }, []);
@@ -43,17 +75,21 @@ const UserProvider = ({ children }) => {
   };
 
   const handleFavoritesMovies = (movie) => {
-    console.log({ movie });
+    // console.log({ movie });
 
-    const isFavorite = favoritesMovies.some( (favoriteMovie) => favoriteMovie.id === movie.id );
+    const isFavorite = favoritesMovies.some(
+      (favoriteMovie) => favoriteMovie.id === movie.id
+    );
 
     if (!isFavorite) {
       const updatedFavorites = [...favoritesMovies, movie];
-      console.log({updatedFavorites})
+      // console.log({updatedFavorites})
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       setFavoritesMovies(updatedFavorites);
     } else {
-      const updatedFavorites = favoritesMovies.filter( favoriteMovie => favoriteMovie.id !== movie.id);
+      const updatedFavorites = favoritesMovies.filter(
+        (favoriteMovie) => favoriteMovie.id !== movie.id
+      );
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       setFavoritesMovies(updatedFavorites);
     }
@@ -71,8 +107,11 @@ const UserProvider = ({ children }) => {
         handleSearchBar,
         iconFavorite,
         iconLike,
-        movies,
+        nowPlayingMovies,
+        popularMovies,
         searchBarOpen,
+        topRatedMovies,
+        upcomingMovies,
       }}
     >
       {children}

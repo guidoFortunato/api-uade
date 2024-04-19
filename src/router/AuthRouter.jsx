@@ -2,7 +2,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthLayout } from "../layout";
 
 import { Login, PassRecover, Register } from "../pages/auth";
-import { Home } from "../pages";
+import { Home } from "../pages/dashboard";
+
 
 export const AuthRouter = () => {
   return (

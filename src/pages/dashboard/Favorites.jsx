@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { MovieCard } from "../components"
-import { UserContext } from "../context/UserProvider";
-import { getEnvVariables } from "../helpers";
+import { MovieCard } from "../../components"
+import { UserContext } from "../../context/UserProvider";
+import { getEnvVariables } from "../../helpers";
 
 const { VITE_API_IMAGE } = getEnvVariables();
 

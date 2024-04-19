@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { HomeLayout } from "../layout";
-import { Favorites, SeeLater, Dashboard, SearchMovies } from "../pages";
+import { Favorites, SeeLater, Dashboard, SearchMovies } from "../pages/dashboard";
 
 export const HomeRouter = () => {
   return (
