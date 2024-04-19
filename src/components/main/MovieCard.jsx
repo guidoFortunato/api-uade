@@ -7,40 +7,34 @@ import { UserContext } from "../../context/UserProvider";
 
 const { VITE_API_IMAGE } = getEnvVariables();
 
-
 export const MovieCard = ({ title, image, description, movie }) => {
-  const {
-    handleFavoritesMovies,
-    iconLike,
-    iconFavorite,
-    handleIconLike,
-    handleIconFavorites,
-  } = useContext(UserContext);
-  
- 
+  const { handleFavoritesMovies } = useContext(UserContext);
+
   const [like, setLike] = useState(false);
-  const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem('favorites'))?.find((favorite) => favorite.id  === movie.id) ? true : false);
+  const [favorite, setFavorite] = useState(
+    JSON.parse(localStorage.getItem("favorites"))?.find(
+      (favorite) => favorite.id === movie.id
+    )
+      ? true
+      : false
+  );
 
   const handleLike = () => {
-    setLike( prev => !prev )
+    setLike((prev) => !prev);
     // handleIconLike(!iconLike)
     // handleFavoritesMovies(movie)
   };
 
   const handleFavorites = () => {
-    setFavorite( prev => !prev )
+    setFavorite((prev) => !prev);
     // handleIconFavorites(!iconFavorite);
     handleFavoritesMovies(movie);
   };
 
   return (
-    <div className=" rounded-lg relative hover:cursor-pointer mx-1">
+    <div className="rounded-lg relative hover:cursor-pointer mx-1">
       <Link to="/">
-        <img
-          className="rounded-lg"
-          src={image}
-          alt={title}
-        />
+        <img className="rounded-lg" src={image} alt={title} />
       </Link>
       <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white rounded-lg transition-all">
         <span className="whitespace-normal text-xs md:text-sm font-semibold flex justify-center items-center h-full text-center">

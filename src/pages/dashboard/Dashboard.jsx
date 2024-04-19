@@ -6,8 +6,6 @@ import { MovieCard, Spinner } from "../../components";
 import { getEnvVariables } from "../../helpers";
 import { DashboardRow } from "./";
 
-const { VITE_API_IMAGE } = getEnvVariables();
-
 export const Dashboard = () => {
   const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies } = useContext(UserContext);
   const [totalMovies, setTotalMovies] = useState([]);
@@ -28,12 +26,8 @@ export const Dashboard = () => {
 
   return (
     <>
-    
       {totalMovies.map((movie) => (
-        <DashboardRow
-          key={movie.id}
-          {...movie}
-        />
+        <DashboardRow key={movie.id} {...movie} />
       ))}
     </>
   );

@@ -41,8 +41,8 @@ export const DashboardRow = ({ title, movies }) => {
 
   return (
     <>
-      <div className="slider-container mb-14">
-      <h2 className="text-white text-base md:text-2xl font-bold mb-1">
+      <div className="slider-container mb-10">
+      <h2 className="text-white text-base md:text-2xl font-bold mb-8 md:mb-1">
         {title}
       </h2>
         <Slider {...settings}>

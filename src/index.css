@@ -60,15 +60,16 @@ body {
 }
 
 /*slider*/
-@media screen and (min-width: 768px) {
-  /* .slick-prev,
-  .slick-next {
-    display: none; 
+/* .slick-prev,
+.slick-next {
+  display: none; 
 
-  }
-  .slider-container:hover .slick-prev,
-  .slider-container:hover .slick-next {
-    display: block; 
-  }
-  */
 }
+@media screen and (min-width: 768px) {
+  .slick-prev,
+.slick-next {
+  display: block; 
+
+}
+ 
+} */
