@@ -9,14 +9,12 @@ import { DashboardRow } from "./";
 const { VITE_API_IMAGE } = getEnvVariables();
 
 export const Dashboard = () => {
-  const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies } =
-    useContext(UserContext);
+  const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies } = useContext(UserContext);
   const [totalMovies, setTotalMovies] = useState([]);
-  console.log({ nowPlayingMovies });
+  // console.log({ nowPlayingMovies });
 
   useEffect(() => {
     if (nowPlayingMovies.length > 0) {
-      console.log("éntra");
       setTotalMovies([
         { id: 1, title: "Continuar viendo", movies: nowPlayingMovies },
         { id: 2, title: "Populares", movies: popularMovies },
@@ -30,6 +28,7 @@ export const Dashboard = () => {
 
   return (
     <>
+    
       {totalMovies.map((movie) => (
         <DashboardRow
           key={movie.id}
