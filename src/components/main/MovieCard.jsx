@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 
-import { getEnvVariables } from "../../helpers";
+// import { getEnvVariables } from "../../helpers";
 import { UserContext } from "../../context/UserProvider";
 
-const { VITE_API_IMAGE } = getEnvVariables();
+// const { VITE_API_IMAGE } = getEnvVariables();
 
 export const MovieCard = ({ title, image, description, movie }) => {
   const { handleFavoritesMovies } = useContext(UserContext);
