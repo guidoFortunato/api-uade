@@ -40,22 +40,35 @@ body {
   @apply bg-violet-600 hover:bg-violet-800 text-white py-2 px-4 rounded-lg transition-all;
 }
 
+/* spinner */
 
- /* spinner */
-
- .spinner{
+.spinner {
   display: flex;
   justify-content: center;
   margin: 30px;
   color: rgb(201, 194, 194);
 }
 
-.spinning{
+.spinning {
   animation: spinner 1s linear infinite;
 }
 
 @keyframes spinner {
-  to{
+  to {
     transform: rotate(360deg);
   }
+}
+
+/*slider*/
+@media screen and (min-width: 768px) {
+  /* .slick-prev,
+  .slick-next {
+    display: none; 
+
+  }
+  .slider-container:hover .slick-prev,
+  .slider-container:hover .slick-next {
+    display: block; 
+  }
+  */
 }

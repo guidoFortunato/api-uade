@@ -34,7 +34,7 @@ export const MovieCard = ({ title, image, description, movie }) => {
   };
 
   return (
-    <div className=" rounded-lg relative hover:cursor-pointer mx-2">
+    <div className=" rounded-lg relative hover:cursor-pointer mx-1">
       <Link to="/">
         <img
           className="rounded-lg"
