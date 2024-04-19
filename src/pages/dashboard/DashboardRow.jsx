@@ -4,11 +4,11 @@ import { MovieCard } from "../../components";
 export const DashboardRow = ({ title, movies, id }) => {
   const slideLeft = () => {
     let slider = document.getElementById("slider" + id);
-    slider.scrollLeft = slider.scrollLeft - 500;
+    slider.scrollLeft = slider.scrollLeft - 1200;
   };
   const slideRight = () => {
     let slider = document.getElementById("slider" + id);
-    slider.scrollLeft = slider.scrollLeft + 500;
+    slider.scrollLeft = slider.scrollLeft + 1200;
   };
 
   return (
