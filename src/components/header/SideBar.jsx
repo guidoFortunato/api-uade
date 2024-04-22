@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { useContext } from "react";
 import { FaSearch } from "react-icons/fa";
+import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 
 export const SideBar = () => {
@@ -54,28 +54,33 @@ export const SideBar = () => {
         <Navbar.Toggle className="ml-1" />
       </div>
       <Navbar.Collapse>
+      <img src="/house-solid.svg" className="h-4 sm:h-4" alt="Home" />
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `block px-3 mb-1 md:mb-0 ${
+            `block px-1 mb-1 md:mb-0 ${
               isActive ? "bg-violet-light text-white md:text-violet-light" : ""
             }  rounded md:bg-transparent md:p-0`
           }
           aria-current="page"
         >
+        
           Home
         </NavLink>
+        <img src="/heart-solid.svg" className="h-4 sm:h-4" alt="Mis favoritos" />
 
         <NavLink
           to="/favoritos"
           className={({ isActive }) =>
-            `block px-3 mb-1 md:mb-0 ${
+            `block px-1 mb-1 md:mb-0 ${
               isActive ? "bg-violet-light text-white md:text-violet-light" : ""
             }  rounded md:bg-transparent md:p-0`
           }
+          
         >
           Mis Favoritos
         </NavLink>
+        <img src="/star-solid.svg" className="h-4 sm:h-4" alt="Mi lista" />
         <NavLink
           to="/mi-lista"
           className={({ isActive }) =>
