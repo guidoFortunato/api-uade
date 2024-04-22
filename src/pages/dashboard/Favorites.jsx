@@ -29,7 +29,7 @@ export const Favorites = () => {
             />
           ))
         ) : (
-          <p className="text-white">
+          <p className="text-white text-sm">
             No hay películas/series favoritas por el momento
           </p>
         )}

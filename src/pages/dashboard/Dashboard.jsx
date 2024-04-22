@@ -5,9 +5,13 @@ import { DashboardRow } from "./";
 import { Spinner } from "../../components";
 
 export const Dashboard = () => {
-  const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies } = useContext(UserContext);
+  const {
+    nowPlayingMovies,
+    popularMovies,
+    topRatedMovies,
+    upcomingMovies,
+  } = useContext(UserContext);
   const [totalMovies, setTotalMovies] = useState([]);
-  // console.log({ nowPlayingMovies });
 
   useEffect(() => {
     if (nowPlayingMovies.length > 0) {

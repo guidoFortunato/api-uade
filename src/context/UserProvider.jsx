@@ -14,6 +14,7 @@ const UserProvider = ({ children }) => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [imageHome, setImageHome] = useState("");
   const [searchBarOpen, setSearchBarOpen] = useState(false);
   const [favoritesMovies, setFavoritesMovies] = useState( JSON.parse(localStorage.getItem("favorites")) || [] );
   const [listMovies, setListMovies] = useState( JSON.parse(localStorage.getItem("list")) || [] );
@@ -21,16 +22,28 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     const getMovies = async () => {
       const data = await getData(
-        `https://api.themoviedb.org/3/movie/now_playing?language=es-ES&page=10`
+        `https://api.themoviedb.org/3/movie/now_playing?language=es-ES&page=4`
       );
       // console.log({ data });
       setNowPlayingMovies(data.results);
     };
     getMovies();
   }, []);
+
+  useEffect(() => {
+    const getImageMovie = async () => {
+      const data = await getData(
+        `https://api.themoviedb.org/3/movie/238/images`
+      );
+      // console.log({ data });
+      setImageHome(data.backdrops[1].file_path);
+    };
+    getImageMovie();
+  }, []);
+
   useEffect(() => {
     const getMovies = async () => {
-      const data = await getData(`https://api.themoviedb.org/3/movie/popular?language=es-ES&page=4`);
+      const data = await getData(`https://api.themoviedb.org/3/movie/popular?language=es-ES&page=2`);
       // console.log({ data });
       setPopularMovies(data.results);
     };
@@ -113,6 +126,7 @@ const UserProvider = ({ children }) => {
         handleFavoritesMovies,
         handleListMovies,
         handleSearchBar,
+        imageHome,
         listMovies,
         nowPlayingMovies,
         popularMovies,

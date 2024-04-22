@@ -25,7 +25,7 @@ export const List = () => {
           ))
         ) : (
           <p className="text-white text-sm">
-            No hay películas en la lista por el momento
+            Su lista se encuentra vacía
           </p>
         )}
       </div>
