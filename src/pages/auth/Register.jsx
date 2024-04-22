@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
+import { IoMdClose } from "react-icons/io";
 import { UserContext } from "../../context/UserProvider";
 
 
@@ -16,7 +17,10 @@ export const Register = () => {
   });
 
   return (
-    <div className="bg-violet-dark p-7 rounded-lg bg-opacity-65 my-10">
+    <div className="bg-violet-dark p-7 rounded-lg bg-opacity-65 my-10 relative">
+      <Link to="/">
+        <IoMdClose className="absolute right-2 top-2 text-2xl text-gray-500 hover:text-gray-400" />
+      </Link>
       <form className="mx-auto flex flex-col gap-4" onSubmit={onSubmit}>
         <h3 className="text-white text-center text-3xl sm:text-4xl">
           Registrarse

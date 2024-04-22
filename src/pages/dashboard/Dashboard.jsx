@@ -10,7 +10,6 @@ export const Dashboard = () => {
   // console.log({ nowPlayingMovies });
 
   useEffect(() => {
-    console.log('veces')
     if (nowPlayingMovies.length > 0) {
       setTotalMovies([
         { id: 1, title: "Continuar viendo", movies: nowPlayingMovies },

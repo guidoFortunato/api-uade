@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { useContext } from "react";
+import { IoMdClose } from "react-icons/io";
 import { UserContext } from "../../context/UserProvider";
 
-
 export const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const { handleAuth } = useContext(UserContext);
 
   const onSubmit = handleSubmit((data) => {
@@ -16,11 +20,16 @@ export const Login = () => {
   });
 
   return (
-    <div className="bg-violet-dark p-7 rounded-lg bg-opacity-65">
-      <form className="mx-auto flex flex-col gap-5" onSubmit={onSubmit}>
+    <div className="bg-violet-dark p-7 rounded-lg bg-opacity-65 relative">
+      <Link to="/">
+        <IoMdClose className="absolute right-2 top-2 text-2xl text-gray-500 hover:text-gray-400" />
+      </Link>
+
+      <form className="mx-auto flex flex-col gap-5 " onSubmit={onSubmit}>
         <h3 className="text-white text-center text-3xl sm:text-4xl">
           Iniciar sesión
         </h3>
+
         <div>
           <label
             htmlFor="email"
@@ -51,6 +60,7 @@ export const Login = () => {
               },
             })}
           />
+
           <div
             className={clsx("text-red-600 font-semibold block mt-1", {
               hidden: errors.email,
