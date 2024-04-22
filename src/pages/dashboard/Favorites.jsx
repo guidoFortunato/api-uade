@@ -11,7 +11,7 @@ export const Favorites = () => {
   return (
     <>
       <h3 className="text-white text-center text-xl md:text-3xl mb-10">
-        Mis películas favoritas
+        Mis películas/series favoritas
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
         {favoritesMovies.length > 0 ? (
@@ -30,7 +30,7 @@ export const Favorites = () => {
           ))
         ) : (
           <p className="text-white">
-            No hay películas favoritas por el momento
+            No hay películas/series favoritas por el momento
           </p>
         )}
       </div>

@@ -10,7 +10,7 @@ export const HomeRouter = () => {
         <Route path="favoritos" element={<Favorites />} />
         <Route path="mi-lista" element={<List />} />
         <Route path="busqueda/:name" element={<SearchMovies />} />
-        <Route path=":name" element={<MovieDetails />} />
+        <Route path="/:name" element={<MovieDetails />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Route>

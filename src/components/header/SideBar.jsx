@@ -1,7 +1,8 @@
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { useContext } from "react";
-import { FaSearch } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
+import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { FaSearch, FaHeart, FaStar   } from "react-icons/fa";
+import { IoMdHome } from "react-icons/io";
 import { UserContext } from "../../context/UserProvider";
 
 export const SideBar = () => {
@@ -54,42 +55,44 @@ export const SideBar = () => {
         <Navbar.Toggle className="ml-1" />
       </div>
       <Navbar.Collapse>
-      <img src="/house-solid.svg" className="h-4 sm:h-4" alt="Home" />
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `block px-1 mb-1 md:mb-0 ${
-              isActive ? "bg-violet-light text-white md:text-violet-light" : ""
-            }  rounded md:bg-transparent md:p-0`
-          }
-          aria-current="page"
-        >
         
-          Home
-        </NavLink>
-        <img src="/heart-solid.svg" className="h-4 sm:h-4" alt="Mis favoritos" />
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `flex mb-1 md:mb-0 ${
+                isActive
+                  ? "bg-violet-light text-white md:text-violet-light"
+                  : ""
+              }  rounded md:bg-transparent md:p-0`
+            }
+            aria-current="page"
+          >
+            <IoMdHome className="text-xl" />
+            <span className="ml-1">Home</span>
+          </NavLink>
+       
 
         <NavLink
           to="/favoritos"
           className={({ isActive }) =>
-            `block px-1 mb-1 md:mb-0 ${
+            `flex items-center mb-1 md:mb-0 ${
               isActive ? "bg-violet-light text-white md:text-violet-light" : ""
             }  rounded md:bg-transparent md:p-0`
           }
-          
         >
-          Mis Favoritos
+          <FaHeart className="text-base" />
+          <span className="ml-1">Mis Favoritos</span>
         </NavLink>
-        <img src="/star-solid.svg" className="h-4 sm:h-4" alt="Mi lista" />
         <NavLink
           to="/mi-lista"
           className={({ isActive }) =>
-            `block px-3 ${
-              isActive ? "bg-violet-light text-white md:text-violet-light" : ""
-            }  rounded md:bg-transparent md:p-0`
-          }
+          `flex  ${
+            isActive ? "bg-violet-light text-white md:text-violet-light" : ""
+          }  rounded md:bg-transparent md:p-0`
+        }
         >
-          Mi Lista
+        <FaStar className="text-lg" />
+          <span className="ml-1">Mi Lista</span>
         </NavLink>
       </Navbar.Collapse>
     </Navbar>
