@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export const DashboardRow = ({ title, movies }) => {
-
   
   
   const settings = {
@@ -45,7 +44,7 @@ export const DashboardRow = ({ title, movies }) => {
   return (
     <>
       <div className="slider-container mb-10">
-      <h2 className="text-white text-base md:text-xl font-bold mb-8 md:mb-1">
+      <h2 className="text-white text-base md:text-lg font-bold mb-8 md:mb-1">
         {title}
       </h2>
         <Slider {...settings}>

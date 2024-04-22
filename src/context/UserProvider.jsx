@@ -48,7 +48,7 @@ const UserProvider = ({ children }) => {
   }, []);
   useEffect(() => {
     const getMovies = async () => {
-      const data = await getData(`https://api.themoviedb.org/3/movie/upcoming?language=es-ES&page=7`);
+      const data = await getData(`https://api.themoviedb.org/3/movie/upcoming?language=es-ES&page=3`);
       // console.log({ data });
       setUpcomingMovies(data.results);
     };

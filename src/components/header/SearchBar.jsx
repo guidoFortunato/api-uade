@@ -22,7 +22,7 @@ export const SearchBar = () => {
       alertaWarning();
       return;
     }
-    navigate(`/busqueda-peliculas/search?q=${value}`);
+    navigate(`/busqueda/search?q=${value}`);
     setValue("");
   };
 

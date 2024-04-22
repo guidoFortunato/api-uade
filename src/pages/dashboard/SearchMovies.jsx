@@ -12,10 +12,6 @@ export const SearchMovies = () => {
   const { pathname, search } = useLocation();
   const query = search.split("=")[1];
   const paramSearch = (pathname.split("/")[2] + search).split("=")[0] + "=";
-  // console.log({ query, paramSearch });
-  // console.log({ movies });
-  // console.log({ status });
-  console.log({ isLoading });
 
   useEffect(() => {
     setTimeout(() => {

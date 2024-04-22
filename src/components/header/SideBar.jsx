@@ -84,7 +84,7 @@ export const SideBar = () => {
             }  rounded md:bg-transparent md:p-0`
           }
         >
-          Mi lista
+          Mi Lista
         </NavLink>
       </Navbar.Collapse>
     </Navbar>
