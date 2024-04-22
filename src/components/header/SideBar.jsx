@@ -20,7 +20,7 @@ export const SideBar = () => {
           className="h-6 sm:h-9"
           alt="Frameland"
         />
-        <span className="self-center whitespace-nowrap text-xl font-semibold italic">
+        <span className="self-center whitespace-nowrap text-2xl ml-1 font-semibold italic">
           FrameLand
         </span>
       </Link>

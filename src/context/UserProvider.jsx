@@ -7,19 +7,15 @@ export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const UserProvider = ({ children }) => {
-  const [auth, setAuth] = useState( JSON.parse(localStorage.getItem("auth")) || false );
+  const [auth, setAuth] = useState(
+    JSON.parse(localStorage.getItem("auth")) || false
+  );
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [upcomingMovies, setUpcomingMoviesg] = useState([]);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
-  const [favoritesMovies, setFavoritesMovies] = useState(
-    JSON.parse(localStorage.getItem("favorites")) || []
-  );
-  const [iconLike, setIconLike] = useState(false);
-  const [iconFavorite, setIconFavorite] = useState(false);
-
-  // const [searchKey, setSearchKey] = useState([]);
+  const [favoritesMovies, setFavoritesMovies] = useState( JSON.parse(localStorage.getItem("favorites")) || [] );
 
   useEffect(() => {
     const getMovies = async () => {
@@ -66,14 +62,6 @@ const UserProvider = ({ children }) => {
     setSearchBarOpen(boolean);
   };
 
-  const handleIconLike = (boolean) => {
-    setIconLike(boolean);
-  };
-
-  const handleIconFavorites = (boolean) => {
-    setIconFavorite(boolean);
-  };
-
   const handleFavoritesMovies = (movie) => {
     // console.log({ movie });
 
@@ -102,11 +90,7 @@ const UserProvider = ({ children }) => {
         favoritesMovies,
         handleAuth,
         handleFavoritesMovies,
-        handleIconFavorites,
-        handleIconLike,
         handleSearchBar,
-        iconFavorite,
-        iconLike,
         nowPlayingMovies,
         popularMovies,
         searchBarOpen,

@@ -1,29 +1,54 @@
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { MovieCard } from "../../components";
+/* eslint-disable react/prop-types */
+import Slider from "react-slick";
+import { MovieCard, Spinner } from "../../components";
 
-export const DashboardRow = ({ title, movies, id }) => {
-  const slideLeft = () => {
-    let slider = document.getElementById("slider" + id);
-    slider.scrollLeft = slider.scrollLeft - 1200;
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+export const DashboardRow = ({ title, movies }) => {
+
+  
+  
+  const settings = {
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    lazyLoad: true,
+    speed: 1000,
+    infinite: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
-  const slideRight = () => {
-    let slider = document.getElementById("slider" + id);
-    slider.scrollLeft = slider.scrollLeft + 1200;
-  };
+
+  if (movies.length === 0) return <Spinner />;
 
   return (
-    <div className="mb-5">
-      <h2 className="text-white font-bold md:text-left">{title}</h2>
-      <div className="relative flex items-center group">
-        <MdChevronLeft
-          className="bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 z-10 cursor-pointer hidden group-hover:block"
-          size={40}
-          onClick={ slideLeft }
-        />
-        <div
-          className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide"
-          id={"slider" + id}
-        >
+    <>
+      <div className="slider-container mb-10">
+      <h2 className="text-white text-base md:text-xl font-bold mb-8 md:mb-1">
+        {title}
+      </h2>
+        <Slider {...settings}>
           {movies.map((movie) => (
             <MovieCard
               key={movie.id}
@@ -37,13 +62,8 @@ export const DashboardRow = ({ title, movies, id }) => {
               movie={movie}
             />
           ))}
-        </div>
-        <MdChevronRight
-          className="bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
-          size={40}
-          onClick={ slideRight }
-        />
+        </Slider>
       </div>
-    </div>
+    </>
   );
 };

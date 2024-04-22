@@ -1,22 +1,17 @@
-// import { useState } from "react"
-
+/* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserProvider";
-import { MovieCard, Spinner } from "../../components";
-import { getEnvVariables } from "../../helpers";
 import { DashboardRow } from "./";
-
-const { VITE_API_IMAGE } = getEnvVariables();
+import { Spinner } from "../../components";
 
 export const Dashboard = () => {
-  const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies } =
-    useContext(UserContext);
+  const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies } = useContext(UserContext);
   const [totalMovies, setTotalMovies] = useState([]);
-  console.log({ nowPlayingMovies });
+  // console.log({ nowPlayingMovies });
 
   useEffect(() => {
+    console.log('veces')
     if (nowPlayingMovies.length > 0) {
-      console.log("éntra");
       setTotalMovies([
         { id: 1, title: "Continuar viendo", movies: nowPlayingMovies },
         { id: 2, title: "Populares", movies: popularMovies },
@@ -24,17 +19,14 @@ export const Dashboard = () => {
         { id: 4, title: "Próximamente", movies: upcomingMovies },
       ]);
     }
-  }, [nowPlayingMovies]);
+  }, [nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies]);
 
   if (nowPlayingMovies.length === 0) return <Spinner />;
 
   return (
     <>
       {totalMovies.map((movie) => (
-        <DashboardRow
-          key={movie.id}
-          {...movie}
-        />
+        <DashboardRow key={movie.id} {...movie} />
       ))}
     </>
   );

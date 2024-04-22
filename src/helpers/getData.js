@@ -34,7 +34,6 @@ export const getData = async (url) => {
     const data = {
       results: [],
     };
-    console.log({ response });
     console.error({
       error: { error },
       ok: false,

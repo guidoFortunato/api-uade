@@ -13,8 +13,6 @@ export const HomeRouter = () => {
 
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
-
-      {/* <Route path="*" element={<Navigate to="/" />} /> */}
     </Routes>
   );
 };
