@@ -5,28 +5,28 @@ import { FaSearch } from "react-icons/fa";
 import { UserContext } from "../../context/UserProvider";
 
 export const SideBar = () => {
-  const { handleAuth, handleSearchBar, searchBarOpen } = useContext(UserContext);
+  const { handleAuth, handleSearchBar, searchBarOpen } =
+    useContext(UserContext);
 
-  const handleLogout = ()=>{
-    handleAuth(false)
+  const handleLogout = () => {
+    handleAuth(false);
     localStorage.setItem("auth", JSON.stringify(false));
-  }
+  };
 
   return (
     <Navbar fluid className="bg-transparent text-white">
-      <Link to="/" className="flex items-center">
-        <img
-          src="/Logo.png"
-          className="h-6 sm:h-9"
-          alt="Frameland"
-        />
+      <Link to="/" className="flex items-center md:ml-7">
+        <img src="/Logo.png" className="h-6 sm:h-9" alt="Frameland" />
         <span className="self-center whitespace-nowrap text-2xl ml-1 font-semibold italic">
           FrameLand
         </span>
       </Link>
 
-      <div className="flex justify-center items-center md:order-2">
-        <FaSearch className="mr-3 cursor-pointer" onClick={() => handleSearchBar(!searchBarOpen)} />
+      <div className="flex justify-center items-center md:order-2 md:mr-7">
+        <FaSearch
+          className="mr-3 cursor-pointer"
+          onClick={() => handleSearchBar(!searchBarOpen)}
+        />
         <Dropdown
           arrowIcon={false}
           inline
@@ -45,15 +45,13 @@ export const SideBar = () => {
             </span>
           </Dropdown.Header>
           <Link to="/">
-            <Dropdown.Item>Dashboard</Dropdown.Item>
+            <Dropdown.Item>Home</Dropdown.Item>
           </Link>
 
           <Dropdown.Divider />
-          <Dropdown.Item onClick={ handleLogout }>
-            Log out
-          </Dropdown.Item>
+          <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
         </Dropdown>
-        <Navbar.Toggle />
+        <Navbar.Toggle className="ml-1" />
       </div>
       <Navbar.Collapse>
         <NavLink
@@ -65,7 +63,7 @@ export const SideBar = () => {
           }
           aria-current="page"
         >
-          Dashboard
+          Home
         </NavLink>
 
         <NavLink
@@ -79,14 +77,14 @@ export const SideBar = () => {
           Mis Favoritos
         </NavLink>
         <NavLink
-          to="/ver-mas-tarde"
+          to="/mi-lista"
           className={({ isActive }) =>
             `block px-3 ${
               isActive ? "bg-violet-light text-white md:text-violet-light" : ""
             }  rounded md:bg-transparent md:p-0`
           }
         >
-          Ver más tarde
+          Mi lista
         </NavLink>
       </Navbar.Collapse>
     </Navbar>

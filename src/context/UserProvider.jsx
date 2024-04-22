@@ -13,14 +13,15 @@ const UserProvider = ({ children }) => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
-  const [upcomingMovies, setUpcomingMoviesg] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
   const [favoritesMovies, setFavoritesMovies] = useState( JSON.parse(localStorage.getItem("favorites")) || [] );
+  const [listMovies, setListMovies] = useState( JSON.parse(localStorage.getItem("list")) || [] );
 
   useEffect(() => {
     const getMovies = async () => {
       const data = await getData(
-        `https://api.themoviedb.org/3/movie/now_playing`
+        `https://api.themoviedb.org/3/movie/now_playing?language=es-ES&page=10`
       );
       // console.log({ data });
       setNowPlayingMovies(data.results);
@@ -29,7 +30,7 @@ const UserProvider = ({ children }) => {
   }, []);
   useEffect(() => {
     const getMovies = async () => {
-      const data = await getData(`https://api.themoviedb.org/3/movie/popular`);
+      const data = await getData(`https://api.themoviedb.org/3/movie/popular?language=es-ES&page=4`);
       // console.log({ data });
       setPopularMovies(data.results);
     };
@@ -38,7 +39,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     const getMovies = async () => {
       const data = await getData(
-        `https://api.themoviedb.org/3/movie/top_rated`
+        `https://api.themoviedb.org/3/movie/top_rated?language=es-ES`
       );
       // console.log({ data });
       setTopRatedMovies(data.results);
@@ -47,9 +48,9 @@ const UserProvider = ({ children }) => {
   }, []);
   useEffect(() => {
     const getMovies = async () => {
-      const data = await getData(`https://api.themoviedb.org/3/movie/upcoming`);
+      const data = await getData(`https://api.themoviedb.org/3/movie/upcoming?language=es-ES&page=7`);
       // console.log({ data });
-      setUpcomingMoviesg(data.results);
+      setUpcomingMovies(data.results);
     };
     getMovies();
   }, []);
@@ -82,6 +83,26 @@ const UserProvider = ({ children }) => {
       setFavoritesMovies(updatedFavorites);
     }
   };
+  const handleListMovies = (movie) => {
+    // console.log({ movie });
+
+    const isList = listMovies.some(
+      (listMovie) => listMovie.id === movie.id
+    );
+
+    if (!isList) {
+      const updatedList = [...listMovies, movie];
+      // console.log({updatedFavorites})
+      localStorage.setItem("list", JSON.stringify(updatedList));
+      setListMovies(updatedList);
+    } else {
+      const updatedList = listMovies.filter(
+        (listMovie) => listMovie.id !== movie.id
+      );
+      localStorage.setItem("list", JSON.stringify(updatedList));
+      setListMovies(updatedList);
+    }
+  };
 
   return (
     <UserContext.Provider
@@ -90,7 +111,9 @@ const UserProvider = ({ children }) => {
         favoritesMovies,
         handleAuth,
         handleFavoritesMovies,
+        handleListMovies,
         handleSearchBar,
+        listMovies,
         nowPlayingMovies,
         popularMovies,
         searchBarOpen,

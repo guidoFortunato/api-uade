@@ -9,9 +9,15 @@ import { UserContext } from "../../context/UserProvider";
 // const { VITE_API_IMAGE } = getEnvVariables();
 
 export const MovieCard = ({ title, image, description, movie }) => {
-  const { handleFavoritesMovies } = useContext(UserContext);
+  const { handleFavoritesMovies, handleListMovies } = useContext(UserContext);
 
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(
+    JSON.parse(localStorage.getItem("list"))?.find(
+      (listMovie) => listMovie.id === movie.id
+    )
+      ? true
+      : false
+  );
   const [favorite, setFavorite] = useState(
     JSON.parse(localStorage.getItem("favorites"))?.find(
       (favorite) => favorite.id === movie.id
@@ -23,7 +29,7 @@ export const MovieCard = ({ title, image, description, movie }) => {
   const handleLike = () => {
     setLike((prev) => !prev);
     // handleIconLike(!iconLike)
-    // handleFavoritesMovies(movie)
+    handleListMovies(movie)
   };
 
   const handleFavorites = () => {
@@ -37,31 +43,33 @@ export const MovieCard = ({ title, image, description, movie }) => {
       <Link to="/">
         <img className="rounded-lg" src={image} alt={title} />
       </Link>
-      <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white rounded-lg transition-all">
-        <span className="whitespace-normal text-[0.7rem] md:text-sm font-semibold flex justify-center items-center h-full text-center">
+      {/* <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white rounded-lg transition-all"> */}
+      {/* <div className="absolute rounded-lg inset-0 bg-gradient-to-b from-black to-transparent" /> */}
+      <div className="rounded-lg text-white opacity-100 transition duration-500 ease-in-out h-full from-[rgb(0,0,0)] to-[rgba(30,16,3,0.13)] bg-gradient-to-t absolute bottom-0 right-0 left-0 top-0">
+        <span className="whitespace-normal text-[0.7rem] md:text-xs font-semibold flex justify-center items-end h-full text-center pb-2">
           {title}
         </span>
         <span>
           {like ? (
             <FaHeart
               onClick={handleLike}
-              className="absolute text-red-500 top-1 md:top-3 left-4 "
+              className="absolute text-red-500 top-1 left-2"
             />
           ) : (
             <FaRegHeart
               onClick={handleLike}
-              className="absolute top-1 md:top-3 left-4 text-gray-300"
+              className="absolute top-1 left-2 text-gray-300"
             />
           )}
           {favorite ? (
             <FaStar
               onClick={handleFavorites}
-              className="absolute text-yellow-300 top-1 md:top-3 left-10 "
+              className="absolute text-yellow-300 top-1 left-8"
             />
           ) : (
             <FaRegStar
               onClick={handleFavorites}
-              className="absolute top-1 md:top-3 left-10  text-gray-300"
+              className="absolute top-1 left-8 text-gray-300"
             />
           )}
         </span>
