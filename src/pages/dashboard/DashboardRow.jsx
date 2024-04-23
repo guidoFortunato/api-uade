@@ -6,8 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export const DashboardRow = ({ title, movies }) => {
-  
-  
   const settings = {
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -16,23 +14,37 @@ export const DashboardRow = ({ title, movies }) => {
     infinite: false,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1900,
         settings: {
           slidesToShow: 5,
           slidesToScroll: 5,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+        },
+      },
+      {
+        breakpoint: 1040,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 700,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -43,10 +55,10 @@ export const DashboardRow = ({ title, movies }) => {
 
   return (
     <>
-      <div className="slider-container mb-10">
-      <h2 className="text-white text-base md:text-base font-bold mb-8 md:mb-2">
-        {title}
-      </h2>
+      <div className="slider-container mb-8 md:mb-10">
+        <h2 className="text-white text-base md:text-base font-bold mb-2">
+          {title}
+        </h2>
         <Slider {...settings}>
           {movies.map((movie) => (
             <MovieCard

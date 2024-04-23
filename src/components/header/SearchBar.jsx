@@ -27,7 +27,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <form className="max-w-lg mx-auto px-5 md:px-0" onSubmit={handleSubmit}>
+    <form className="max-w-lg mx-auto px-5 mb-4 md:px-0" onSubmit={handleSubmit}>
       <label
         htmlFor="default-search"
         className="mb-2 text-sm font-medium text-gray-900 sr-only"

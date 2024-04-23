@@ -9,7 +9,7 @@ export const HomeLayout = () => {
 
   return (
     <>
-      <header className="background-home">
+      <header>
         <SideBar />
         {searchBarOpen && <SearchBar />}
         <div className="w-full h-[550px]">
@@ -21,13 +21,13 @@ export const HomeLayout = () => {
             />
           </div>
         </div>
-        <main className="flex justify-center min-h-screen px-4 sm:px-0">
-          {/* <div className="w-full sm:w-[500px] px-10"> */}
-          <div className="container px-10 py-10">
-            <Outlet />
-          </div>
-        </main>
       </header>
+      <main className="flex justify-center  px-4 sm:px-0">
+        {/* <div className="w-full sm:w-[500px] px-10"> */}
+        <div className="container px-10 py-10">
+          <Outlet />
+        </div>
+      </main>
       <Footer />
     </>
   );

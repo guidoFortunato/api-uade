@@ -2,18 +2,20 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
-    //chequear que funcione el color del background 
-    <footer className="rounded-lg shadow m-4 bg-[#993fecdc]"> 
-      <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:flex-col md:items-center font-normal md:justify-center">
-      <p className="text-sm text-white sm:text-center font-semibold italic sm:text-6x1 ">FrameLand</p>
-        <span className="text-sm text-white font-medium sm:text-center ">
-        <p>Un espacio con especial atención al cliente latinoamericano </p>
-          <Link to="/" className=" ml-1 text-xs">
-          © { new Date().getFullYear() } - Todos los derechos reservado
-          </Link>
+    <footer className="bg-[#993fecdc] p-4 absolute bottom-0 w-full">
+      <div className="w-full max-w-screen-xl mx-auto  md:flex md:flex-col md:items-center font-normal md:justify-center">
+        <Link to="/" className="flex items-center text-xs mb-1">
+          <img src="/Logo.png" className="h-6" alt="Frameland" />
+          <p className="text-sm text-white sm:text-center font-semibold italic ml-1 hover:text-slate-300 transition-all">
+            FrameLand
+          </p>
+        </Link>
+
+        <span className="text-sm text-white font-medium text-center ">
+          {/* <p>Un espacio con especial atención al cliente latinoamericano </p> */}
+          © {new Date().getFullYear()} - Todos los derechos reservados
         </span>
       </div>
     </footer>
   );
-   
-}
+};

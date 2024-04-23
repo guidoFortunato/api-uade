@@ -4,7 +4,15 @@
 
 body {
   font-family: "Poppins", "Montserrat", "Raleway", "Roboto", sans-serif;
-  /* background-image: url("/public/4500x2500.jpg"); */
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 150px;
+  background: rgb(52, 14, 97);
+  background: linear-gradient(
+    0deg,
+    rgba(52, 14, 97, 1) 44%,
+    rgba(16, 4, 44, 1) 100%
+  );
 }
 
 .background-auth {
