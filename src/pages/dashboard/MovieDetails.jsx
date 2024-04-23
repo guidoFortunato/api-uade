@@ -5,16 +5,26 @@ import { Spinner } from "../../components/Spinner";
 
 const obtenerNombreMes = (numeroMes) => {
   const meses = [
-    "enero", "febrero", "marzo", "abril", "mayo", "junio",
-    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+    "enero",
+    "febrero",
+    "marzo",
+    "abril",
+    "mayo",
+    "junio",
+    "julio",
+    "agosto",
+    "septiembre",
+    "octubre",
+    "noviembre",
+    "diciembre",
   ];
   return meses[numeroMes - 1];
-}
+};
 
 export const MovieDetails = () => {
   const [movieDetail, setMovieDetail] = useState(null);
   const { id } = useParams();
-  const splitDate = movieDetail?.release_date?.split("-")
+  const splitDate = movieDetail?.release_date?.split("-");
 
   console.log({ movieDetail });
 
@@ -30,7 +40,6 @@ export const MovieDetails = () => {
   }, []);
 
   if (movieDetail === null) return <Spinner />;
-  
 
   return (
     <div className="container grid grid-cols-1 lg:grid-cols-6 gap-4 mx-auto mt-10 text-white">
@@ -46,86 +55,108 @@ export const MovieDetails = () => {
           alt={movieDetail.title}
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 md:col-span-4 bg-violet-dark">
-        <div className="p-5 md:col-span-2 flex flex-col md:justify-center">
-          <h3 className="text-base md:text-lg mb-2 font-semibold">
-            Descripción
-          </h3>
-          <span className="text-sm md:text-base">
-            {movieDetail.overview.length > 0
-              ? movieDetail.overview
-              : "Sin descripción"}
-          </span>
+      <div className="grid grid-cols-1 lg:grid-cols-3 md:col-span-4 bg-violet-dark">
+        <div className="p-5 lg:col-span-2">
+          <div className="mb-7 lg:mb-0">
+            <h3 className="text-base md:text-xl mb-2 font-semibold capitalize text-center lg:text-left">
+              {movieDetail.title}
+            </h3>
+          </div>
+          {movieDetail.overview.length > 0 && (
+            <div className="flex flex-col h-[80%] justify-center">
+              <h3 className="text-base md:text-lg mb-2 font-semibold">
+                Descripción
+              </h3>
+              <span className="text-sm md:text-base">
+                {movieDetail.overview.length > 0
+                  ? movieDetail.overview
+                  : "Sin descripción"}
+              </span>
+            </div>
+          )}
         </div>
         <div className="md:col-span-1 p-5 break-words">
           <div className="mb-4">
-          {movieDetail.genres.length > 0 && (
-            <h3 className="text-base md:text-lg font-semibold">
-              Género<span>{movieDetail.genres.length > 1 ? "s:" : ":"}</span>
-            </h3>
-          )}
-          {movieDetail.genres.length > 0 &&
-            movieDetail.genres.map((item) => {
-              if (
-                movieDetail.genres.indexOf(item) ===
-                movieDetail.genres.length - 1
-              ) {
-                return (
-                  <span key={item.id} className="whitespace-nowrap text-sm md:text-base">
-                    {item.name}
-                  </span>
-                );
-              } else {
-                return (
-                  <span key={item.id} className="whitespace-nowrap text-sm md:text-base">
-                    {item.name},
-                  </span>
-                );
-              }
-            })}
-
+            {movieDetail.genres.length > 0 && (
+              <h3 className="text-base md:text-lg font-semibold">
+                Género<span>{movieDetail.genres.length > 1 ? "s:" : ":"}</span>
+              </h3>
+            )}
+            {movieDetail.genres.length > 0 &&
+              movieDetail.genres.map((item) => {
+                if (
+                  movieDetail.genres.indexOf(item) ===
+                  movieDetail.genres.length - 1
+                ) {
+                  return (
+                    <span
+                      key={item.id}
+                      className="whitespace-nowrap text-sm md:text-base"
+                    >
+                      {item.name}
+                    </span>
+                  );
+                } else {
+                  return (
+                    <span
+                      key={item.id}
+                      className="whitespace-nowrap text-sm md:text-base"
+                    >
+                      {item.name},
+                    </span>
+                  );
+                }
+              })}
           </div>
           <div className="mb-4">
-          {movieDetail.spoken_languages.length > 0 && (
-            <h3 className="text-base md:text-lg font-semibold">
-              Idioma
-              <span>
-                {movieDetail.spoken_languages.length > 1 ? "s:" : ":"}
-              </span>
-            </h3>
-          )}
-          {movieDetail.spoken_languages.length > 0 &&
-            movieDetail.spoken_languages.map((item) => {
-              if (
-                movieDetail.spoken_languages.indexOf(item) ===
-                movieDetail.spoken_languages.length - 1
-              ) {
-                return (
-                  <span key={item.english_name} className="whitespace-nowrap text-sm md:text-base">
-                    {item.english_name}
-                  </span>
-                );
-              } else {
-                return (
-                  <span key={item.english_name} className="whitespace-nowrap text-sm md:text-base">
-                    {item.english_name},
-                  </span>
-                );
-              }
-            })}
-
+            {movieDetail.spoken_languages.length > 0 && (
+              <h3 className="text-base md:text-lg font-semibold">
+                Idioma
+                <span>
+                  {movieDetail.spoken_languages.length > 1 ? "s:" : ":"}
+                </span>
+              </h3>
+            )}
+            {movieDetail.spoken_languages.length > 0 &&
+              movieDetail.spoken_languages.map((item) => {
+                if (
+                  movieDetail.spoken_languages.indexOf(item) ===
+                  movieDetail.spoken_languages.length - 1
+                ) {
+                  return (
+                    <span
+                      key={item.english_name}
+                      className="whitespace-nowrap text-sm md:text-base"
+                    >
+                      {item.english_name}
+                    </span>
+                  );
+                } else {
+                  return (
+                    <span
+                      key={item.english_name}
+                      className="whitespace-nowrap text-sm md:text-base"
+                    >
+                      {item.english_name},
+                    </span>
+                  );
+                }
+              })}
           </div>
           <div>
-         {
-          movieDetail.release_date && (
-            <>
-              <h3 className="text-base md:text-lg font-semibold">Fecha de estreno:</h3>
-              {/* <span className="ml-1 whitespace-nowrap text-sm md:text-base">{movieDetail.release_date}</span> */}
-              <span className="whitespace-nowrap text-sm md:text-base">{`${splitDate[2]} de ${obtenerNombreMes(splitDate[1])} de ${splitDate[0]}`}</span>
-            </>
-          )
-         }
-
+            {movieDetail.release_date && (
+              <>
+                <h3 className="text-base md:text-lg font-semibold">
+                  Fecha de estreno:
+                </h3>
+                {/* <span className="ml-1 whitespace-nowrap text-sm md:text-base">{movieDetail.release_date}</span> */}
+                <span className="whitespace-nowrap text-sm md:text-base">{`${
+                  splitDate[2]
+                } de ${obtenerNombreMes(splitDate[1])} de ${
+                  splitDate[0]
+                }`}</span>
+              </>
+            )}
           </div>
         </div>
       </div>
