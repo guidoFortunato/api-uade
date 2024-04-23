@@ -13,7 +13,7 @@ export const HomeLayout = () => {
         <SideBar />
         {searchBarOpen && <SearchBar />}
       </header>
-      <main className="flex flex-col items-center justify-center px-4 sm:px-0">
+      <main>
         <Outlet />
       </main>
       <Footer />

@@ -9,7 +9,7 @@ export const Favorites = () => {
   const { favoritesMovies } = useContext(UserContext);
   // console.log({favoritesMovies})
   return (
-    <div className="container px-10 py-10">
+    <div className="container px-10 py-10 mx-auto">
       <h3 className="text-white text-center text-xl md:text-3xl mb-10">
         Mis películas/series favoritas
       </h3>
