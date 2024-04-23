@@ -5,12 +5,8 @@ import { DashboardRow } from "./";
 import { Spinner } from "../../components";
 
 export const Dashboard = () => {
-  const {
-    nowPlayingMovies,
-    popularMovies,
-    topRatedMovies,
-    upcomingMovies,
-  } = useContext(UserContext);
+  const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies } =
+    useContext(UserContext);
   const [totalMovies, setTotalMovies] = useState([]);
 
   useEffect(() => {
@@ -28,9 +24,22 @@ export const Dashboard = () => {
 
   return (
     <>
-      {totalMovies.map((movie) => (
-        <DashboardRow key={movie.id} {...movie} />
-      ))}
+        <div className="w-full h-[550px]">
+          <div className="w-full h-full">
+            <img
+              src={`https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg`}
+              alt="GodFather"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      <div className="container px-10 py-10">
+     
+          {totalMovies.map((movie) => (
+            <DashboardRow key={movie.id} {...movie} />
+          ))}
+        
+      </div>
     </>
   );
 };

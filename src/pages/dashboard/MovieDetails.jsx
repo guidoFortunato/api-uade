@@ -9,7 +9,7 @@ export const MovieDetails = () => {
     
     const getMovieDetails = async () => {
       const data = await getData(`https://api.themoviedb.org/3/movie/${id}`)
-      // console.log({data})
+      console.log({data})
     }
     getMovieDetails()
     

@@ -6,7 +6,8 @@ export const List = () => {
   const { listMovies } = useContext(UserContext);
   // console.log({favoritesMovies})
   return (
-    <>
+    <div className="container px-10 py-10">
+    
       <h3 className="text-white text-center text-xl md:text-3xl mb-10">Mi Lista</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
         {listMovies.length > 0 ? (
@@ -29,6 +30,6 @@ export const List = () => {
           </p>
         )}
       </div>
-    </>
+    </div>
   );
 };
