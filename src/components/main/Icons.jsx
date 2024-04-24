@@ -33,25 +33,25 @@ export const Icons = ({movie, isCard}) => {
   };
   return (
     <span className={isCard ? "" : "relative"}>
-      {like ? (
+      {favorite ? (
         <FaHeart
-          onClick={handleLike}
+          onClick={handleFavorites}
           className="absolute text-red-500 top-1 left-1 cursor-pointer"
         />
       ) : (
         <FaRegHeart
-          onClick={handleLike}
+          onClick={handleFavorites}
           className="absolute top-1 left-1 text-gray-300 cursor-pointer"
         />
       )}
-      {favorite ? (
+      {like ? (
         <FaStar
-          onClick={handleFavorites}
+          onClick={handleLike}
           className="absolute text-yellow-300 top-1 left-6 cursor-pointer"
         />
       ) : (
         <FaRegStar
-          onClick={handleFavorites}
+          onClick={handleLike}
           className="absolute top-1 left-6 text-gray-300 cursor-pointer"
         />
       )}
