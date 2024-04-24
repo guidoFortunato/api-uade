@@ -5,8 +5,8 @@ export const Footer = () => {
     <footer className="bg-[#993fecdc] p-4 absolute bottom-0 w-full">
       <div className="w-full max-w-screen-xl mx-auto  md:flex md:flex-col md:items-center font-normal md:justify-center">
         <Link to="/" className="flex items-center text-xs mb-1">
-          <img src="/Logo.png" className="h-6" alt="Frameland" />
-          <p className="text-sm text-white sm:text-center font-semibold italic ml-1 hover:text-slate-300 transition-all">
+          <img src="/Logo.png" className="h-8 md:h-9" alt="Frameland" />
+          <p className="text-2xl md:text-3xl text-white sm:text-center font-semibold italic ml-1 hover:text-slate-300 transition-all">
             FrameLand
           </p>
         </Link>

@@ -5,10 +5,10 @@ import { Footer, SearchBar, SideBar } from "../components";
 import { UserContext } from "../context/UserProvider";
 
 export const HomeLayout = () => {
-  const { searchBarOpen, imageHome } = useContext(UserContext);
+  const { searchBarOpen } = useContext(UserContext);
 
   return (
-    <>
+    <div className="background">
       <header>
         <SideBar />
         {searchBarOpen && <SearchBar />}
@@ -17,6 +17,6 @@ export const HomeLayout = () => {
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   );
 };

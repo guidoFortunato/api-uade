@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
 import { FaHeart, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import { UserContext } from "../../context/UserProvider";
@@ -36,23 +37,23 @@ export const Icons = ({movie, isCard}) => {
       {favorite ? (
         <FaHeart
           onClick={handleFavorites}
-          className="absolute text-red-500 top-1 left-1 cursor-pointer"
+          className={`absolute text-red-500 top-1 ${ isCard ? "left-1" : "left-0 text-xl" } cursor-pointer`}
         />
       ) : (
         <FaRegHeart
           onClick={handleFavorites}
-          className="absolute top-1 left-1 text-gray-300 cursor-pointer"
+          className={`absolute top-1 ${ isCard ? "left-1" : "left-0 text-xl" } text-gray-300 text-lg cursor-pointer`}
         />
       )}
       {like ? (
         <FaStar
           onClick={handleLike}
-          className="absolute text-yellow-300 top-1 left-6 cursor-pointer"
+          className={`absolute text-yellow-300 top-1 left-7 ${ isCard ? "text-lg" : "text-xl" } cursor-pointer`}
         />
       ) : (
         <FaRegStar
           onClick={handleLike}
-          className="absolute top-1 left-6 text-gray-300 cursor-pointer"
+          className={`absolute top-1 left-7 text-gray-300 ${ isCard ? "text-lg" : "text-xl" } cursor-pointer`}
         />
       )}
     </span>

@@ -25,17 +25,23 @@ const obtenerNombreMes = (numeroMes) => {
 export const FilmDetails = () => {
   const [filmDetail, setFilmDetail] = useState(null);
   const { id } = useParams();
-  const params = useLocation()
+  const params = useLocation();
   const pathname = params.pathname.split("/")[1];
-  const splitDate = pathname === "peliculas" ? filmDetail?.release_date?.split("-") : filmDetail?.first_air_date?.split("-")
-  const date = pathname === "peliculas" ? filmDetail?.release_date : filmDetail?.first_air_date
+  const splitDate =
+    pathname === "peliculas"
+      ? filmDetail?.release_date?.split("-")
+      : filmDetail?.first_air_date?.split("-");
+  const date =
+    pathname === "peliculas"
+      ? filmDetail?.release_date
+      : filmDetail?.first_air_date;
   // console.log({pathname})
 
   console.log({ filmDetail });
 
   useEffect(() => {
     const getfilmDetails = async () => {
-      const apiTrend = pathname === "peliculas" ? "movie" : "tv"
+      const apiTrend = pathname === "peliculas" ? "movie" : "tv";
       const data = await getData(
         `https://api.themoviedb.org/3/${apiTrend}/${id}?language=es-ES`
       );
@@ -51,7 +57,7 @@ export const FilmDetails = () => {
     <div className="container grid grid-cols-1 lg:grid-cols-6 mx-auto mt-10 text-white">
       <div className="md:col-span-2 mx-auto">
         <img
-          className="hidden lg:block "
+          className="hidden lg:block h-full object-cover"
           src={`https://image.tmdb.org/t/p/original/${filmDetail.poster_path}`}
           alt={pathname === "peliculas" ? filmDetail.title : filmDetail.name}
         />
@@ -62,15 +68,14 @@ export const FilmDetails = () => {
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:col-span-4 bg-violet-dark">
-        <div className="p-5 lg:col-span-2">
-          <div className="mb-7 lg:mb-0">
-            <h3 className="text-base md:text-lg mb-2 font-semibold capitalize text-center lg:text-left">
-            {pathname === "peliculas" ? filmDetail.title : filmDetail.name}
+        <div className="p-5 lg:col-span-2 flex flex-col justify-between">
+          <div className="mb-7 lg:mb-10">
+            <h3 className="text-lg md:text-xl mb-2 font-semibold capitalize text-center lg:text-left">
+              {pathname === "peliculas" ? filmDetail.title : filmDetail.name}
             </h3>
-            <Icons movie={filmDetail} className="mt-5" />
           </div>
           {filmDetail.overview?.length > 0 && (
-            <div className="flex flex-col h-[80%] justify-center">
+            <div className="flex flex-col">
               <h3 className="text-base md:text-lg mb-2 font-semibold">
                 Descripción
               </h3>
@@ -79,8 +84,21 @@ export const FilmDetails = () => {
               </span>
             </div>
           )}
+          <div className="hidden lg:block lg:pt-10 h-[50%]">
+            <img
+              className="block h-[70%] w-full object-cover"
+              src={`https://image.tmdb.org/t/p/original/${filmDetail.backdrop_path}`}
+              alt={
+                pathname === "peliculas" ? filmDetail.title : filmDetail.name
+              }
+            />
+          </div>
         </div>
         <div className="md:col-span-1 p-5 break-words">
+          <div className="mb-4">
+            <h3 className="text-base md:text-lg font-semibold">Categoría:</h3>
+            <span>{pathname === "peliculas" ? "Película" : "Serie"}</span>
+          </div>
           <div className="mb-4">
             {filmDetail.genres?.length > 0 && (
               <h3 className="text-base md:text-lg font-semibold">
@@ -94,20 +112,14 @@ export const FilmDetails = () => {
                   filmDetail.genres.length - 1
                 ) {
                   return (
-                    <span
-                      key={item.id}
-                      className="text-sm md:text-base"
-                    >
+                    <span key={item.id} className="text-sm md:text-base">
                       {" "}
                       {item.name}
                     </span>
                   );
                 } else {
                   return (
-                    <span
-                      key={item.id}
-                      className="text-sm md:text-base"
-                    >
+                    <span key={item.id} className="text-sm md:text-base">
                       {item.name},{" "}
                     </span>
                   );
@@ -152,8 +164,7 @@ export const FilmDetails = () => {
               })}
           </div>
           <div>
-            
-            { date && (
+            {date && (
               <>
                 <h3 className="text-base md:text-lg font-semibold">
                   Fecha de estreno:
@@ -166,6 +177,9 @@ export const FilmDetails = () => {
                 }`}</span>
               </>
             )}
+          </div>
+          <div className="py-5">
+            <Icons movie={filmDetail} />
           </div>
         </div>
       </div>
