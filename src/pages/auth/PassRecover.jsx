@@ -9,7 +9,7 @@ export const PassRecover = () => {
 
   return (
     <div className="bg-violet-dark p-7 rounded-lg bg-opacity-65 relative">
-       <Link to="/">
+       <Link to="/auth/login">
         <IoMdClose className="absolute right-2 top-2 text-2xl text-gray-500 hover:text-gray-400" />
       </Link>
       <form className="mx-auto flex flex-col gap-6" onSubmit={handleSubmit}>
