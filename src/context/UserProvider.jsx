@@ -13,6 +13,7 @@ const UserProvider = ({ children }) => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [topRatedSeries, setTopRatedSeries] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [imageHome, setImageHome] = useState("");
   const [searchBarOpen, setSearchBarOpen] = useState(false);
@@ -59,6 +60,7 @@ const UserProvider = ({ children }) => {
     };
     getMovies();
   }, []);
+
   useEffect(() => {
     const getMovies = async () => {
       const data = await getData(`https://api.themoviedb.org/3/movie/upcoming?language=es-ES&page=3`);
@@ -66,6 +68,15 @@ const UserProvider = ({ children }) => {
       setUpcomingMovies(data.results);
     };
     getMovies();
+  }, []);
+
+  useEffect(() => {
+    const getSeries = async () => {
+      const data = await getData(`https://api.themoviedb.org/3/tv/top_rated?language=es-ES&page=1'`);
+      // console.log({ data });
+      setTopRatedSeries(data.results);
+    };
+    getSeries();
   }, []);
 
   const handleAuth = (user) => {
@@ -132,6 +143,7 @@ const UserProvider = ({ children }) => {
         popularMovies,
         searchBarOpen,
         topRatedMovies,
+        topRatedSeries,
         upcomingMovies,
       }}
     >

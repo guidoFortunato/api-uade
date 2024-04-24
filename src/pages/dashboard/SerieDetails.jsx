@@ -5,138 +5,140 @@ import { Spinner } from "../../components/Spinner";
 
 const obtenerNombreMes = (numeroMes) => {
   const meses = [
-    "enero",
-    "febrero",
-    "marzo",
-    "abril",
-    "mayo",
-    "junio",
-    "julio",
-    "agosto",
-    "septiembre",
-    "octubre",
-    "noviembre",
-    "diciembre",
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
   ];
   return meses[numeroMes - 1];
 };
 
-export const MovieDetails = () => {
-  const [movieDetail, setMovieDetail] = useState(null);
+export const SerieDetails = () => {
+  const [serieDetail, setSerieDetail] = useState(null);
   const { id } = useParams();
-  const splitDate = movieDetail?.release_date?.split("-");
+  const splitDate = serieDetail?.first_air_date?.split("-");
 
-  console.log({ movieDetail });
+  console.log({ serieDetail });
 
   useEffect(() => {
-    const getMovieDetails = async () => {
+    const getSerieDetails = async () => {
       const data = await getData(
-        `https://api.themoviedb.org/3/movie/${id}?language=es-ES`
+        `https://api.themoviedb.org/3/tv/${id}?language=es-ES`
       );
-      // console.log(data);
-      setMovieDetail(data);
+      console.log(data);
+      setSerieDetail(data);
     };
-    getMovieDetails();
+    getSerieDetails();
   }, []);
 
-  if (movieDetail === null) return <Spinner />;
+  if (serieDetail === null) return <Spinner />;
 
   return (
-    <div className="container grid grid-cols-1 lg:grid-cols-6 gap-4 mx-auto mt-10 text-white">
-      <div className="md:col-span-2">
+   
+    <div className="container grid grid-cols-1 lg:grid-cols-6 mx-auto mt-10 text-white">
+      <div className="md:col-span-2 mx-auto">
         <img
           className="hidden lg:block "
-          src={`https://image.tmdb.org/t/p/original/${movieDetail.poster_path}`}
-          alt={movieDetail.title}
+          src={`https://image.tmdb.org/t/p/original/${serieDetail.poster_path}`}
+          alt={serieDetail.name}
         />
         <img
           className="block lg:hidden"
-          src={`https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`}
-          alt={movieDetail.title}
+          src={`https://image.tmdb.org/t/p/original/${serieDetail.backdrop_path}`}
+          alt={serieDetail.name}
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:col-span-4 bg-violet-dark">
         <div className="p-5 lg:col-span-2">
           <div className="mb-7 lg:mb-0">
-            <h3 className="text-base md:text-xl mb-2 font-semibold capitalize text-center lg:text-left">
-              {movieDetail.title}
+            <h3 className="text-base md:text-lg mb-2 font-semibold capitalize text-center lg:text-left">
+              {serieDetail.original_name}
             </h3>
           </div>
-          {movieDetail.overview.length > 0 && (
+          {serieDetail.overview?.length > 0 && (
             <div className="flex flex-col h-[80%] justify-center">
               <h3 className="text-base md:text-lg mb-2 font-semibold">
                 Descripción
               </h3>
               <span className="text-sm md:text-base">
-                {movieDetail.overview.length > 0
-                  ? movieDetail.overview
+                {serieDetail.overview?.length > 0
+                  ? serieDetail.overview
                   : "Sin descripción"}
               </span>
             </div>
           )}
         </div>
-        <div className="md:col-span-1 p-5 break-words">
-          <div className="mb-4">
-            {movieDetail.genres.length > 0 && (
+        <div className="md:col-span-1 p-5 break-words w-full">
+          <div className="mb-4 w-full">
+            {serieDetail.genres?.length > 0 && (
               <h3 className="text-base md:text-lg font-semibold">
-                Género<span>{movieDetail.genres.length > 1 ? "s:" : ":"}</span>
+                Género<span>{serieDetail.genres.length > 1 ? "s:" : ":"}</span>
               </h3>
             )}
-            {movieDetail.genres.length > 0 &&
-              movieDetail.genres.map((item) => {
+            {serieDetail.genres.length > 0 &&
+              serieDetail.genres.map((item) => {
                 if (
-                  movieDetail.genres.indexOf(item) ===
-                  movieDetail.genres.length - 1
+                  serieDetail.genres.indexOf(item) ===
+                  serieDetail.genres.length - 1
                 ) {
                   return (
                     <span
                       key={item.id}
-                      className="whitespace-nowrap text-sm md:text-base"
+                      className="text-sm md:text-base"
                     >
-                      {item.name}
+                      {" "}{item.name}
                     </span>
                   );
                 } else {
                   return (
                     <span
                       key={item.id}
-                      className="whitespace-nowrap text-sm md:text-base"
+                      className="text-sm md:text-base"
                     >
-                      {item.name},
+                      {item.name},{" "}
                     </span>
                   );
                 }
               })}
           </div>
           <div className="mb-4">
-            {movieDetail.spoken_languages.length > 0 && (
+            {serieDetail.spoken_languages.length > 0 && (
               <h3 className="text-base md:text-lg font-semibold">
                 Idioma
                 <span>
-                  {movieDetail.spoken_languages.length > 1 ? "s:" : ":"}
+                  {serieDetail.spoken_languages.length > 1 ? "s:" : ":"}
                 </span>
               </h3>
             )}
-            {movieDetail.spoken_languages.length > 0 &&
-              movieDetail.spoken_languages.map((item) => {
+            {serieDetail.spoken_languages.length > 0 &&
+              serieDetail.spoken_languages.map((item) => {
                 if (
-                  movieDetail.spoken_languages.indexOf(item) ===
-                  movieDetail.spoken_languages.length - 1
+                  serieDetail.spoken_languages.indexOf(item) ===
+                  serieDetail.spoken_languages.length - 1
                 ) {
                   return (
                     <span
                       key={item.english_name}
-                      className="whitespace-nowrap text-sm md:text-base"
+                      className="text-sm md:text-base"
                     >
-                      {item.english_name}
+                      {" "}{item.english_name}
                     </span>
                   );
                 } else {
                   return (
                     <span
                       key={item.english_name}
-                      className="whitespace-nowrap text-sm md:text-base"
+                      className="text-sm md:text-base"
                     >
+                      {" "}
                       {item.english_name},
                     </span>
                   );
@@ -144,12 +146,12 @@ export const MovieDetails = () => {
               })}
           </div>
           <div>
-            {movieDetail.release_date && (
+            {serieDetail.first_air_date && (
               <>
                 <h3 className="text-base md:text-lg font-semibold">
                   Fecha de estreno:
                 </h3>
-                {/* <span className="ml-1 whitespace-nowrap text-sm md:text-base">{movieDetail.release_date}</span> */}
+                {/* <span className="ml-1 whitespace-nowrap text-sm md:text-base">{serieDetail.release_date}</span> */}
                 <span className="whitespace-nowrap text-sm md:text-base">{`${
                   splitDate[2]
                 } de ${obtenerNombreMes(splitDate[1])} de ${

@@ -5,9 +5,10 @@ import { DashboardRow } from "./";
 import { Spinner } from "../../components";
 
 export const Dashboard = () => {
-  const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies } =
-    useContext(UserContext);
+  const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, topRatedSeries } = useContext(UserContext);
   const [totalMovies, setTotalMovies] = useState([]);
+
+  // console.log({topRatedSeries, nowPlayingMovies})
 
   useEffect(() => {
     if (nowPlayingMovies.length > 0) {
@@ -15,10 +16,11 @@ export const Dashboard = () => {
         { id: 1, title: "Continuar viendo", movies: nowPlayingMovies },
         { id: 2, title: "Populares", movies: popularMovies },
         { id: 3, title: "Mas valoradas", movies: topRatedMovies },
-        { id: 4, title: "Próximamente", movies: upcomingMovies },
+        { id: 4, title: "Series mas premiadas", movies: topRatedSeries },
+        { id: 5, title: "Próximamente", movies: upcomingMovies },
       ]);
     }
-  }, [nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies]);
+  }, [nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, topRatedSeries]);
 
   if (nowPlayingMovies.length === 0) return <Spinner />;
 

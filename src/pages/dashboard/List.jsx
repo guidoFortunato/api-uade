@@ -15,7 +15,7 @@ export const List = () => {
           listMovies.map((movie) => (
             <MovieCard
               key={movie.id}
-              title={movie.title}
+              title={movie.title ? movie.title : movie.name}
               image={
                 movie.backdrop_path
                   ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
@@ -23,6 +23,7 @@ export const List = () => {
               }
               description={movie.overview}
               movie={movie}
+              isMovie={movie.title ? true : false}
             />
           ))
         ) : (
