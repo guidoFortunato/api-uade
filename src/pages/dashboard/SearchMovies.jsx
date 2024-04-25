@@ -78,7 +78,7 @@ export const SearchMovies = () => {
                 src="https://www.tuentrada.com/teatro/gran-rex/imagenes/error.png"
                 alt="no hay películas"
               />
-              No pudimos encontrar la película
+               No se encontraron coincidencias
             </span>
           </div>
         </div>

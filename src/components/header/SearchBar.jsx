@@ -19,7 +19,7 @@ export const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (value.length === 0) {
-      alertaWarning();
+      alertaWarning("Debe ingresar al menos un caracter");
       return;
     }
     navigate(`/busqueda/search?q=${value}`);
