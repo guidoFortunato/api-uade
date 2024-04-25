@@ -24,6 +24,7 @@ const obtenerNombreMes = (numeroMes) => {
 
 export const FilmDetails = () => {
   const [filmDetail, setFilmDetail] = useState(null);
+  const [movie, setMovie] = useState(null);
   const { id } = useParams();
   const params = useLocation();
   const pathname = params.pathname.split("/")[1];
@@ -37,7 +38,7 @@ export const FilmDetails = () => {
       : filmDetail?.first_air_date;
   // console.log({pathname})
 
-  console.log({ filmDetail });
+  console.log({ movie });
 
   useEffect(() => {
     const getfilmDetails = async () => {
@@ -51,7 +52,20 @@ export const FilmDetails = () => {
     getfilmDetails();
   }, []);
 
+  useEffect(() => {
+    const getfilmMovie = async () => {
+      const apiTrend = pathname === "peliculas" ? "movie" : "tv";
+      const data = await getData(
+        `https://api.themoviedb.org/3/movie/${id}/videos?language=es-ES`
+      );
+      // console.log(data);
+      setMovie(data);
+    };
+    getfilmMovie();
+  }, []);
+
   if (filmDetail === null) return <Spinner />;
+  if (movie === null) return <Spinner />;
 
   return (
     <div className="container grid grid-cols-1 lg:grid-cols-6 mx-auto mt-10 text-white">
@@ -84,17 +98,28 @@ export const FilmDetails = () => {
               </span>
             </div>
           )}
-          <div className="hidden lg:block lg:pt-10 h-[50%]">
-            <img
+          {movie.results?.length > 0 && (
+            <div className="hidden xl:block lg:pt-10 h-full 2xl:h-[50%]">
+              <iframe
+                className="h-full w-full"
+                src={`https://www.youtube.com/embed/${movie.results[0].key}`}
+                title={movie.name}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+              {/* <img
               className="block h-[70%] w-full object-cover"
               src={`https://image.tmdb.org/t/p/original/${filmDetail.backdrop_path}`}
               alt={
                 pathname === "peliculas" ? filmDetail.title : filmDetail.name
               }
-            />
-          </div>
+            /> */}
+            </div>
+          )}
         </div>
-        <div className="md:col-span-1 p-5 break-words">
+        <div className="md:col-span-1 p-5 break-words lg:bg-[#993fecdc]">
           <div className="mb-4">
             <h3 className="text-base md:text-lg font-semibold">Categoría:</h3>
             <span>{pathname === "peliculas" ? "Película" : "Serie"}</span>
