@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react";
+import { Spinner } from "../../components";
 import { UserContext } from "../../context/UserProvider";
 import { DashboardRow } from "./";
-import { Spinner } from "../../components";
 
 export const Dashboard = () => {
   const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, topRatedSeries } = useContext(UserContext);
@@ -27,11 +27,12 @@ export const Dashboard = () => {
   return (
     <>
       <div className="w-full h-[550px]">
-        <div className="w-full h-full">
+        <div className="w-full h-64">
           <img
-            src={`https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg`}
+            /*src={`https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg`} */
+            img src="/Banner.jpg"
             alt="GodFather"
-            className="w-full h-full object-cover"
+            className="w-64 h-64 object-cover"
           />
         </div>
       </div>
