@@ -57,6 +57,8 @@ export const Icons = ({ movie, isCard }) => {
     }
     handleFavoritesMovies(movie);
   };
+
+  
   return (
     <span className={isCard ? "" : "relative"}>
       {favorite ? (

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import YoutubePlayer from "react-player/youtube";
 import { getData } from "../../helpers/getData";
 import { Spinner } from "../../components/Spinner";
-import { Icons } from "../../components";
+import { Icons, ModalComponent, Trailer } from "../../components";
 
 const obtenerNombreMes = (numeroMes) => {
   const meses = [
@@ -24,7 +25,7 @@ const obtenerNombreMes = (numeroMes) => {
 
 export const FilmDetails = () => {
   const [filmDetail, setFilmDetail] = useState(null);
-  const [movie, setMovie] = useState(null);
+  const [trailer, setTrailer] = useState(null);
   const { id } = useParams();
   const params = useLocation();
   const pathname = params.pathname.split("/")[1];
@@ -38,7 +39,7 @@ export const FilmDetails = () => {
       : filmDetail?.first_air_date;
   // console.log({pathname})
 
-  console.log({ movie });
+  console.log({ trailer });
 
   useEffect(() => {
     const getfilmDetails = async () => {
@@ -53,19 +54,19 @@ export const FilmDetails = () => {
   }, []);
 
   useEffect(() => {
-    const getfilmMovie = async () => {
+    const getfilmTrailer = async () => {
       const apiTrend = pathname === "peliculas" ? "movie" : "tv";
       const data = await getData(
-        `https://api.themoviedb.org/3/movie/${id}/videos?language=es-ES`
+        `https://api.themoviedb.org/3/${apiTrend}/${id}/videos?language=es-ES`
       );
       // console.log(data);
-      setMovie(data);
+      setTrailer(data);
     };
-    getfilmMovie();
+    getfilmTrailer();
   }, []);
 
   if (filmDetail === null) return <Spinner />;
-  if (movie === null) return <Spinner />;
+  if (trailer === null) return <Spinner />;
 
   return (
     <div className="container grid grid-cols-1 lg:grid-cols-6 mx-auto mt-10 text-white">
@@ -82,42 +83,56 @@ export const FilmDetails = () => {
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:col-span-4 bg-violet-dark">
-        <div className="p-5 lg:col-span-2 flex flex-col justify-between">
+        <div className="p-5 lg:col-span-2">
           <div className="mb-7 lg:mb-10">
             <h3 className="text-lg md:text-xl mb-2 font-semibold capitalize text-center lg:text-left">
               {pathname === "peliculas" ? filmDetail.title : filmDetail.name}
             </h3>
           </div>
-          {filmDetail.overview?.length > 0 && (
-            <div className="flex flex-col">
-              <h3 className="text-base md:text-lg mb-2 font-semibold">
-                Descripción
-              </h3>
-              <span className="text-sm md:text-base">
-                {filmDetail.overview}
-              </span>
-            </div>
-          )}
-          {movie.results?.length > 0 && (
-            <div className="hidden xl:block lg:pt-10 h-full 2xl:h-[50%]">
-              <iframe
-                className="h-full w-full"
-                src={`https://www.youtube.com/embed/${movie.results[0].key}`}
-                title={movie.name}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
-              {/* <img
-              className="block h-[70%] w-full object-cover"
-              src={`https://image.tmdb.org/t/p/original/${filmDetail.backdrop_path}`}
-              alt={
-                pathname === "peliculas" ? filmDetail.title : filmDetail.name
-              }
-            /> */}
-            </div>
-          )}
+          <div className="flex flex-col ">
+            {filmDetail.overview?.length > 0 && (
+              <div className="flex flex-col">
+                <h3 className="text-base md:text-lg mb-2 font-semibold">
+                  Descripción
+                </h3>
+                <span className="text-sm md:text-base">
+                  {filmDetail.overview}
+                </span>
+              </div>
+            )}
+            {trailer.results?.length > 0 && (
+              <div className="mt-5">
+                <ModalComponent textButton={"Ver trailer"} size={"5xl"}>
+                  <Trailer
+                    url={`https://www.youtube.com/embed/${trailer.results[0].key}`}
+                    trailer={trailer}
+                  />
+                </ModalComponent>
+              </div>
+            ) }
+            {/* {trailer.results?.length > 0 ? (
+              <div className="mt-5">
+                <ModalComponent textButton={"Ver trailer"} size={"5xl"}>
+                  <Trailer
+                    url={`https://www.youtube.com/embed/${trailer.results[0].key}`}
+                    trailer={trailer}
+                  />
+                </ModalComponent>
+              </div>
+            ) : (
+              <div className="hidden xl:block ">
+                <img
+                  className="block h-full object-cover"
+                  src={`https://image.tmdb.org/t/p/original/${filmDetail.backdrop_path}`}
+                  alt={
+                    pathname === "peliculas"
+                      ? filmDetail.title
+                      : filmDetail.name
+                  }
+                />
+              </div>
+            )} */}
+          </div>
         </div>
         <div className="md:col-span-1 p-5 break-words lg:bg-[#993fecdc]">
           <div className="mb-4">

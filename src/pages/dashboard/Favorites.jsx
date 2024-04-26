@@ -22,7 +22,7 @@ export const Favorites = () => {
               image={
                 movie.backdrop_path
                   ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
-                  : "https://placehold.co/300x170"
+                  : "https://placehold.co/3840x2160"
               }
               description={movie.overview}
               movie={movie}

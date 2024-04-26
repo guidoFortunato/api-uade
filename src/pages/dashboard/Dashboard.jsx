@@ -29,8 +29,8 @@ export const Dashboard = () => {
       <div className="w-full h-[500px]">
         <div className="w-full h-full">
           <img
-            src={`https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg`}
-            // src="/Banner.jpg"
+            // src={`https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg`}
+            src="/Banner.jpg"
             alt="GodFather"
             className="w-full h-full object-cover"
           />
