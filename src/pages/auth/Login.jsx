@@ -1,10 +1,10 @@
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { useContext, useState } from "react";
-import { IoMdClose } from "react-icons/io";
+import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
+import { IoMdClose } from "react-icons/io";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 
 export const Login = () => {
@@ -106,9 +106,9 @@ export const Login = () => {
               })}
             />
             {seePassword ? (
-              <FaEye className="absolute right-4 top-3 text-slate-900 cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
+              <FaEye className="absolute right-4 top-3 text-[#7b11df] cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
             ) : (
-              <FaEyeSlash className="absolute right-4 top-3 text-slate-900 cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
+              <FaEyeSlash className="absolute right-4 top-3 text-[#ffffff]" onClick={ ()=>setSeePassword( prev => !prev ) } />
             )}
           </div>
           {errors.password && (
