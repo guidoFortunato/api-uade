@@ -26,13 +26,13 @@ export const Dashboard = () => {
 
   return (
     <>
-      <div className="w-full h-[550px]">
-        <div className="w-full h-64">
+      <div className="w-full h-[500px]">
+        <div className="w-full h-full">
           <img
-            /*src={`https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg`} */
-            img src="/Banner.jpg"
+            src={`https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg`}
+            // src="/Banner.jpg"
             alt="GodFather"
-            className="w-64 h-64 object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
       </div>

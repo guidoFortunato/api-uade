@@ -22,7 +22,7 @@ export const Register = () => {
         <IoMdClose className="absolute right-2 top-2 text-2xl text-gray-500 hover:text-gray-400" />
       </Link>
       <form className="mx-auto flex flex-col gap-4" onSubmit={onSubmit}>
-        <h3 className="text-white text-center text-3xl sm:text-4xl">
+        <h3 className="text-white text-center text-2xl sm:text-3xl">
           Registrarse
         </h3>
         <div>
@@ -51,7 +51,7 @@ export const Register = () => {
             })}
           />
           {errors.name && (
-            <span className="text-red-600 text-xs block mt-1 font-semibold">
+            <span className="text-red-500 text-xs block mt-1 font-normal">
               {errors.name.message}
             </span>
           )}
@@ -87,7 +87,7 @@ export const Register = () => {
             })}
           />
           {errors.email && (
-            <span className="text-red-600 text-xs block mt-1 font-semibold">
+            <span className="text-red-500 text-xs block mt-1 font-normal">
               {errors.email.message}
             </span>
           )}
@@ -125,7 +125,7 @@ export const Register = () => {
             })}
           />
           {errors.confirmEmail && (
-            <span className="text-red-600 text-xs block mt-1 font-semibold">
+            <span className="text-red-500 text-xs block mt-1 font-normal">
               {errors.confirmEmail.message}
             </span>
           )}
@@ -165,7 +165,7 @@ export const Register = () => {
             })}
           />
           {errors.password && (
-            <span className="text-red-600 text-xs block mt-1 font-semibold">
+            <span className="text-red-500 text-xs block mt-1 font-normal">
               {errors.password.message}
             </span>
           )}
@@ -203,7 +203,7 @@ export const Register = () => {
             })}
           />
           {errors.confirmPassword && (
-            <span className="text-red-600 text-xs block mt-1 font-semibold">
+            <span className="text-red-500 text-xs block mt-1 font-normal">
               {errors.confirmPassword.message}
             </span>
           )}
@@ -213,7 +213,7 @@ export const Register = () => {
             Crear cuenta
           </button>
         </div>
-        <div className="flex flex-col items-center sm:flex-row  sm:justify-end text-white">
+        <div className="flex flex-col items-center sm:flex-row  sm:justify-end text-white text-sm">
           <div>
             <span>Ya tenés cuenta?</span>
           </div>

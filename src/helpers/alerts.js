@@ -1,6 +1,6 @@
 import Swal from "sweetalert2"
 
-export const alertaWarning = (text = "Debe ingresar un valor") => {
+export const alertaWarning = (text = "Este campo es obligatorio") => {
   
   Swal.fire({
     icon: 'warning',
@@ -11,7 +11,7 @@ export const alertaWarning = (text = "Debe ingresar un valor") => {
   })
 }
 
-export const alertaSuccess = (text = "Descargado con éxito") => {
+export const alertaSuccess = (text = "Enviado con éxito") => {
   
   Swal.fire({
     icon: 'success',

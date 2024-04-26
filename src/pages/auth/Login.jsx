@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import clsx from "clsx";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
 import { UserContext } from "../../context/UserProvider";
 
 export const Login = () => {
@@ -12,6 +14,7 @@ export const Login = () => {
     formState: { errors },
   } = useForm();
   const { handleAuth } = useContext(UserContext);
+  const [seePassword, setSeePassword] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
     // console.log({ data });
@@ -26,7 +29,7 @@ export const Login = () => {
       </Link>
 
       <form className="mx-auto flex flex-col gap-5 " onSubmit={onSubmit}>
-        <h3 className="text-white text-center text-3xl sm:text-4xl">
+        <h3 className="text-white text-center text-2xl sm:text-3xl">
           Iniciar sesión
         </h3>
 
@@ -41,7 +44,7 @@ export const Login = () => {
             type="text"
             id="email"
             className={clsx(
-              "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
+              "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5 pr-10",
               {
                 "border-red-500 focus:ring-red-600 focus:border-red-500":
                   errors.email,
@@ -61,15 +64,8 @@ export const Login = () => {
             })}
           />
 
-          <div
-            className={clsx("text-red-600 font-semibold block mt-1", {
-              hidden: errors.email,
-            })}
-          >
-            {" "}
-          </div>
           {errors.email && (
-            <span className="text-red-600 font-semibold text-xs block mt-1">
+            <span className="text-red-500 font-normal text-xs block mt-1">
               {errors.email.message}
             </span>
           )}
@@ -81,39 +77,47 @@ export const Login = () => {
           >
             Contraseña
           </label>
-          <input
-            type="password"
-            id="password"
-            className={clsx(
-              "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
-              {
-                "border-red-500 focus:ring-red-600 focus:border-red-500":
-                  errors.email,
-                "focus:ring-violet-500 focus:border-violet-600": !errors.email,
-              }
+          <div className="relative">
+            <input
+              type={ seePassword ? "text" : "password" }
+              id="password"
+              className={clsx(
+                "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5 pr-10",
+                {
+                  "border-red-500 focus:ring-red-600 focus:border-red-500":
+                    errors.email,
+                  "focus:ring-violet-500 focus:border-violet-600":
+                    !errors.email,
+                }
+              )}
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "La contraseña es obligatoria",
+                },
+                minLength: {
+                  value: 6,
+                  message: "La contraseña debe tener como mínimo 6 caracteres",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "La contraseña debe tener como máximo 20 caracteres",
+                },
+              })}
+            />
+            {seePassword ? (
+              <FaEye className="absolute right-4 top-3 text-slate-900 cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
+            ) : (
+              <FaEyeSlash className="absolute right-4 top-3 text-slate-900 cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
             )}
-            {...register("password", {
-              required: {
-                value: true,
-                message: "La contraseña es obligatoria",
-              },
-              minLength: {
-                value: 6,
-                message: "La contraseña debe tener como mínimo 6 caracteres",
-              },
-              maxLength: {
-                value: 20,
-                message: "La contraseña debe tener como máximo 20 caracteres",
-              },
-            })}
-          />
+          </div>
           {errors.password && (
-            <span className="text-red-600 font-semibold text-xs block mt-1">
+            <span className="text-red-500 font-normal text-xs block mt-1">
               {errors.password.message}
             </span>
           )}
           <Link to="/auth/recover">
-            <p className="mt-2 text-sm text-violet-light hover:text-violet-500">
+            <p className="mt-2 text-xs text-violet-light hover:text-violet-500">
               Olvidé mi contraseña
             </p>
           </Link>
@@ -123,7 +127,7 @@ export const Login = () => {
             Ingresar
           </button>
         </div>
-        <div className="flex flex-col items-center sm:flex-row  sm:justify-end text-white">
+        <div className="flex flex-col items-center sm:flex-row  sm:justify-end text-white text-sm">
           <div>
             <span>No tenés cuenta?</span>
           </div>
