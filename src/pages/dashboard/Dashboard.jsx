@@ -7,8 +7,25 @@ import { DashboardRow } from "./";
 export const Dashboard = () => {
   const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, topRatedSeries } = useContext(UserContext);
   const [totalMovies, setTotalMovies] = useState([]);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
-  // console.log({topRatedSeries, nowPlayingMovies})
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (nowPlayingMovies.length > 0) {
@@ -26,11 +43,10 @@ export const Dashboard = () => {
 
   return (
     <>
-      <div className="w-full h-[500px]">
-        <div className="w-full h-full">
+      <div className="w-full h-[500px] flex items-center justify-center">
+        <div className="size-fit object center">
           <img
-            // src={`https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg`}
-            src="/Banner.jpg"
+            src={windowSize.width >= 500 && windowSize.height >= 500 ? "/Banner5.jpg" : "/Banner6.png"}
             alt="GodFather"
             className="w-full h-full object-cover"
           />
@@ -44,19 +60,3 @@ export const Dashboard = () => {
     </>
   );
 };
-
-// <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
-// {movies.length > 0 ? (
-//   movies.map((movie) => (
-//     <MovieCard
-//       key={movie.id}
-//       title={movie.title}
-//       image={ movie.backdrop_path ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}` : "https://placehold.co/300x150" }
-//       description={movie.overview}
-//       movie={movie}
-//     />
-//   ))
-// ) : (
-//   <p className="text-white">Error, intente nuevamente mas tarde</p>
-// )}
-// </div>
