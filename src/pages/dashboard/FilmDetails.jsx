@@ -39,7 +39,7 @@ export const FilmDetails = () => {
       : filmDetail?.first_air_date;
   // console.log({pathname})
 
-  console.log({ trailer });
+  console.log({ filmDetail });
 
   useEffect(() => {
     const getfilmDetails = async () => {

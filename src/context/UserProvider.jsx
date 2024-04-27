@@ -19,6 +19,7 @@ const UserProvider = ({ children }) => {
   const [searchBarOpen, setSearchBarOpen] = useState(false);
   const [favoritesMovies, setFavoritesMovies] = useState( JSON.parse(localStorage.getItem("favorites")) || [] );
   const [listMovies, setListMovies] = useState( JSON.parse(localStorage.getItem("list")) || [] );
+  const [selected, setSelected] = useState("Películas");
 
   useEffect(() => {
     const getMovies = async () => {
@@ -87,6 +88,10 @@ const UserProvider = ({ children }) => {
     setSearchBarOpen(boolean);
   };
 
+  const handleSelected = (value) => {
+    setSelected(value);
+  };
+
   const handleFavoritesMovies = (movie) => {
     // console.log({ movie });
 
@@ -137,11 +142,13 @@ const UserProvider = ({ children }) => {
         handleFavoritesMovies,
         handleListMovies,
         handleSearchBar,
+        handleSelected,
         imageHome,
         listMovies,
         nowPlayingMovies,
         popularMovies,
         searchBarOpen,
+        selected,
         topRatedMovies,
         topRatedSeries,
         upcomingMovies,

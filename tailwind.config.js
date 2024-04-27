@@ -4,6 +4,7 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
     "node_modules/flowbite-react/lib/esm/**/*.js",
+    "node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
@@ -19,5 +20,5 @@ export default {
     },
   },
   // eslint-disable-next-line no-undef
-  plugins: [require("flowbite/plugin", ), require('tailwind-scrollbar-hide')],
+  plugins: [require("flowbite/plugin")],
 };

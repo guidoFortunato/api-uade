@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { alertaWarning, getEnvVariables } from "../../helpers";
 
-const { VITE_API_URL } = getEnvVariables();
+// const { VITE_API_URL } = getEnvVariables();
 
 export const SearchBar = () => {
   let navigate = useNavigate();
@@ -56,7 +56,7 @@ export const SearchBar = () => {
           type="search"
           id="default-search"
           className="block w-full p-4 ps-10 pr-24 text-sm text-[#c2c2c2] border border-[#662d94] rounded-lg bg-[#9d4edd79] focus:ring-[#9757ca] focus:border-[#9757ca]"
-          placeholder="Buscar película por título, autor, género..."
+          placeholder="Buscar por título, autor, género..."
           value={value}
           onChange={handleValue}
         />

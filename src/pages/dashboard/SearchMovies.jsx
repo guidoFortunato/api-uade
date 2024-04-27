@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { UserContext } from "../../context/UserProvider";
 import { MovieCard, Spinner } from "../../components";
 import { getData, getEnvVariables } from "../../helpers";
 
-const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
+// const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
 
 export const SearchMovies = () => {
+  const { selected } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState(null);
   const [movies, setMovies] = useState([]);
@@ -20,12 +22,36 @@ export const SearchMovies = () => {
   }, []);
 
   useEffect(() => {
+    console.log('entra al uef')
     try {
       setIsLoading(true);
-      const getMovie = async () => {
-        const data = await getData(
-          `https://api.themoviedb.org/3/search/movie?query=${query}`
-        );
+      const getFullData = async () => {
+        let data;
+
+        if (selected === "Películas") {
+          console.log('busqueda por Películas')
+          data = await getData(
+            `https://api.themoviedb.org/3/search/movie?query=${query}&language=es-ES`
+          );
+        }
+        if (selected === "Series") {
+          console.log('busqueda por Series')
+          data = await getData(
+            `https://api.themoviedb.org/3/search/tv?query=${query}&language=es-ES`
+          );
+        }
+        if (selected === "Actores") {
+          console.log('busqueda por Actores')
+          data = await getData(
+            `https://api.themoviedb.org/3/search/person?query=${query}&language=es-ES&page=1`
+          );
+        }
+        // if (selected === "Genres") {
+        //   data = await getData(
+        //     `https://api.themoviedb.org/3/search/person?query=${query}&language=es-ES`
+        //   );
+        // }
+
         console.log({ data });
         setMovies(data.results);
         if (data.results.length === 0) {
@@ -34,13 +60,15 @@ export const SearchMovies = () => {
         }
         setStatus(true);
       };
-      getMovie();
+
+
+      getFullData();
     } catch (error) {
       console.log({ error });
     } finally {
       setIsLoading(false);
     }
-  }, [query, search]);
+  }, [query, search ]);
 
   if (isLoading) return <Spinner />;
   if (status === null) return <Spinner />;

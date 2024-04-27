@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { HomeLayout } from "../layout";
-import { Favorites, List, Dashboard, SearchMovies, FilmDetails, SerieDetails } from "../pages/dashboard";
+import { Favorites, List, Dashboard, SearchMovies, FilmDetails } from "../pages/dashboard";
 
 export const HomeRouter = () => {
   return (
@@ -12,6 +12,8 @@ export const HomeRouter = () => {
         <Route path="busqueda/:name" element={<SearchMovies />} />
         <Route path="/peliculas/:name/:id" element={<FilmDetails />} />
         <Route path="/series/:name/:id" element={<FilmDetails />} />
+        <Route path="/actores/:name/:id" element={<FilmDetails />} />
+        <Route path="/generos/:name/:id" element={<FilmDetails />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Route>

@@ -10,7 +10,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export const MovieCard = ({ title, image, description, movie, isMovie }) => {
   const newTitle = title?.charAt().toUpperCase() + title?.substring(1).toLowerCase();
-  console.log({ movie });
+  // console.log({ movie });
   // console.log({image})
   const pathTitle = title
     ?.replace(/[^\w\s]/g, "") // Reemplazar puntos y dos puntos por espacios
@@ -28,7 +28,7 @@ export const MovieCard = ({ title, image, description, movie, isMovie }) => {
       {/* <img className="rounded-lg" src={image} alt={newTitle} /> */}
       <LazyLoadImage
         alt={newTitle}
-        className="rounded-lg"
+        className="rounded-lg object-cover w-full h-full"
         src={image}
         // placeholderSrc="https://placehold.co/3840x2160"
         // effect="blur"
