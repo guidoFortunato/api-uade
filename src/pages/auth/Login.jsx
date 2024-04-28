@@ -29,7 +29,7 @@ export const Login = () => {
       </Link>
 
       <form className="mx-auto flex flex-col gap-5 " onSubmit={onSubmit}>
-        <h3 className="text-white text-center text-2xl sm:text-3xl">
+        <h3 className="text-[#ffffff] text-center text-2xl sm:text-3xl">
           Iniciar sesión
         </h3>
 
