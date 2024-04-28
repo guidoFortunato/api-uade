@@ -46,7 +46,7 @@ export const Dashboard = () => {
       <div className="w-full h-[500px] flex items-center justify-center">
         <div className="size-fit object center">
           <img
-            src={windowSize.width >= 500 && windowSize.height >= 500 ? "/Banner5.jpg" : "/Banner6.png"}
+            src={windowSize.width >= 500 && windowSize.height >= 500 ? "/Banner7.png" : "/Banner6.png"}
             alt="GodFather"
             className="w-full h-full object-cover"
           />
