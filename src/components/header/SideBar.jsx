@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { FaSearch, FaHeart, FaStar   } from "react-icons/fa";
+import { useContext } from "react";
+import { FaHeart, FaSearch, FaStar } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
+import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 
 export const SideBar = () => {
@@ -23,7 +23,7 @@ export const SideBar = () => {
         </span>
       </Link>
 
-      <div className="flex justify-center items-center md:order-2 md:mr-7">
+      <div className="flex justify-center items-center md:order-2 md:mr-7 p-3 rounded-lg"> 
         <FaSearch
           className="mr-3 cursor-pointer"
           onClick={() => handleSearchBar(!searchBarOpen)}
@@ -39,23 +39,29 @@ export const SideBar = () => {
             />
           }
         >
+          <div className="bg-[#9f5ae0]">
+          <div className="bg-white">
           <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">
+            <span className="block text-base font-bold text-[#9f5ae0]">Bonnie Green</span>
+            <span className="block italic truncate text-xs font-medium">
               name@test.com
             </span>
           </Dropdown.Header>
+          </div>
           <Link to="/">
-            <Dropdown.Item>Home</Dropdown.Item>
+          <Dropdown.Item className="text-white hover:text-[#9f5ae0] transition-colors">Home</Dropdown.Item>
           </Link>
 
           <Dropdown.Divider />
-          <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
+          <Dropdown.Item className="text-white hover:text-[#9f5ae0] transition-colors" onClick={handleLogout}>Log out</Dropdown.Item>
+          </div>
         </Dropdown>
+        
         <Navbar.Toggle className="ml-1" />
       </div>
+      
       <Navbar.Collapse>
-        
+       
           <NavLink
             to="/"
             className={({ isActive }) =>
