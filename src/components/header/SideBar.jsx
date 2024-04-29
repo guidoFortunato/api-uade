@@ -17,8 +17,8 @@ export const SideBar = () => {
   return (
     <Navbar fluid className="bg-transparent text-white">
       <Link to="/" className="flex items-center md:ml-7">
-        <img src="/Logo.png" className="h-8 md:h-9" alt="Frameland" />
-        <span className="self-center whitespace-nowrap text-2xl md:text-3xl ml-1 font-semibold italic">
+        {/* <img src="/Logo.png" className="h-7" alt="Frameland" /> */}
+        <span className="self-center whitespace-nowrap text-xl md:text-3xl ml-1 font-semibold italic">
           FrameLand
         </span>
       </Link>

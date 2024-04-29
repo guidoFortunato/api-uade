@@ -1,4 +1,6 @@
 export * from "./header/SideBar";
+export * from "./header/SideBar2";
+export * from "./header/SideBar3";
 export * from "./header/SearchBar";
 export * from "./header/SearchBar2";
 export * from "./footer/Footer";

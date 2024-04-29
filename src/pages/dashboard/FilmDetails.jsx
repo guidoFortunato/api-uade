@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import YoutubePlayer from "react-player/youtube";
 import { getData } from "../../helpers/getData";
 import { Spinner } from "../../components/Spinner";
 import { Icons, ModalComponent, Trailer } from "../../components";

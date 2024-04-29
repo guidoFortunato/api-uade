@@ -1,9 +1,6 @@
-import YouTubePlayer from "react-player";
-
 export const Trailer = ({ url, trailer }) => {
   return (
     <>
-      
       <iframe
         className="h-[550px] w-full"
         src={url}
@@ -12,7 +9,7 @@ export const Trailer = ({ url, trailer }) => {
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       ></iframe>
-      
+
       {/* <YouTubePlayer
         url={url}
         style={{

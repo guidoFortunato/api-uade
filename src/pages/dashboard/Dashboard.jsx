@@ -44,11 +44,21 @@ export const Dashboard = () => {
   return (
     <>
       <div className="w-full h-[500px] flex items-center justify-center">
-        <div className="size-fit object center">
-          <img
+        <div className="w-full h-full">
+          {/* <img
             src={windowSize.width >= 500 && windowSize.height >= 500 ? "/Banner5.jpg" : "/Banner6.png"}
             alt="GodFather"
             className="w-full h-full object-cover"
+          /> */}
+          <img
+            src={"/Banner5.jpg"}
+            alt="Godfather"
+            className="hidden lg:block w-full h-full  object-cover"
+          />
+          <img
+            src={"/Banner6.png"}
+            alt="Godfather"
+            className="block lg:hidden w-full h-full  object-cover"
           />
         </div>
       </div>
