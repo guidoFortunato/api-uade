@@ -41,7 +41,7 @@ body {
 }
 
 .background-home {
-  background: rgb(52, 14, 97);
+  
   background: linear-gradient(
     0deg,
     rgba(52, 14, 97, 1) 44%,
@@ -95,4 +95,8 @@ body {
 
 .slick-prev.slick-disabled:before, .slick-next.slick-disabled:before{
   opacity: 0;
+}
+
+.navbar-active {
+  background: rgba(0, 0, 0, .8);
 }

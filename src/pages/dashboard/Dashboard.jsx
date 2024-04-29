@@ -7,25 +7,9 @@ import { DashboardRow } from "./";
 export const Dashboard = () => {
   const { nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, topRatedSeries } = useContext(UserContext);
   const [totalMovies, setTotalMovies] = useState([]);
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  
+  
 
   useEffect(() => {
     if (nowPlayingMovies.length > 0) {
@@ -51,7 +35,7 @@ export const Dashboard = () => {
             className="w-full h-full object-cover"
           /> */}
           <img
-            src={"/Banner5.jpg"}
+            src={"/Banner7.png"}
             alt="Godfather"
             className="hidden lg:block w-full h-full  object-cover"
           />

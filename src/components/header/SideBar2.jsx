@@ -16,7 +16,7 @@ export const SideBar2 = () => {
 
   return (
     <nav className="bg-transparent text-white">
-      <div className="max-w-screen-3xl flex flex-wrap justify-between mx-auto p-4">
+      <div className="max-w-screen-3xl flex flex-wrap justify-between md:justify-around mx-auto p-4">
         <Link to="/" className="flex items-center">
           <img src="/Logo.png" className="h-8 md:h-9" alt="Frameland" />
           <span className="self-center whitespace-nowrap text-2xl md:text-3xl  font-semibold italic">
