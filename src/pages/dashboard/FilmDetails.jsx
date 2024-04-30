@@ -25,7 +25,7 @@ const obtenerNombreMes = (numeroMes) => {
 export const FilmDetails = () => {
   const [filmDetail, setFilmDetail] = useState(null);
   const [trailer, setTrailer] = useState(null);
-  const { id } = useParams();
+  const { name, id } = useParams();
   const params = useLocation();
   const pathname = params.pathname.split("/")[1];
   const splitDate =
@@ -36,17 +36,23 @@ export const FilmDetails = () => {
     pathname === "peliculas"
       ? filmDetail?.release_date
       : filmDetail?.first_air_date;
-  // console.log({pathname})
+  console.log({name})
 
-  console.log({ filmDetail });
+  // console.log({ filmDetail });
 
   useEffect(() => {
     const getfilmDetails = async () => {
-      const apiTrend = pathname === "peliculas" ? "movie" : "tv";
-      const data = await getData(
-        `https://api.themoviedb.org/3/${apiTrend}/${id}?language=es-ES`
-      );
-      // console.log(data);
+      const apiTrend = pathname === "peliculas" ? "movie" : pathname === "actores" ? "person" : "tv";
+      // if (apiTrend === "person") {
+      //   const data = await getData( `https://api.themoviedb.org/3/search/person?query=${name}&language=es-ES&page=1` );
+      //   console.log({data})
+      //   if (data.results.length > 0) {
+      //     setFilmDetail(data.results[0].known_for)         
+      //   }
+      //   return
+      // }
+      const data = await getData( `https://api.themoviedb.org/3/${apiTrend}/${id}?language=es-ES` );
+      // console.log({data});
       setFilmDetail(data);
     };
     getfilmDetails();

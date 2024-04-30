@@ -35,7 +35,7 @@ export const Favorites = () => {
                 }
                 description={movie.overview}
                 movie={movie}
-                isMovie={movie.title ? true : false}
+                mediaType={movie.media_type}
               />
             ))}
           </div>

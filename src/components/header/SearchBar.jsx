@@ -28,7 +28,7 @@ export const SearchBar = ({ myStyle = "", width = "" }) => {
 
   return (
     <form
-      className={myStyle.length > 0 ? `${myStyle} mx-auto` : "mx-auto p-4"}
+      className={myStyle.length > 0 ? `${myStyle} w-1/2 mx-auto` : "mx-auto p-4"}
       onSubmit={handleSubmit}
     >
       <label

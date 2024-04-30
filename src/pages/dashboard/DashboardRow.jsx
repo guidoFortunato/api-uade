@@ -50,6 +50,7 @@ export const DashboardRow = ({ title, movies }) => {
       },
     ],
   };
+  console.log({movies})
 
   if (movies.length === 0) return <Spinner />;
 
@@ -70,7 +71,7 @@ export const DashboardRow = ({ title, movies }) => {
             }
             description={movie.overview}
             movie={movie}
-            isMovie={movie.title ? true : false}
+            mediaType={ movie.media_type ? movie.media_type : movie.title ? "movie" : "tv"}
           />
         ))}
       </Slider>

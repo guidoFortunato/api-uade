@@ -8,10 +8,9 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 // import { getEnvVariables } from "../../helpers";
 // const { VITE_API_IMAGE } = getEnvVariables();
 
-export const MovieCard = ({ title, image, description, movie, isMovie }) => {
-  const newTitle =
-    title?.charAt().toUpperCase() + title?.substring(1).toLowerCase();
-  // console.log({ movie });
+export const MovieCard = ({ title, image, description, movie, mediaType = "movie" }) => {
+  const newTitle = title?.charAt().toUpperCase() + title?.substring(1).toLowerCase();
+  // console.log({ mediaType });
   // console.log({image})
   const pathTitle = title
     ?.replace(/[^\w\s]/g, "") // Reemplazar puntos y dos puntos por espacios
@@ -34,9 +33,13 @@ export const MovieCard = ({ title, image, description, movie, isMovie }) => {
       <div className="absolute inset-0 hover:-inset-auto bg-gradient-to-b from-[rgba(0,0,0,0.19)] to-[rgba(30,16,3,0.13)]" />
       <Link
         to={
-          isMovie
+          mediaType === "movie"
             ? `/peliculas/${pathTitle}/${movie.id}`
-            : `/series/${pathTitle}/${movie.id}`
+            : mediaType === "tv"
+            ? `/series/${pathTitle}/${movie.id}`
+            : mediaType === "person" 
+            ? `/actores/${pathTitle}/${movie.id}`
+            : null
         }
       >
         <div className=" text-white opacity-100 transition duration-500 ease-in-out h-full from-[rgb(0,0,0)] to-[rgba(30,16,3,0.13)] hover:from-[rgb(0,0,0)] hover:to-[rgba(30,16,3,0)] bg-gradient-to-t absolute bottom-0 right-0 left-0 top-0">

@@ -22,30 +22,32 @@ export const SearchMovies = () => {
   }, []);
 
   useEffect(() => {
-    console.log('entra al uef')
     try {
       setIsLoading(true);
       const getFullData = async () => {
-        let data;
+        // let data;
+        const data = await getData(
+          `https://api.themoviedb.org/3/search/multi?query=${query}&language=es-ES`
+        );
 
-        if (selected === "Películas") {
-          console.log('busqueda por Películas')
-          data = await getData(
-            `https://api.themoviedb.org/3/search/movie?query=${query}&language=es-ES`
-          );
-        }
-        if (selected === "Series") {
-          console.log('busqueda por Series')
-          data = await getData(
-            `https://api.themoviedb.org/3/search/tv?query=${query}&language=es-ES`
-          );
-        }
-        if (selected === "Actores") {
-          console.log('busqueda por Actores')
-          data = await getData(
-            `https://api.themoviedb.org/3/search/person?query=${query}&language=es-ES&page=1`
-          );
-        }
+        // if (selected === "Películas") {
+        //   console.log('busqueda por Películas')
+        //   data = await getData(
+        //     `https://api.themoviedb.org/3/search/movie?query=${query}&language=es-ES`
+        //   );
+        // }
+        // if (selected === "Series") {
+        //   console.log('busqueda por Series')
+        //   data = await getData(
+        //     `https://api.themoviedb.org/3/search/tv?query=${query}&language=es-ES`
+        //   );
+        // }
+        // if (selected === "Actores") {
+        //   console.log('busqueda por Actores')
+        //   data = await getData(
+        //     `https://api.themoviedb.org/3/search/person?query=${query}&language=es-ES&page=1`
+        //   );
+        // }
         // if (selected === "Genres") {
         //   data = await getData(
         //     `https://api.themoviedb.org/3/search/person?query=${query}&language=es-ES`
@@ -61,22 +63,23 @@ export const SearchMovies = () => {
         setStatus(true);
       };
 
-
       getFullData();
     } catch (error) {
       console.log({ error });
     } finally {
       setIsLoading(false);
     }
-  }, [query, search ]);
+  }, [query, search]);
 
   if (isLoading) return <Spinner />;
   if (status === null) return <Spinner />;
   if (paramSearch !== "search?q=") return <Navigate to="/" />;
 
   return (
-    
     <div className="container px-10 py-10 mx-auto">
+      <h3 className="text-white text-center text-base md:text-lg whitespace-nowrap mb-8">
+        Su búsqueda: "{query}"
+      </h3>
       {status ? (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
           {movies.map((movie) => (
@@ -90,7 +93,7 @@ export const SearchMovies = () => {
               }
               description={movie.overview}
               movie={movie}
-              isMovie={movie.title ? true : false}
+              mediaType={movie.media_type}
             />
           ))}
         </div>
@@ -101,13 +104,13 @@ export const SearchMovies = () => {
         >
           <span className="sr-only">Info</span>
           <div>
-            <span className="font-semibold text-xl text-center text-white flex justify-center items-center flex-col">
+            <span className="font-semibold text-lg text-center text-white flex justify-center items-center flex-col">
               <img
                 className="w-60 lg:w-1/2"
                 src="https://www.tuentrada.com/teatro/gran-rex/imagenes/error.png"
                 alt="no hay películas"
               />
-               No se encontraron coincidencias
+              No se encontraron coincidencias
             </span>
           </div>
         </div>
