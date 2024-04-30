@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import { FaHeart, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import clsx from "clsx";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { UserContext } from "../../context/UserProvider";
 
 const notifySuccess = (text) => {
@@ -69,7 +69,6 @@ export const Icons = ({ movie, isCard }) => {
               "left-0 text-xl": !isCard,
             })}
           />
-          <Toaster position="bottom-right" />
         </>
       ) : (
         <>
@@ -80,7 +79,6 @@ export const Icons = ({ movie, isCard }) => {
               "left-0 text-xl": !isCard,
             })}
           />
-          <Toaster position="bottom-right" className="z-50" />
         </>
       )}
       {like ? (

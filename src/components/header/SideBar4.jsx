@@ -8,7 +8,8 @@ import { SearchBar } from "./SearchBar";
 import { SearchBar3 } from "./SearchBar3";
 
 export const SideBar4 = () => {
-  const { handleAuth, handleSearchBar, searchBarOpen } = useContext(UserContext);
+  const { handleAuth, handleSearchBar, searchBarOpen } =
+    useContext(UserContext);
   const [isOpenSearchBar, setIsSearchOpenBar] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
 
@@ -84,8 +85,6 @@ export const SideBar4 = () => {
           <div>
             <button
               type="button"
-              data-collapse-toggle="navbar-search"
-              aria-controls="navbar-search"
               aria-expanded="false"
               className="block text-gray-500 md:mr-3 hover:text-gray-400 rounded-lg text-sm p-2.5"
               onClick={() => setIsSearchOpenBar((prev) => !prev)}
@@ -110,10 +109,8 @@ export const SideBar4 = () => {
           </div>
           <div>
             <button
-              data-collapse-toggle="navbar-search"
               type="button"
               className="mr-3 inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden"
-              aria-controls="navbar-search"
               aria-expanded="false"
               onClick={() => setIsOpenList((prev) => !prev)}
             >
@@ -170,7 +167,11 @@ export const SideBar4 = () => {
           !isOpenList && !isOpenSearchBar && "hidden"
         } md:hidden justify-between items-center text-white max-w-screen-3xl py-2`}
       >
-        <div className={`transition-all duration-300 ${ isOpenSearchBar ? "flex" : "hidden" } md:hidden w-full sm:w-[60%]`}>
+        <div
+          className={`transition-all duration-300 ${
+            isOpenSearchBar ? "flex" : "hidden"
+          } md:hidden w-full sm:w-[60%]`}
+        >
           <SearchBar3 myStyle={"px-5 w-[90%] mx-auto"} />
         </div>
         <div

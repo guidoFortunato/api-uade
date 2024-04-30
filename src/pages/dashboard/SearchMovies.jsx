@@ -75,6 +75,7 @@ export const SearchMovies = () => {
   if (paramSearch !== "search?q=") return <Navigate to="/" />;
 
   return (
+    
     <div className="container px-10 py-10 mx-auto">
       {status ? (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">

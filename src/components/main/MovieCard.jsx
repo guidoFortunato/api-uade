@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Icons } from "./Icons";
 
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 // import { getEnvVariables } from "../../helpers";
 // const { VITE_API_IMAGE } = getEnvVariables();
 
 export const MovieCard = ({ title, image, description, movie, isMovie }) => {
-  const newTitle = title?.charAt().toUpperCase() + title?.substring(1).toLowerCase();
+  const newTitle =
+    title?.charAt().toUpperCase() + title?.substring(1).toLowerCase();
   // console.log({ movie });
   // console.log({image})
   const pathTitle = title
@@ -24,18 +25,13 @@ export const MovieCard = ({ title, image, description, movie, isMovie }) => {
   // console.log({ movieCard: movie });
 
   return (
-    <div className="rounded-lg relative hover:cursor-pointer mx-1">
-      {/* <img className="rounded-lg" src={image} alt={newTitle} /> */}
+    <div className="relative hover:cursor-pointer mx-1">
       <LazyLoadImage
         alt={newTitle}
-        className="rounded-lg object-cover w-full h-full"
+        className="object-cover w-full h-full"
         src={image}
-        // placeholderSrc="https://placehold.co/3840x2160"
-        // effect="blur"
-        // height={image.height}
-        // width={image.width}
       />
-      <div className="absolute rounded-lg inset-0 hover:-inset-auto bg-gradient-to-b from-[rgba(0,0,0,0.19)] to-[rgba(30,16,3,0.13)]" />
+      <div className="absolute inset-0 hover:-inset-auto bg-gradient-to-b from-[rgba(0,0,0,0.19)] to-[rgba(30,16,3,0.13)]" />
       <Link
         to={
           isMovie
@@ -43,7 +39,7 @@ export const MovieCard = ({ title, image, description, movie, isMovie }) => {
             : `/series/${pathTitle}/${movie.id}`
         }
       >
-        <div className="rounded-lg text-white opacity-100 transition duration-500 ease-in-out h-full from-[rgb(0,0,0)] to-[rgba(30,16,3,0.13)] hover:from-[rgb(0,0,0)] hover:to-[rgba(30,16,3,0)] bg-gradient-to-t absolute bottom-0 right-0 left-0 top-0">
+        <div className=" text-white opacity-100 transition duration-500 ease-in-out h-full from-[rgb(0,0,0)] to-[rgba(30,16,3,0.13)] hover:from-[rgb(0,0,0)] hover:to-[rgba(30,16,3,0)] bg-gradient-to-t absolute bottom-0 right-0 left-0 top-0">
           <span className="whitespace-normal text-xs font-semibold flex justify-center items-end h-full text-center pb-2 capitalize">
             {newTitle}
           </span>

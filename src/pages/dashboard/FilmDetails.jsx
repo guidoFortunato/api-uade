@@ -108,7 +108,7 @@ export const FilmDetails = () => {
                   />
                 </ModalComponent>
               </div>
-            ) }
+            )}
             {/* {trailer.results?.length > 0 ? (
               <div className="mt-5">
                 <ModalComponent textButton={"Ver trailer"} size={"5xl"}>

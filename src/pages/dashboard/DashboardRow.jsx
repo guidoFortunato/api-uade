@@ -54,28 +54,26 @@ export const DashboardRow = ({ title, movies }) => {
   if (movies.length === 0) return <Spinner />;
 
   return (
-    <>
-      <div className="slider-container mb-8 md:mb-10">
-        <h2 className="text-white text-base md:text-base font-bold mb-2">
-          {title}
-        </h2>
-        <Slider {...settings}>
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title ? movie.title : movie.name}
-              image={
-                movie.backdrop_path
-                  ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
-                  : "https://placehold.co/300x150"
-              }
-              description={movie.overview}
-              movie={movie}
-              isMovie={movie.title ? true : false}
-            />
-          ))}
-        </Slider>
-      </div>
-    </>
+    <div className="slider-container mb-8 md:mb-10">
+      <h2 className="text-white text-base md:text-base font-bold mb-2">
+        {title}
+      </h2>
+      <Slider {...settings}>
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            title={movie.title ? movie.title : movie.name}
+            image={
+              movie.backdrop_path
+                ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+                : "https://placehold.co/300x150"
+            }
+            description={movie.overview}
+            movie={movie}
+            isMovie={movie.title ? true : false}
+          />
+        ))}
+      </Slider>
+    </div>
   );
 };
