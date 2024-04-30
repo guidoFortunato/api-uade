@@ -1,19 +1,44 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { IoMdClose } from "react-icons/io";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
 import { UserContext } from "../../context/UserProvider";
-
+import { alertInfo } from "../../helpers";
 
 export const Register = () => {
   const { handleAuth } = useContext(UserContext);
-  const { register, handleSubmit, formState: { errors }, watch } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
+
+  const [seePassword, setSeePassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
-    // console.log({ data });
-    handleAuth(true);
+   
+    const { name, email, password } = data;
+    const newUser = { name, email, password };
+
+    let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+    
+    if (existingUsers.length > 0) {
+      const existUser = existingUsers.find(user => user.email === email)
+      if (existUser !== undefined) {
+        alertInfo(`<p class="font-semibold text-md">El usuario <span class="text-violet-dark">"${existUser.email}"</span> ya tiene una cuenta creada</p>`, 6000)
+        return
+      }
+    }
+    existingUsers.push(newUser);
+
+    localStorage.setItem("users", JSON.stringify(existingUsers));
     localStorage.setItem("auth", JSON.stringify(true));
+    handleAuth(true);
   });
 
   return (
@@ -137,8 +162,11 @@ export const Register = () => {
           >
             Contraseña
           </label>
+          <div className="relative">
+
+          
           <input
-            type="password"
+            type={ seePassword ? "text" : "password" }
             id="password"
             className={clsx(
               "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
@@ -164,6 +192,12 @@ export const Register = () => {
               },
             })}
           />
+           {seePassword ? (
+              <FaEye className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
+            ) : (
+              <FaEyeSlash className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
+            )}
+            </div>
           {errors.password && (
             <span className="text-red-500 text-xs block mt-1 font-normal">
               {errors.password.message}
@@ -177,8 +211,9 @@ export const Register = () => {
           >
             Confirmar contraseña
           </label>
+          <div className="relative">
           <input
-            type="password"
+            type={ confirmPassword ? "text" : "password" }
             id="confirmPassword"
             className={clsx(
               "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
@@ -202,6 +237,12 @@ export const Register = () => {
               },
             })}
           />
+          {confirmPassword ? (
+              <FaEye className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setConfirmPassword( prev => !prev ) } />
+            ) : (
+              <FaEyeSlash className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setConfirmPassword( prev => !prev ) } />
+            )}
+            </div>
           {errors.confirmPassword && (
             <span className="text-red-500 text-xs block mt-1 font-normal">
               {errors.confirmPassword.message}

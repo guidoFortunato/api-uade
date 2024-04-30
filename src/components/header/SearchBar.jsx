@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { alertaWarning, getEnvVariables } from "../../helpers";
+import { alertWarning, getEnvVariables } from "../../helpers";
 
 // const { VITE_API_URL } = getEnvVariables();
 
@@ -19,7 +19,7 @@ export const SearchBar = ({ myStyle = "", width = "" }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (value.length === 0) {
-      alertaWarning("La búsqueda no puede estar vacía");
+      alertWarning("La búsqueda no puede estar vacía");
       return;
     }
     navigate(`/busqueda/search?q=${value}`);

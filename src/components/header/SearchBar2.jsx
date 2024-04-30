@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
-import { alertaWarning, getEnvVariables } from "../../helpers";
+import { alertWarning, getEnvVariables } from "../../helpers";
 
 // const { VITE_API_URL } = getEnvVariables();
 
@@ -33,7 +33,7 @@ export const SearchBar2 = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (value.length === 0) {
-      alertaWarning("Debe ingresar al menos un caracter");
+      alertWarning("Debe ingresar al menos un caracter");
       return;
     }
 

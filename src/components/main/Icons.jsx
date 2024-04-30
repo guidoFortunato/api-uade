@@ -18,7 +18,6 @@ const notifyError = (text) => {
 
 export const Icons = ({ movie, isCard }) => {
   const { handleFavoritesMovies, handleListMovies } = useContext(UserContext);
-  // console.log({movie})
   const [like, setLike] = useState(
     JSON.parse(localStorage.getItem("list"))?.find(
       (listMovie) => listMovie.id === movie.id
@@ -70,7 +69,7 @@ export const Icons = ({ movie, isCard }) => {
               "left-0 text-xl": !isCard,
             })}
           />
-          <Toaster position="top-right" />
+          <Toaster position="bottom-right" />
         </>
       ) : (
         <>
@@ -81,7 +80,7 @@ export const Icons = ({ movie, isCard }) => {
               "left-0 text-xl": !isCard,
             })}
           />
-          <Toaster position="top-right" />
+          <Toaster position="bottom-right" className="z-50" />
         </>
       )}
       {like ? (

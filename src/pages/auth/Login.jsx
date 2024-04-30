@@ -6,6 +6,7 @@ import { FaEyeSlash } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
+import { alertInfo } from "../../helpers";
 
 export const Login = () => {
   const {
@@ -17,9 +18,21 @@ export const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
-    // console.log({ data });
-    handleAuth(true);
-    localStorage.setItem("auth", JSON.stringify(true));
+    const { email, password } = data;
+    
+    let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+    
+    if (existingUsers.length > 0) {
+      const existUser = existingUsers.find(user => user.email === email && user.password === password);
+      console.log({ existUser });
+      if (existUser !== undefined) {
+        handleAuth(true);
+        localStorage.setItem("auth", JSON.stringify(true));
+        return
+      }
+    }
+    alertInfo(`<p class="font-semibold text-md">Su email y/o contraseña son incorrectos</p>`, 6000)
+    return
   });
 
   return (
@@ -106,9 +119,9 @@ export const Login = () => {
               })}
             />
             {seePassword ? (
-              <FaEye className="absolute right-4 top-3 text-[#7b11df] cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
+              <FaEye className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
             ) : (
-              <FaEyeSlash className="absolute right-4 top-3 text-[#ffffff]" onClick={ ()=>setSeePassword( prev => !prev ) } />
+              <FaEyeSlash className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
             )}
           </div>
           {errors.password && (

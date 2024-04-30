@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { IoMdClose } from "react-icons/io";
 import clsx from "clsx";
-import { alertaSuccess } from "../../helpers";
+import { alertSuccess } from "../../helpers";
 
 export const PassRecover = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -10,7 +10,7 @@ export const PassRecover = () => {
 
   const onSubmit = handleSubmit((data) => {
     console.log("click enviar");
-    alertaSuccess()
+    alertSuccess()
     navigate('/auth/login')
   });
 
