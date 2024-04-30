@@ -4,7 +4,7 @@ import { alertaWarning, getEnvVariables } from "../../helpers";
 
 // const { VITE_API_URL } = getEnvVariables();
 
-export const SearchBar = ({myStyle = ""}) => {
+export const SearchBar = ({ myStyle = "", width = "" }) => {
   let navigate = useNavigate();
   const [value, setValue] = useState("");
 
@@ -19,15 +19,18 @@ export const SearchBar = ({myStyle = ""}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (value.length === 0) {
-      alertaWarning("Debe ingresar al menos un caracter");
+      alertaWarning("La búsqueda no puede estar vacía");
       return;
     }
     navigate(`/busqueda/search?q=${value}`);
     setValue("");
   };
-  
+
   return (
-    <form className={ myStyle.length > 0 ? `${myStyle} mx-auto` : "mx-auto"} onSubmit={handleSubmit}>
+    <form
+      className={myStyle.length > 0 ? `${myStyle} mx-auto` : "mx-auto p-4"}
+      onSubmit={handleSubmit}
+    >
       <label
         htmlFor="default-search"
         className="mb-2 text-sm font-medium text-gray-900 sr-only"
@@ -62,7 +65,7 @@ export const SearchBar = ({myStyle = ""}) => {
         />
         <button
           type="submit"
-          className="text-white absolute end-2.5 bottom-2.5 bg-[#9D4EDD] hover:bg-violet-900  focus:outline-none  font-medium rounded-lg text-sm px-4 py-2"
+          className="text-white absolute end-2.5 bottom-2.5 bg-[#9D4EDD] hover:bg-violet-900  focus:outline-none  font-medium rounded-lg text-sm px-3 py-1.5"
         >
           Buscar
         </button>

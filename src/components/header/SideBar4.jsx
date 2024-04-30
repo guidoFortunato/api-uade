@@ -19,16 +19,16 @@ export const SideBar4 = () => {
 
   return (
     <>
-      <nav className="flex justify-between items-center bg-transparent text-white max-w-screen-3xl px-5 pt-5 py-5">
+      <nav className="flex justify-between items-center bg-transparent text-white max-w-screen-3xl px-5 py-2">
         <div className="flex flex-wrap flex-col md:flex-row">
-          <div className="mb-2 md:mb-0 md:mr-8">
+          <div className="mb-2 md:mb-0 mt-2 md:mr-8">
             <Link to="/">
               <h3 className="self-center whitespace-nowrap text-xl md:text-2xl font-semibold italic">
                 FrameLand
               </h3>
             </Link>
           </div>
-          <div className="hidden md:flex md:items-center mt-2 sm:mt-0 ">
+          <div className="hidden md:flex md:items-center mt-2">
             <ul className="flex flex-row justify-center font-medium mt-0 space-x-4 rtl:space-x-reverse text-sm">
               <li>
                 <NavLink
@@ -75,13 +75,7 @@ export const SideBar4 = () => {
         </div>
         <div className="flex items-center justify-center">
           <div className="p-0 m-0 transition-all duration-300 hidden md:flex">
-            <SearchBar
-              myStyle={
-                isOpenSearchBar
-                  ? "max-w-screen-sm transition-all p-0 m-0"
-                  : "hidden"
-              }
-            />
+            <SearchBar />
           </div>
           <div>
             <button
@@ -89,7 +83,7 @@ export const SideBar4 = () => {
               data-collapse-toggle="navbar-search"
               aria-controls="navbar-search"
               aria-expanded="false"
-              className=" text-gray-500 md:mr-3 hover:text-gray-400 rounded-lg text-sm p-2.5"
+              className="block md:hidden text-gray-500 md:mr-3 hover:text-gray-400 rounded-lg text-sm p-2.5"
               onClick={() => setIsSearchOpenBar((prev) => !prev)}
             >
               <svg
@@ -137,7 +131,7 @@ export const SideBar4 = () => {
               </svg>
             </button>
           </div>
-          <div>
+          <div className="md:ml-1">
             <Dropdown
               arrowIcon={true}
               inline
@@ -145,6 +139,7 @@ export const SideBar4 = () => {
                 <Avatar
                   alt="User settings"
                   img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  rounded
                 />
               }
             >
@@ -167,22 +162,23 @@ export const SideBar4 = () => {
         </div>
       </nav>
       <nav
-        className={`flex flex-col md:hidden justify-between items-center bg-transparent text-white max-w-screen-3xl p-5`}
+        className={`flex flex-col ${ !isOpenList && !isOpenSearchBar && "hidden" } md:hidden justify-between items-center bg-transparent text-white max-w-screen-3xl py-2`}
       >
         <div className="transition-all duration-300 flex md:hidden">
           <SearchBar
-            myStyle={isOpenSearchBar ? "max-w-screen-sm transition-all p-0 m-0 mx-auto" : "hidden"}
+          width="100%"
+            myStyle={isOpenSearchBar ? "max-w-screen-sm transition-all mb-4 mx-auto" : "hidden"}
           />
         </div>
         <div
           className={`flex flex-col md:hidden md:items-center mt-2 sm:mt-0 w-full`}
         >
-          <ul className={`${ isOpenList ? "flex flex-col justify-center" : "hidden" } font-medium mt-0 w-full text-sm`}>
+          <ul className={`${ isOpenList ? "flex flex-col justify-center" : "hidden" } font-medium mt-0 w-full text-sm px-2`}>
             <li>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  `flex items-center mb-2 py-1 ${
+                  `flex items-center mb-2 py-2 px-1 ${
                     isActive ? "bg-violet-light text-white w-full" : ""
                   }  rounded md:bg-transparent md:p-0`
                 }
@@ -196,7 +192,7 @@ export const SideBar4 = () => {
               <NavLink
                 to="/favoritos"
                 className={({ isActive }) =>
-                  `flex items-center mb-2 py-1 ${
+                  `flex items-center mb-2 py-2 px-1 ${
                     isActive ? "bg-violet-light text-white w-full" : ""
                   }  rounded md:bg-transparent md:p-0`
                 }
@@ -209,7 +205,7 @@ export const SideBar4 = () => {
               <NavLink
                 to="/mi-lista"
                 className={({ isActive }) =>
-                  `flex items-center py-1 lg:py-0 ${
+                  `flex items-center py-2 px-1 ${
                     isActive ? "bg-violet-light text-white w-full" : ""
                   }  rounded md:bg-transparent md:p-0`
                 }
