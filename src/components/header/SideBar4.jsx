@@ -5,10 +5,10 @@ import { FaSearch, FaHeart, FaStar } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { UserContext } from "../../context/UserProvider";
 import { SearchBar } from "./SearchBar";
+import { SearchBar3 } from "./SearchBar3";
 
 export const SideBar4 = () => {
-  const { handleAuth, handleSearchBar, searchBarOpen } =
-    useContext(UserContext);
+  const { handleAuth, handleSearchBar, searchBarOpen } = useContext(UserContext);
   const [isOpenSearchBar, setIsSearchOpenBar] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
 
@@ -19,7 +19,7 @@ export const SideBar4 = () => {
 
   return (
     <>
-      <nav className="flex justify-between items-center bg-transparent text-white max-w-screen-3xl px-5 py-2">
+      <nav className="flex justify-between items-center text-white max-w-screen-3xl px-5 py-3">
         <div className="flex flex-wrap flex-col md:flex-row">
           <div className="mb-2 md:mb-0 mt-2 md:mr-8">
             <Link to="/">
@@ -74,8 +74,12 @@ export const SideBar4 = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <div className="p-0 m-0 transition-all duration-300 hidden md:flex">
-            <SearchBar />
+          <div
+            className={`p-0 m-0 transition-all duration-300 hidden ${
+              isOpenSearchBar ? " md:flex" : ""
+            }`}
+          >
+            <SearchBar3 />
           </div>
           <div>
             <button
@@ -83,7 +87,7 @@ export const SideBar4 = () => {
               data-collapse-toggle="navbar-search"
               aria-controls="navbar-search"
               aria-expanded="false"
-              className="block md:hidden text-gray-500 md:mr-3 hover:text-gray-400 rounded-lg text-sm p-2.5"
+              className="block text-gray-500 md:mr-3 hover:text-gray-400 rounded-lg text-sm p-2.5"
               onClick={() => setIsSearchOpenBar((prev) => !prev)}
             >
               <svg
@@ -162,18 +166,21 @@ export const SideBar4 = () => {
         </div>
       </nav>
       <nav
-        className={`flex flex-col ${ !isOpenList && !isOpenSearchBar && "hidden" } md:hidden justify-between items-center bg-transparent text-white max-w-screen-3xl py-2`}
+        className={`flex flex-col ${
+          !isOpenList && !isOpenSearchBar && "hidden"
+        } md:hidden justify-between items-center text-white max-w-screen-3xl py-2`}
       >
-        <div className="transition-all duration-300 flex md:hidden">
-          <SearchBar
-          width="100%"
-            myStyle={isOpenSearchBar ? "max-w-screen-sm transition-all mb-4 mx-auto" : "hidden"}
-          />
+        <div className={`transition-all duration-300 ${ isOpenSearchBar ? "flex" : "hidden" } md:hidden w-full sm:w-[60%]`}>
+          <SearchBar3 myStyle={"px-5 w-[90%] mx-auto"} />
         </div>
         <div
-          className={`flex flex-col md:hidden md:items-center mt-2 sm:mt-0 w-full`}
+          className={`flex flex-col md:hidden md:items-center mt-3 md:mt-0 w-full`}
         >
-          <ul className={`${ isOpenList ? "flex flex-col justify-center" : "hidden" } font-medium mt-0 w-full text-sm px-2`}>
+          <ul
+            className={`${
+              isOpenList ? "flex flex-col justify-center" : "hidden"
+            } font-medium mt-0 w-full text-sm px-2`}
+          >
             <li>
               <NavLink
                 to="/"

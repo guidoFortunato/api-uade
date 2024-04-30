@@ -21,17 +21,19 @@ export const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
-   
     const { name, email, password } = data;
     const newUser = { name, email, password };
 
     let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    
+
     if (existingUsers.length > 0) {
-      const existUser = existingUsers.find(user => user.email === email)
+      const existUser = existingUsers.find((user) => user.email === email);
       if (existUser !== undefined) {
-        alertInfo(`<p class="font-semibold text-md">El usuario <span class="text-violet-dark">"${existUser.email}"</span> ya tiene una cuenta creada</p>`, 6000)
-        return
+        alertInfo(
+          `<p class="font-semibold text-md">El usuario <span class="text-violet-dark">"${existUser.email}"</span> ya tiene una cuenta creada</p>`,
+          6000
+        );
+        return;
       }
     }
     existingUsers.push(newUser);
@@ -163,41 +165,45 @@ export const Register = () => {
             Contraseña
           </label>
           <div className="relative">
-
-          
-          <input
-            type={ seePassword ? "text" : "password" }
-            id="password"
-            className={clsx(
-              "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
-              {
-                "border-red-500 focus:ring-red-600 focus:border-red-500":
-                  errors.password,
-                "focus:ring-violet-500 focus:border-violet-600":
-                  !errors.password,
-              }
-            )}
-            {...register("password", {
-              required: {
-                value: true,
-                message: "La contraseña es obligatoria",
-              },
-              minLength: {
-                value: 6,
-                message: "La contraseña debe tener como mínimo 6 caracteres",
-              },
-              maxLength: {
-                value: 20,
-                message: "La contraseña debe tener como máximo 20 caracteres",
-              },
-            })}
-          />
-           {seePassword ? (
-              <FaEye className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
+            <input
+              type={seePassword ? "text" : "password"}
+              id="password"
+              className={clsx(
+                "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
+                {
+                  "border-red-500 focus:ring-red-600 focus:border-red-500":
+                    errors.password,
+                  "focus:ring-violet-500 focus:border-violet-600":
+                    !errors.password,
+                }
+              )}
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "La contraseña es obligatoria",
+                },
+                minLength: {
+                  value: 6,
+                  message: "La contraseña debe tener como mínimo 6 caracteres",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "La contraseña debe tener como máximo 20 caracteres",
+                },
+              })}
+            />
+            {seePassword ? (
+              <FaEye
+                className="absolute right-4 top-3 text-white cursor-pointer"
+                onClick={() => setSeePassword((prev) => !prev)}
+              />
             ) : (
-              <FaEyeSlash className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
+              <FaEyeSlash
+                className="absolute right-4 top-3 text-white cursor-pointer"
+                onClick={() => setSeePassword((prev) => !prev)}
+              />
             )}
-            </div>
+          </div>
           {errors.password && (
             <span className="text-red-500 text-xs block mt-1 font-normal">
               {errors.password.message}
@@ -212,37 +218,43 @@ export const Register = () => {
             Confirmar contraseña
           </label>
           <div className="relative">
-          <input
-            type={ confirmPassword ? "text" : "password" }
-            id="confirmPassword"
-            className={clsx(
-              "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
-              {
-                "border-red-500 focus:ring-red-600 focus:border-red-500":
-                  errors.confirmPassword,
-                "focus:ring-violet-500 focus:border-violet-600":
-                  !errors.confirmPassword,
-              }
-            )}
-            {...register("confirmPassword", {
-              required: {
-                value: true,
-                message: "Debe confirmar la contraseña",
-              },
-              validate: (value) => {
-                return (
-                  value === watch("password") ||
-                  "Las contraseñas deben ser iguales"
-                );
-              },
-            })}
-          />
-          {confirmPassword ? (
-              <FaEye className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setConfirmPassword( prev => !prev ) } />
+            <input
+              type={confirmPassword ? "text" : "password"}
+              id="confirmPassword"
+              className={clsx(
+                "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
+                {
+                  "border-red-500 focus:ring-red-600 focus:border-red-500":
+                    errors.confirmPassword,
+                  "focus:ring-violet-500 focus:border-violet-600":
+                    !errors.confirmPassword,
+                }
+              )}
+              {...register("confirmPassword", {
+                required: {
+                  value: true,
+                  message: "Debe confirmar la contraseña",
+                },
+                validate: (value) => {
+                  return (
+                    value === watch("password") ||
+                    "Las contraseñas deben ser iguales"
+                  );
+                },
+              })}
+            />
+            {confirmPassword ? (
+              <FaEye
+                className="absolute right-4 top-3 text-white cursor-pointer"
+                onClick={() => setConfirmPassword((prev) => !prev)}
+              />
             ) : (
-              <FaEyeSlash className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setConfirmPassword( prev => !prev ) } />
+              <FaEyeSlash
+                className="absolute right-4 top-3 text-white cursor-pointer"
+                onClick={() => setConfirmPassword((prev) => !prev)}
+              />
             )}
-            </div>
+          </div>
           {errors.confirmPassword && (
             <span className="text-red-500 text-xs block mt-1 font-normal">
               {errors.confirmPassword.message}

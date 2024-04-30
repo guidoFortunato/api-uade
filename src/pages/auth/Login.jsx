@@ -18,21 +18,25 @@ export const Login = () => {
   const [seePassword, setSeePassword] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
+    
     const { email, password } = data;
-    
     let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    
+
     if (existingUsers.length > 0) {
-      const existUser = existingUsers.find(user => user.email === email && user.password === password);
-      console.log({ existUser });
+      const existUser = existingUsers.find(
+        (user) => user.email === email && user.password === password
+      );
       if (existUser !== undefined) {
         handleAuth(true);
         localStorage.setItem("auth", JSON.stringify(true));
-        return
+        return;
       }
     }
-    alertInfo(`<p class="font-semibold text-md">Su email y/o contraseña son incorrectos</p>`, 6000)
-    return
+    alertInfo(
+      `<p class="font-semibold text-md">Su email y/o contraseña son incorrectos</p>`,
+      6000
+    );
+    return;
   });
 
   return (
@@ -92,7 +96,7 @@ export const Login = () => {
           </label>
           <div className="relative">
             <input
-              type={ seePassword ? "text" : "password" }
+              type={seePassword ? "text" : "password"}
               id="password"
               className={clsx(
                 "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5 pr-10",
@@ -119,9 +123,15 @@ export const Login = () => {
               })}
             />
             {seePassword ? (
-              <FaEye className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
+              <FaEye
+                className="absolute right-4 top-3 text-white cursor-pointer"
+                onClick={() => setSeePassword((prev) => !prev)}
+              />
             ) : (
-              <FaEyeSlash className="absolute right-4 top-3 text-white cursor-pointer" onClick={ ()=>setSeePassword( prev => !prev ) } />
+              <FaEyeSlash
+                className="absolute right-4 top-3 text-white cursor-pointer"
+                onClick={() => setSeePassword((prev) => !prev)}
+              />
             )}
           </div>
           {errors.password && (

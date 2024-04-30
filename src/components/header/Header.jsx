@@ -8,31 +8,31 @@ import { SideBar4 } from "./SideBar4";
 
 export const Header = () => {
 
-  // const [navbar, setNavbar] = useState(false);
-  // const changeBackground = () => {
-  //   if (window.scrollY >= 1) {
-  //     setNavbar(true);
-  //   } else {
-  //     setNavbar(false);
-  //   }
-  // };
+  const [navbar, setNavbar] = useState(false);
+  const changeBackground = () => {
+    if (window.scrollY >= 1) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", changeBackground);
+  useEffect(() => {
+    window.addEventListener("scroll", changeBackground);
 
-  //   return () => {
-  //     window.removeEventListener("scroll", changeBackground);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener("scroll", changeBackground);
+    };
+  }, []);
 
   return (
     <header
     
       className={clsx(
-        "bg-[#0D0D0D] w-full text-white sticky top-0 z-40 transition-all duration-300",
-        // {
-        //   "navbar-active": navbar,
-        // }
+        "bg-black w-full text-white sticky top-0 z-40 transition-all duration-300",
+        {
+          "navbar-active": navbar,
+        }
       )}
     >
       {/* <SideBar /> */}
