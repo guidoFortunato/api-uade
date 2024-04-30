@@ -4,7 +4,7 @@ import { alertaWarning, getEnvVariables } from "../../helpers";
 
 // const { VITE_API_URL } = getEnvVariables();
 
-export const SearchBar = () => {
+export const SearchBar = ({myStyle = ""}) => {
   let navigate = useNavigate();
   const [value, setValue] = useState("");
 
@@ -27,7 +27,7 @@ export const SearchBar = () => {
   };
   
   return (
-    <form className="max-w-lg mx-auto px-5 mb-4 md:px-0" onSubmit={handleSubmit}>
+    <form className={ myStyle.length > 0 ? `${myStyle} mx-auto` : "mx-auto"} onSubmit={handleSubmit}>
       <label
         htmlFor="default-search"
         className="mb-2 text-sm font-medium text-gray-900 sr-only"
@@ -56,7 +56,7 @@ export const SearchBar = () => {
           type="search"
           id="default-search"
           className="block w-full p-4 ps-10 pr-24 text-sm text-[#c2c2c2] border border-[#662d94] rounded-lg bg-[#9d4edd79] focus:ring-[#9757ca] focus:border-[#9757ca]"
-          placeholder="Buscar por título, autor, género..."
+          placeholder="Buscar..."
           value={value}
           onChange={handleValue}
         />
