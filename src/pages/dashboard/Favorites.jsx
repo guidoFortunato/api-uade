@@ -9,53 +9,42 @@ export const Favorites = () => {
   const { favoritesMovies } = useContext(UserContext);
   // console.log({favoritesMovies})
   return (
-    <div className="container px-10 py-10 mx-auto">
-      <h3 className="text-white text-center text-xl md:text-3xl mb-10">
-        Mis películas/series favoritas
-      </h3>
-      {favoritesMovies.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-          {favoritesMovies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title ? movie.title : movie.name}
-              image={
-                movie.backdrop_path
-                  ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
-                  : "https://placehold.co/3840x2160"
-              }
-              description={movie.overview}
-              movie={movie}
-              isMovie={movie.title ? true : false}
-            />
-          ))}
-        </div>
-      ) : (
-        <p className="text-white text-sm">
-          No hay películas/series favoritas por el momento
-        </p>
-      )}
-      {/* <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+    <>
+      <div className="w-full h-[200px] md:h-[250px] relative">
+        <img
+          src="/fondo-pantallas.jpg"
+          alt=""
+          className="object-cover h-full w-full"
+        />
+        <div className="w-full h-full absolute top-0 bg-black bg-opacity-70" />
+        <h3 className="text-white text-center text-xl md:text-2xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] absolute whitespace-nowrap capitalize">
+          Mis favoritos
+        </h3>
+      </div>
+      <div className="container px-10 py-10 mx-auto">
         {favoritesMovies.length > 0 ? (
-          favoritesMovies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title}
-              image={
-                movie.backdrop_path
-                  ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
-                  : "https://placehold.co/300x170"
-              }
-              description={movie.overview}
-              movie={movie}
-            />
-          ))
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+            {favoritesMovies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                title={movie.title ? movie.title : movie.name}
+                image={
+                  movie.backdrop_path
+                    ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+                    : "https://placehold.co/3840x2160"
+                }
+                description={movie.overview}
+                movie={movie}
+                isMovie={movie.title ? true : false}
+              />
+            ))}
+          </div>
         ) : (
           <p className="text-white text-sm">
-            No hay películas/series favoritas por el momento
+            No hay posees favoritos por el momento
           </p>
         )}
-      </div> */}
-    </div>
+      </div>
+    </>
   );
 };
