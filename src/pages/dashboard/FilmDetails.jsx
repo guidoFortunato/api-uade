@@ -57,7 +57,7 @@ export const FilmDetails = () => {
   if (trailer === null) return <Spinner />;
 
   return (
-    <div className="container grid grid-cols-1 lg:grid-cols-6 mx-auto mt-10 text-white">
+    <div className="container grid grid-cols-1 lg:grid-cols-6 mx-auto mt-10 text-white px-10">
       <div className="md:col-span-2 mx-auto">
         <img
           className="hidden lg:block h-full object-cover"
