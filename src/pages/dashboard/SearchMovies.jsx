@@ -1,13 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { UserContext } from "../../context/UserProvider";
 import { MovieCard, Spinner } from "../../components";
 import { getData, getEnvVariables } from "../../helpers";
 
 // const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
 
 export const SearchMovies = () => {
-  const { selected } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState(null);
   const [movies, setMovies] = useState([]);
@@ -25,36 +23,11 @@ export const SearchMovies = () => {
     try {
       setIsLoading(true);
       const getFullData = async () => {
-        // let data;
         const data = await getData(
           `https://api.themoviedb.org/3/search/multi?query=${query}&language=es-ES`
         );
 
-        // if (selected === "Películas") {
-        //   console.log('busqueda por Películas')
-        //   data = await getData(
-        //     `https://api.themoviedb.org/3/search/movie?query=${query}&language=es-ES`
-        //   );
-        // }
-        // if (selected === "Series") {
-        //   console.log('busqueda por Series')
-        //   data = await getData(
-        //     `https://api.themoviedb.org/3/search/tv?query=${query}&language=es-ES`
-        //   );
-        // }
-        // if (selected === "Actores") {
-        //   console.log('busqueda por Actores')
-        //   data = await getData(
-        //     `https://api.themoviedb.org/3/search/person?query=${query}&language=es-ES&page=1`
-        //   );
-        // }
-        // if (selected === "Genres") {
-        //   data = await getData(
-        //     `https://api.themoviedb.org/3/search/person?query=${query}&language=es-ES`
-        //   );
-        // }
-
-        console.log({ data });
+        // console.log({ data });
         setMovies(data.results);
         if (data.results.length === 0) {
           setStatus(false);
@@ -88,7 +61,7 @@ export const SearchMovies = () => {
               title={movie.title ? movie.title : movie.name}
               image={
                 movie.backdrop_path
-                  ? `https://image.tmdb.org/t/p/original//${movie.backdrop_path}`
+                  ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
                   : "https://placehold.co/3840x2160"
               }
               description={movie.overview}

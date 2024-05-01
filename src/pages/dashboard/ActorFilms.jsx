@@ -1,5 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { MovieCard, Spinner } from "../../components";
 import { getData, getEnvVariables } from "../../helpers";
@@ -11,7 +16,7 @@ export const ActorFilms = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState(null);
   const [movies, setMovies] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // const { pathname, search } = useLocation();
   const { name } = useParams();
   // const paramSearch = (pathname.split("/")[2] + search).split("=")[0] + "=";
@@ -27,11 +32,9 @@ export const ActorFilms = () => {
     try {
       setIsLoading(true);
       const getFullData = async () => {
-  
         const data = await getData(
           `https://api.themoviedb.org/3/search/person?query=${name}&language=es-ES&page=1`
         );
-
 
         console.log({ data });
         if (data.results.length === 0) {
@@ -53,14 +56,14 @@ export const ActorFilms = () => {
   if (isLoading) return <Spinner />;
   if (status === null) return <Spinner />;
   if (status === false) {
-    navigate('/')
-    return
+    navigate("/");
+    return;
   }
-  
+
   return (
     <div className="container px-10 py-10 mx-auto">
-      <h3 className="text-white text-center text-base md:text-lg whitespace-nowrap mb-8">
-       <h2 className="capitalize text-xl">{name.split('-').join(' ')}</h2>
+      <h3 className="text-white text-center text-base md:text-xl whitespace-nowrap mb-8 capitalize">
+        {name.split("-").join(" ")}
       </h3>
       {status ? (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
