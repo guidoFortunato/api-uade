@@ -41,12 +41,12 @@ export const Dashboard = () => {
 
   return (
     <>
-      <div className="w-full h-[500px] text-white">
+      <div className="w-full h-[650px] text-white">
         <div className="w-full h-full relative">
           {dataMovieDashboard ? (
             <>
-              {/* <div className="absolute w-full h-[500px] bg-black opacity-70 md:bg-gradient-to-r md:from-black" /> */}
-              <div className="absolute w-full h-[500px] bg-gradient-to-r from-black" />
+              <div className="absolute w-full h-[650px] bg-black opacity-70" />
+              {/* <div className="absolute w-full h-[500px] bg-gradient-to-r from-black" /> */}
               <img
                 src={`https://image.tmdb.org/t/p/original${dataMovieDashboard[0].backdrop_path}`}
                 alt={
@@ -57,7 +57,7 @@ export const Dashboard = () => {
                 className="object-cover h-full w-full"
               />
 
-              <div className="absolute w-full top-[20%] p-4 md:p-8">
+              <div className="absolute w-full top-[30%] p-4 md:p-8">
                 <h1 className="text-3xl md:text-5xl font-bold capitalize">
                   {dataMovieDashboard[0]?.title
                     ? dataMovieDashboard[0]?.title
