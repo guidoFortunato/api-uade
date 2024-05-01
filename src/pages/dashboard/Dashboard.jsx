@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react";
-import { Spinner } from "../../components";
+import { Icons, Spinner } from "../../components";
 import { UserContext } from "../../context/UserProvider";
 import { DashboardRow } from "./";
 import { getNameMonth } from "../../helpers";
+import { Link } from "react-router-dom";
 
 export const Dashboard = () => {
   const {
@@ -15,9 +16,8 @@ export const Dashboard = () => {
     dataMovieDashboard,
   } = useContext(UserContext);
   const [totalMovies, setTotalMovies] = useState([]);
-  console.log({ dataMovieDashboard });
 
-  // const splitDate = dataMovieDashboard[0]?.release_date?.split("-")
+  // console.log({ dataMovieDashboard });
 
   useEffect(() => {
     if (nowPlayingMovies.length > 0) {
@@ -64,12 +64,37 @@ export const Dashboard = () => {
                     : dataMovieDashboard[0]?.name}
                 </h1>
                 <div className="my-4">
-                  <button className="border bg-gray-300 text-black border-gray-300 py-2 px-5">
-                    Play
-                  </button>
-                  <button className="border text-white border-gray-300 py-2 px-5 ml-4">
-                    Watch Later
-                  </button>
+                  <Link
+                  className="mr-3"
+                    to={
+                      dataMovieDashboard[0].media_type === "movie"
+                        ? `/peliculas/${dataMovieDashboard[0].title
+                            .split(" ")
+                            .join("-")
+                            .toLowerCase()}/${dataMovieDashboard[0].id}`
+                        : dataMovieDashboard[0].media_type === "tv"
+                        ? `/series/${
+                            dataMovieDashboard[0].title
+                              ? dataMovieDashboard[0].title
+                                  .split(" ")
+                                  .join("-")
+                                  .toLowerCase()
+                              : dataMovieDashboard[0].name
+                                  .split(" ")
+                                  .join("-")
+                                  .toLowerCase()
+                          }/${dataMovieDashboard[0].id}`
+                        : null
+                    }
+                  >
+                    <button className="rounded border bg-gray-300 text-black border-gray-300 py-2 px-5 hover:bg-transparent hover:text-white hover:border-gray-400 transition-all">
+                      <span className="font-semibold">Ver Detalle</span>
+                    </button>
+                  </Link>
+                  {/* <button className="rounded border text-white border-gray-300 hover:bg-gray-300 hover:text-black py-2 px-5 ml-4 transition-all">
+                    <span className="font-semibold">Agregar a mi lista</span>
+                  </button> */}
+                  <Icons movie={dataMovieDashboard[0]} />
                 </div>
                 <p className="text-gray-400 text-sm">
                   Estreno:{" "}

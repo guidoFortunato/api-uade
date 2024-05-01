@@ -16,7 +16,7 @@ const notifyError = (text) => {
   })
 };
 
-export const Icons = ({ movie, isCard }) => {
+export const Icons = ({ movie, isCard = false }) => {
   const { handleFavoritesMovies, handleListMovies } = useContext(UserContext);
   const [like, setLike] = useState(
     JSON.parse(localStorage.getItem("list"))?.find(
