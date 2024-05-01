@@ -20,6 +20,7 @@ const UserProvider = ({ children }) => {
   const [favoritesMovies, setFavoritesMovies] = useState( JSON.parse(localStorage.getItem("favorites")) || [] );
   const [listMovies, setListMovies] = useState( JSON.parse(localStorage.getItem("list")) || [] );
   const [selected, setSelected] = useState("Películas");
+  const [dataMovieDashboard, setDataMovieDashboard] = useState();
 
   useEffect(() => {
     const getMovies = async () => {
@@ -30,6 +31,17 @@ const UserProvider = ({ children }) => {
       setNowPlayingMovies(data.results);
     };
     getMovies();
+  }, []);
+  
+  useEffect(() => {
+    const getDataMovieDashboard = async () => {
+      const data = await getData(
+        'https://api.themoviedb.org/3/find/thegodfather?external_source=facebook_id&language=es-ES'
+      );
+      // console.log({ data });
+      setDataMovieDashboard(data.movie_results);
+    };
+    getDataMovieDashboard();
   }, []);
 
   useEffect(() => {
@@ -137,6 +149,7 @@ const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         auth,
+        dataMovieDashboard,
         favoritesMovies,
         handleAuth,
         handleFavoritesMovies,

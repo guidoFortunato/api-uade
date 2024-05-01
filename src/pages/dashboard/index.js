@@ -5,4 +5,5 @@ export * from "./Home";
 export * from "./SearchMovies";
 export * from "./List";
 export * from "./FilmDetails";
+export * from "./ActorFilms";
 

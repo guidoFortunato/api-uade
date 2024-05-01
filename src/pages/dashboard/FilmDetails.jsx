@@ -3,24 +3,8 @@ import { useLocation, useParams } from "react-router-dom";
 import { getData } from "../../helpers/getData";
 import { Spinner } from "../../components/Spinner";
 import { Icons, ModalComponent, Trailer } from "../../components";
+import { getNameMonth } from "../../helpers/";
 
-const obtenerNombreMes = (numeroMes) => {
-  const meses = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre",
-  ];
-  return meses[numeroMes - 1];
-};
 
 export const FilmDetails = () => {
   const [filmDetail, setFilmDetail] = useState(null);
@@ -36,7 +20,6 @@ export const FilmDetails = () => {
     pathname === "peliculas"
       ? filmDetail?.release_date
       : filmDetail?.first_air_date;
-  console.log({name})
 
   // console.log({ filmDetail });
 
@@ -217,7 +200,7 @@ export const FilmDetails = () => {
                 {/* <span className="ml-1 whitespace-nowrap text-sm md:text-base">{filmDetail.release_date}</span> */}
                 <span className="whitespace-nowrap text-sm md:text-base">{`${
                   splitDate[2]
-                } de ${obtenerNombreMes(splitDate[1])} de ${
+                } de ${getNameMonth(splitDate[1])} de ${
                   splitDate[0]
                 }`}</span>
               </>

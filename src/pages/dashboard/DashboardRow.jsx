@@ -50,7 +50,7 @@ export const DashboardRow = ({ title, movies }) => {
       },
     ],
   };
-  console.log({movies})
+  // console.log({movies})
 
   if (movies.length === 0) return <Spinner />;
 
@@ -66,7 +66,7 @@ export const DashboardRow = ({ title, movies }) => {
             title={movie.title ? movie.title : movie.name}
             image={
               movie.backdrop_path
-                ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+                ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
                 : "https://placehold.co/300x150"
             }
             description={movie.overview}
