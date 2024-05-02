@@ -41,7 +41,7 @@ export const Favorites = () => {
           </div>
         ) : (
           <p className="text-white text-sm">
-            No hay posees favoritos por el momento
+            No posees favoritos por el momento
           </p>
         )}
       </div>
