@@ -27,7 +27,7 @@ export const SearchMovies = () => {
           `https://api.themoviedb.org/3/search/multi?query=${query}&language=es-ES`
         );
 
-        // console.log({ data });
+        console.log({ data });
         setMovies(data.results);
         if (data.results.length === 0) {
           setStatus(false);

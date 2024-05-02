@@ -8,12 +8,19 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 // import { getEnvVariables } from "../../helpers";
 // const { VITE_API_IMAGE } = getEnvVariables();
 
-export const MovieCard = ({ title, image, description, movie, mediaType = "movie" }) => {
-  const newTitle = title?.charAt().toUpperCase() + title?.substring(1).toLowerCase();
+export const MovieCard = ({
+  title,
+  image,
+  description,
+  movie,
+  mediaType = "movie",
+}) => {
+  const newTitle =
+    title?.charAt().toUpperCase() + title?.substring(1).toLowerCase();
   // console.log({ mediaType });
   // console.log({image})
   const pathTitle = title
-    ?.replace(/[^\w\s]/g, "") // Reemplazar puntos y dos puntos por espacios
+    ?.replace(/[^\w\sáéíóú]/gi, "") // Reemplazar puntos, dos puntos y letras sin tilde por espacios
     .replace(/\s+/g, " ") // Reemplazar múltiples espacios consecutivos por un espacio
     .replace(/-+/g, "-") // Reemplazar secuencias de guiones duplicados con un solo guion
     .trim() // Eliminar espacios al inicio y al final
@@ -38,7 +45,7 @@ export const MovieCard = ({ title, image, description, movie, mediaType = "movie
             ? `/peliculas/${pathTitle}/${movie.id}`
             : mediaType === "tv"
             ? `/series/${pathTitle}/${movie.id}`
-            : mediaType === "person" 
+            : mediaType === "person"
             ? `/actores/${pathTitle}/${movie.id}`
             : null
         }

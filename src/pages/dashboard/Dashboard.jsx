@@ -18,7 +18,7 @@ export const Dashboard = () => {
   } = useContext(UserContext);
   const [totalMovies, setTotalMovies] = useState([]);
 
-  console.log({ dataMovieDashboard });
+  // console.log({ dataMovieDashboard });
 
   useEffect(() => {
     if (nowPlayingMovies.length > 0) {
