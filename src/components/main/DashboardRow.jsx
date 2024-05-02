@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import Slider from "react-slick";
-import { MovieCard, Spinner } from "../../components";
+import { MovieCard, Spinner } from "..";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -67,7 +67,7 @@ export const DashboardRow = ({ title, movies }) => {
             image={
               movie.backdrop_path
                 ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
-                : "https://placehold.co/300x150"
+                : "https://placehold.co/3840x2160"
             }
             description={movie.overview}
             movie={movie}

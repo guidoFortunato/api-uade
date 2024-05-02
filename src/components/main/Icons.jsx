@@ -8,12 +8,12 @@ import { UserContext } from "../../context/UserProvider";
 const notifySuccess = (text) => {
   toast.success(text, {
     duration: 2000,
-  })
+  });
 };
 const notifyError = (text) => {
   toast.error(text, {
     duration: 2000,
-  })
+  });
 };
 
 export const Icons = ({ movie, isCard = false }) => {
@@ -37,10 +37,9 @@ export const Icons = ({ movie, isCard = false }) => {
     setLike((prev) => !prev);
     // handleIconLike(!iconLike)
     if (like) {
-      notifyError("Removido de tu lista")
-      
-    }else{
-      notifySuccess("Agregado a tu lista")
+      notifyError("Removido de tu lista");
+    } else {
+      notifySuccess("Agregado a tu lista");
     }
     handleListMovies(movie);
   };
@@ -49,15 +48,13 @@ export const Icons = ({ movie, isCard = false }) => {
     setFavorite((prev) => !prev);
     // handleIconFavorites(!iconFavorite);
     if (favorite) {
-      notifyError("Removido de tus favoritos")
-      
-    }else{
-      notifySuccess("Agregado a tus favoritos")
+      notifyError("Removido de tus favoritos");
+    } else {
+      notifySuccess("Agregado a tus favoritos");
     }
     handleFavoritesMovies(movie);
   };
 
-  
   return (
     <span className={isCard ? "" : "relative"}>
       {favorite ? (

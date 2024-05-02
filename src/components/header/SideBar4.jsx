@@ -1,15 +1,13 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { FaSearch, FaHeart, FaStar } from "react-icons/fa";
+import { Avatar, Dropdown } from "flowbite-react";
+import { FaHeart, FaStar } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { UserContext } from "../../context/UserProvider";
-import { SearchBar } from "./SearchBar";
 import { SearchBar3 } from "./SearchBar3";
 
 export const SideBar4 = () => {
-  const { handleAuth, handleSearchBar, searchBarOpen } =
-    useContext(UserContext);
+  const { handleAuth } = useContext(UserContext);
   const [isOpenSearchBar, setIsSearchOpenBar] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
 

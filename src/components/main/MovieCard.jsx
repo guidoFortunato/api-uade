@@ -30,7 +30,8 @@ export const MovieCard = ({ title, image, description, movie, mediaType = "movie
         className="rounded object-cover w-full h-full"
         src={image}
       />
-      <div className="rounded absolute inset-0 hover:-inset-auto bg-gradient-to-b from-[rgba(0,0,0,0.19)] to-[rgba(30,16,3,0.13)]" />
+      {/* <div className="rounded absolute inset-0 hover:-inset-auto bg-gradient-to-b from-[rgba(0,0,0,0.19)] to-[rgba(30,16,3,0.13)]" /> */}
+      <div className="rounded absolute top-0 left-0 w-full h-full bg-black opacity-30 " />
       <Link
         to={
           mediaType === "movie"

@@ -12,3 +12,4 @@ export * from "./Spinner";
 export * from "./main/Icons";
 export * from "./details/Trailer";
 export * from "./details/ModalComponent";
+export * from "./main/DashboardRow";

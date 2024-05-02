@@ -139,7 +139,7 @@ export const Login = () => {
               {errors.password.message}
             </span>
           )}
-          <Link to="/auth/recover">
+          <Link to="/auth/pass-recover">
             <p className="mt-2 text-xs text-violet-light hover:text-violet-500">
               Olvidé mi contraseña
             </p>

@@ -29,7 +29,6 @@ export const Header = () => {
 
   return (
     <header
-    
       className={clsx(
         "bg-transparent w-full text-white fixed top-0 z-40 transition-all duration-300",
         {

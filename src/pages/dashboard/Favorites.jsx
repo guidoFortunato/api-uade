@@ -16,7 +16,7 @@ export const Favorites = () => {
           alt=""
           className="object-cover h-full w-full"
         />
-        <div className="w-full h-full absolute top-0 bg-black bg-opacity-70" />
+        <div className="w-full h-full absolute top-0 bg-black bg-opacity-85" />
         <h3 className="text-white text-center text-xl md:text-2xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] absolute whitespace-nowrap capitalize">
           Mis favoritos
         </h3>

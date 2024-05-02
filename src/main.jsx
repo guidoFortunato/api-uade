@@ -7,10 +7,10 @@ import UserProvider from "./context/UserProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter>
       <UserProvider>
         <App />
       </UserProvider>
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );
