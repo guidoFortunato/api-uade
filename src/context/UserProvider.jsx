@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getData, getEnvVariables } from "../helpers/";
+import { getData, getEnvVariables, getGenres } from "../helpers/";
 
 const { VITE_API_URL } = getEnvVariables();
 
@@ -15,6 +15,7 @@ const UserProvider = ({ children }) => {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [topRatedSeries, setTopRatedSeries] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [genres, setGenres] = useState([]);
   const [imageHome, setImageHome] = useState("");
   const [searchBarOpen, setSearchBarOpen] = useState(false);
   const [favoritesMovies, setFavoritesMovies] = useState( JSON.parse(localStorage.getItem("favorites")) || [] );
@@ -32,13 +33,30 @@ const UserProvider = ({ children }) => {
     };
     getMovies();
   }, []);
+
+  useEffect(() => {
+    const getDataGenres = async () => {
+      const dataGenresMovies = await getData(
+        `https://api.themoviedb.org/3/genre/movie/list?language=es`
+      );
+      const dataGenresSeries = await getData(
+        `https://api.themoviedb.org/3/genre/tv/list?language=es`
+      );
+      // console.log({ dataGenresMovies, dataGenresSeries });
+      const dataGenres = getGenres(dataGenresMovies.genres, dataGenresSeries.genres);
+      console.log({dataGenres})
+
+      setGenres(dataGenres);
+    };
+    getDataGenres();
+  }, []);
   
   useEffect(() => {
     const getDataMovieDashboard = async () => {
       const data = await getData(
         'https://api.themoviedb.org/3/find/thegodfather?external_source=facebook_id&language=es-ES'
       );
-      console.log({ data });
+      // console.log({ data });
       setDataMovieDashboard(data.movie_results[2]);
     };
     getDataMovieDashboard();
