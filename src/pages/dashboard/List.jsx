@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { UserContext } from "../../context/UserProvider";
 import { MovieCard } from "../../components";
+import { UserContext } from "../../context/UserProvider";
 
 export const List = () => {
   const { listMovies } = useContext(UserContext);
@@ -9,7 +9,7 @@ export const List = () => {
     <>
       <div className="w-full h-[200px] md:h-[250px] relative">
         <img
-          src="/fondo-pantallas.jpg"
+          src="/FondoFAV3.jpeg"
           alt=""
           className="object-cover h-full w-full"
         />

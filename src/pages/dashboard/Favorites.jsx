@@ -12,7 +12,7 @@ export const Favorites = () => {
     <>
       <div className="w-full h-[200px] md:h-[250px] relative">
         <img
-          src="/fondo-pantallas.jpg"
+          src="/FondoFAV1.jpeg"
           alt=""
           className="object-cover h-full w-full"
         />

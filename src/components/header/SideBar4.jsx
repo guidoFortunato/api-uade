@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
 import { Avatar, Dropdown } from "flowbite-react";
+import { useContext, useState } from "react";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
+import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { SearchBar3 } from "./SearchBar3";
 
@@ -10,6 +10,7 @@ export const SideBar4 = () => {
   const { handleAuth } = useContext(UserContext);
   const [isOpenSearchBar, setIsSearchOpenBar] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
+  
 
   const handleLogout = () => {
     handleAuth(false);
@@ -18,7 +19,7 @@ export const SideBar4 = () => {
 
   return (
     <>
-      <nav className="flex justify-between items-center text-white max-w-screen-3xl px-5 py-3">
+      <nav className="flex justify-between items-center bg-[#1B073C] text-white max-w-screen-3xl px-5 py-3 sticky top-0 z-50">
         <div className="flex flex-wrap flex-col md:flex-row">
           <div className="mb-2 md:mb-0 mt-2 md:mr-8">
             <Link to="/">
