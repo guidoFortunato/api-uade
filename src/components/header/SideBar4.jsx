@@ -19,7 +19,7 @@ export const SideBar4 = () => {
 
   return (
     <>
-      <nav className="flex justify-between items-center bg-[#1B073C] text-white max-w-screen-3xl px-5 py-3 sticky top-0 z-50">
+      <nav className="flex justify-between items-center bg-[#19063A] text-white max-w-screen-3xl px-5 py-3 sticky top-0 z-50">
         <div className="flex flex-wrap flex-col md:flex-row">
           <div className="mb-2 md:mb-0 mt-2 md:mr-8">
             <Link to="/">
@@ -143,21 +143,29 @@ export const SideBar4 = () => {
                 />
               }
             >
+              <div className="bg-[#240046]">
+              <div className="bg-white">
               <Dropdown.Header>
-                <span className="block text-sm">Bonnie Green</span>
-                <span className="block truncate text-sm font-medium">
+                <span className="block text-base font-semibold">Bonnie Green</span>
+                <span className="block truncate italic text-xs font-medium">
                   name@test.com
                 </span>
               </Dropdown.Header>
+              </div>
+              <div className="hover:bg-[#ffffff]">
               <Link to="/">
-                <Dropdown.Item>Home</Dropdown.Item>
+                <Dropdown.Item className="text-white hover:text-[#5A189A]">Home</Dropdown.Item>
               </Link>
-
+              </div>
+              <div className="bg-[#240046] hover:bg-[#ffffff]">
               <Dropdown.Divider />
-              <Dropdown.Item onClick={handleLogout}>
+              <Dropdown.Item onClick={handleLogout} className="text-white hover:text-[#5A189A]">
                 Cerrar sesión
               </Dropdown.Item>
+              </div>
+              </div>
             </Dropdown>
+
           </div>
         </div>
       </nav>
