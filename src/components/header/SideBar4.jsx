@@ -143,27 +143,24 @@ export const SideBar4 = () => {
                 />
               }
             >
-              <div className="bg-[#240046]">
+              
               <div className="bg-white">
               <Dropdown.Header>
-                <span className="block text-base font-semibold">Bonnie Green</span>
-                <span className="block truncate italic text-xs font-medium">
+                <span className="block text-base text-[#693fb1] font-semibold">Bonnie Green</span>
+                <span className="block truncate italic text-xs text-[#855ace] font-medium">
                   name@test.com
                 </span>
               </Dropdown.Header>
               </div>
               <div className="hover:bg-[#ffffff]">
               <Link to="/">
-                <Dropdown.Item className="text-white hover:text-[#5A189A]">Home</Dropdown.Item>
+                <Dropdown.Item className="text-[#5A189A] hover:text-violet-light">Home</Dropdown.Item>
               </Link>
               </div>
-              <div className="bg-[#240046] hover:bg-[#ffffff]">
               <Dropdown.Divider />
-              <Dropdown.Item onClick={handleLogout} className="text-white hover:text-[#5A189A]">
+              <Dropdown.Item onClick={handleLogout} className="text-[#5A189A] hover:text-violet-light">
                 Cerrar sesión
               </Dropdown.Item>
-              </div>
-              </div>
             </Dropdown>
 
           </div>
