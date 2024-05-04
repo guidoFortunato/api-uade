@@ -65,10 +65,11 @@ export const SearchBar3 = ({myStyle}) => {
         <input
           type="text"
           id="search-navbar"
-          className="block w-full p-2 ps-10 text-sm text-white border bg-[#19063A] border-[#9e55fd] rounded-lg focus:bg-[#13052F]"
+          className="block w-full p-2 ps-10 text-sm text-white border bg-transparent border-[#9e55fd] rounded focus:ring-[#9757ca] focus:border-[#9757ca] focus:outline-none"
           placeholder="Buscar..."
           value={value}
           onChange={handleValue}
+          autoComplete="off"
         />
       </div>
     </form>

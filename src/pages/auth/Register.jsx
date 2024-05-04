@@ -63,7 +63,7 @@ export const Register = () => {
             type="text"
             id="name"
             className={clsx(
-              "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
+              "bg-violet-light  border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
               {
                 "border-red-500 focus:ring-red-600 focus:border-red-500":
                   errors.name,
@@ -94,7 +94,7 @@ export const Register = () => {
             type="text"
             id="email"
             className={clsx(
-              "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
+              "bg-violet-light  border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
               {
                 "border-red-500 focus:ring-red-600 focus:border-red-500":
                   errors.email,
@@ -130,7 +130,7 @@ export const Register = () => {
             type="text"
             id="confirmEmail"
             className={clsx(
-              "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
+              "bg-violet-light  border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
               {
                 "border-red-500 focus:ring-red-600 focus:border-red-500":
                   errors.confirmEmail,
@@ -169,7 +169,7 @@ export const Register = () => {
               type={seePassword ? "text" : "password"}
               id="password"
               className={clsx(
-                "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
+                "bg-violet-light  border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
                 {
                   "border-red-500 focus:ring-red-600 focus:border-red-500":
                     errors.password,
@@ -222,7 +222,7 @@ export const Register = () => {
               type={confirmPassword ? "text" : "password"}
               id="confirmPassword"
               className={clsx(
-                "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
+                "bg-violet-light  border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5",
                 {
                   "border-red-500 focus:ring-red-600 focus:border-red-500":
                     errors.confirmPassword,

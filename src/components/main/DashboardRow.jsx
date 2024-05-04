@@ -41,8 +41,9 @@ export const DashboardRow = ({ title, movies }) => {
           slidesToScroll: 2,
         },
       },
+      
       {
-        breakpoint: 480,
+        breakpoint: 344,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,

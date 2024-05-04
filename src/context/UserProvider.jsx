@@ -57,7 +57,7 @@ const UserProvider = ({ children }) => {
         'https://api.themoviedb.org/3/find/thegodfather?external_source=facebook_id&language=es-ES'
       );
       // console.log({ data });
-      setDataMovieDashboard(data.movie_results[2]);
+      setDataMovieDashboard(data.movie_results[1]);
     };
     getDataMovieDashboard();
   }, []);

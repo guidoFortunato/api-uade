@@ -75,7 +75,7 @@ export const SideBar4 = () => {
         </div>
         <div className="flex items-center justify-center">
         <div
-          className={`p-0 m-0 transform transition-transform origin-right duration-500 ${
+          className={`p-0 m-0 transform transition-transform origin-right duration-500 hidden ${
           isOpenSearchBar ? 'scale-x-100' : 'scale-x-0'} md:flex`}
           >
             <SearchBar3 />
@@ -166,12 +166,12 @@ export const SideBar4 = () => {
         </div>
       </nav>
       <nav
-        className={`flex flex-col ${
+        className={`flex flex-col bg-[#19063A] ${
           !isOpenList && !isOpenSearchBar && "hidden"
-        } md:hidden justify-between items-center text-white max-w-screen-3xl py-2`}
+        } md:hidden justify-between items-center text-white max-w-screen-3xl pt-2`}
       >
         <div
-          className={`transition-all duration-300 ${
+          className={`transition-all duration-300 pb-2 ${
             isOpenSearchBar ? "flex" : "hidden"
           } md:hidden w-full sm:w-[60%]`}
         >
@@ -212,7 +212,7 @@ export const SideBar4 = () => {
                 <span className="ml-1 text-sm">Mis Favoritos</span>
               </NavLink>
             </li>
-            <li>
+            <li className="pb-4">
               <NavLink
                 to="/mi-lista"
                 className={({ isActive }) =>

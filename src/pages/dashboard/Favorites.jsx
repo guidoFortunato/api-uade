@@ -40,7 +40,7 @@ export const Favorites = () => {
             ))}
           </div>
         ) : (
-          <p className="text-white text-sm">
+          <p className="text-white text-center text-sm">
             No posees favoritos por el momento
           </p>
         )}

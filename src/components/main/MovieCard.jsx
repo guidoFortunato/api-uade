@@ -4,6 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Icons } from "./Icons";
 
 import "react-lazy-load-image-component/src/effects/blur.css";
+import clsx from "clsx";
 
 // import { getEnvVariables } from "../../helpers";
 // const { VITE_API_IMAGE } = getEnvVariables();
@@ -11,7 +12,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 export const MovieCard = ({
   title,
   image,
-  description,
+  isProfile = false,
   movie,
   mediaType = "movie",
 }) => {
@@ -31,7 +32,12 @@ export const MovieCard = ({
   // console.log({ movieCard: movie });
 
   return (
-    <div className="rounded relative hover:cursor-pointer mx-1">
+    <div className={clsx(
+      "rounded relative hover:cursor-pointer mx-1 h-[200px]",
+      {
+        "w-full" : isProfile
+      }
+    )}>
       <LazyLoadImage
         alt={newTitle}
         className="rounded object-cover w-full h-full"
