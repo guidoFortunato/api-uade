@@ -74,10 +74,9 @@ export const SideBar4 = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <div
-            className={`p-0 m-0 transition-all duration-300 hidden ${
-              isOpenSearchBar ? " md:flex" : ""
-            }`}
+        <div
+          className={`p-0 m-0 transform transition-transform origin-right duration-500 ${
+          isOpenSearchBar ? 'scale-x-100' : 'scale-x-0'} md:flex`}
           >
             <SearchBar3 />
           </div>
@@ -85,7 +84,7 @@ export const SideBar4 = () => {
             <button
               type="button"
               aria-expanded="false"
-              className="block text-gray-500 md:mr-3 hover:text-gray-400 rounded-lg text-sm p-2.5"
+              className="block text-white md:mr-3 hover:text-gray-400 rounded-lg  text-sm p-2.5"
               onClick={() => setIsSearchOpenBar((prev) => !prev)}
             >
               <svg

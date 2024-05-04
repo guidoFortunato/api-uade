@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
-import { alertWarning, getEnvVariables } from "../../helpers";
+import { alertWarning } from "../../helpers";
 
 // const { VITE_API_URL } = getEnvVariables();
 
@@ -46,7 +46,7 @@ export const SearchBar3 = ({myStyle}) => {
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg
-            className="w-4 h-4 text-gray-500 dark:text-gray-400"
+            className="w-4 h-4 text-white dark:text-gray-400"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -65,7 +65,7 @@ export const SearchBar3 = ({myStyle}) => {
         <input
           type="text"
           id="search-navbar"
-          className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+          className="block w-full p-2 ps-10 text-sm text-white border bg-[#19063A] border-[#9e55fd] rounded-lg focus:bg-[#13052F]"
           placeholder="Buscar..."
           value={value}
           onChange={handleValue}
