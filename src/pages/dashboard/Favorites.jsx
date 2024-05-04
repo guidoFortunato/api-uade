@@ -30,7 +30,11 @@ export const Favorites = () => {
                 title={movie.title ? movie.title : movie.name}
                 image={
                   movie.backdrop_path
-                    ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+                    ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+                    : movie.profile_path 
+                    ? `https://image.tmdb.org/t/p/original${movie.profile_path}`
+                    : movie.poster_path
+                    ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
                     : "https://placehold.co/3840x2160"
                 }
                 description={movie.overview}

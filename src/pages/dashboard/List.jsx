@@ -20,24 +20,30 @@ export const List = () => {
       </div>
       <div className="container px-10 py-10 mx-auto">
         {listMovies.length > 0 ? (
-          listMovies.map((movie) => (
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+            {listMovies.map((movie) => (
               <MovieCard
                 key={movie.id}
                 title={movie.title ? movie.title : movie.name}
                 image={
                   movie.backdrop_path
-                    ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+                    ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+                    : movie.profile_path 
+                    ? `https://image.tmdb.org/t/p/original${movie.profile_path}`
+                    : movie.poster_path
+                    ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
                     : "https://placehold.co/3840x2160"
                 }
                 description={movie.overview}
                 movie={movie}
                 mediaType={movie.media_type}
               />
-            </div>
-          ))
+            ))}
+          </div>
         ) : (
-          <p className="text-white text-center text-sm">Su lista se encuentra vacía</p>
+          <p className="text-white text-center text-sm">
+            Su lista se encuentra vacía
+          </p>
         )}
       </div>
     </>

@@ -76,7 +76,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     const getMovies = async () => {
       const data = await getData(`https://api.themoviedb.org/3/movie/popular?language=es-ES&page=2`);
-      // console.log({ data });
+      console.log({ data });
       setPopularMovies(data.results);
     };
     getMovies();
