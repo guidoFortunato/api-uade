@@ -61,49 +61,59 @@ export const ActorFilms = () => {
   }
 
   return (
-    <div className="container px-10 py-10 mx-auto">
-      <h3 className="text-white text-center text-base md:text-xl whitespace-nowrap mb-8 capitalize">
-        {name.split("-").join(" ")}
-      </h3>
-      {status ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title ? movie.title : movie.name}
-              image={
-                movie.backdrop_path
-                  ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
-                  : movie.profile_path 
-                  ? `https://image.tmdb.org/t/p/original${movie.profile_path}`
-                  : movie.poster_path
-                  ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
-                  : "https://placehold.co/3840x2160"
-              }
-              description={movie.overview}
-              movie={movie}
-              mediaType={movie.media_type}
-            />
-          ))}
-        </div>
-      ) : (
-        <div
-          className="mt-10 flex justify-center mx-auto p-4 mb-4 text-sm"
-          role="alert"
-        >
-          <span className="sr-only">Info</span>
-          <div>
-            <span className="font-semibold text-lg text-center text-white flex justify-center items-center flex-col">
-              <img
-                className="w-60 lg:w-1/2"
-                src="https://www.tuentrada.com/teatro/gran-rex/imagenes/error.png"
-                alt="no hay películas"
+    <>
+      <div className="w-full h-[200px] md:h-[250px] relative">
+        <img
+          src="/FondoFAV3.jpeg"
+          alt=""
+          className="object-cover h-full w-full"
+        />
+        <div className="w-full h-full absolute top-0 bg-black bg-opacity-85" />
+        <h3 className="text-white text-center text-xl md:text-2xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] absolute whitespace-nowrap capitalize">
+          {name.split("-").join(" ")}
+        </h3>
+      </div>
+      <div className="container px-10 py-10 mx-auto">
+        {status ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
+            {movies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                title={movie.title ? movie.title : movie.name}
+                image={
+                  movie.backdrop_path
+                    ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+                    : movie.profile_path
+                    ? `https://image.tmdb.org/t/p/original${movie.profile_path}`
+                    : movie.poster_path
+                    ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+                    : "https://placehold.co/3840x2160"
+                }
+                description={movie.overview}
+                movie={movie}
+                mediaType={movie.media_type}
               />
-              No se encontraron coincidencias
-            </span>
+            ))}
           </div>
-        </div>
-      )}
-    </div>
+        ) : (
+          <div
+            className="mt-10 flex justify-center mx-auto p-4 mb-4 text-sm"
+            role="alert"
+          >
+            <span className="sr-only">Info</span>
+            <div>
+              <span className="font-semibold text-lg text-center text-white flex justify-center items-center flex-col">
+                <img
+                  className="w-60 lg:w-1/2"
+                  src="https://www.tuentrada.com/teatro/gran-rex/imagenes/error.png"
+                  alt="no hay películas"
+                />
+                No se encontraron coincidencias
+              </span>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 };

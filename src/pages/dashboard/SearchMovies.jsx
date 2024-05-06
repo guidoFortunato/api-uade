@@ -58,7 +58,7 @@ export const SearchMovies = () => {
         />
         <div className="w-full h-full absolute top-0 bg-black bg-opacity-85" />
         <h3 className="text-white text-center text-xl md:text-2xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] absolute whitespace-nowrap capitalize">
-          Búsqueda: "{query}"
+          Búsqueda: "{query.split("-").join(" ")}"
         </h3>
       </div>
       <div className="container px-10 py-10 mx-auto">

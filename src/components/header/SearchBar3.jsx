@@ -5,18 +5,9 @@ import { alertWarning } from "../../helpers";
 
 // const { VITE_API_URL } = getEnvVariables();
 
-export const SearchBar3 = ({myStyle}) => {
-  const { selected, handleSelected } = useContext(UserContext);
+export const SearchBar3 = ({ myStyle }) => {
   let navigate = useNavigate();
   const [value, setValue] = useState("");
-  const [movies, setMovies] = useState([]);
-  const [isMovies, setIsMovies] = useState(true);
-  const [series, setSeries] = useState([]);
-  const [isSeries, setIsSeries] = useState(false);
-  const [genres, setGenres] = useState([]);
-  const [isGenres, setIsGenres] = useState(false);
-  const [actors, setActores] = useState([]);
-  const [isActors, setIsActors] = useState(false);
 
   const handleValue = (e) => {
     if (!e.target.value.trim()) {
@@ -26,10 +17,6 @@ export const SearchBar3 = ({myStyle}) => {
     setValue(e.target.value);
   };
 
-  const handleContentSelected = (e) => {
-    handleSelected(e.target.textContent);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (value.length === 0) {
@@ -37,7 +24,7 @@ export const SearchBar3 = ({myStyle}) => {
       return;
     }
 
-    navigate(`/busqueda/search?q=${value}`);
+    navigate(`/busqueda/search?q=${value.split(" ").join("-")}`);
     setValue("");
   };
 

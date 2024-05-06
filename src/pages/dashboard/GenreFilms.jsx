@@ -19,7 +19,7 @@ export const GenreFilms = () => {
   const navigate = useNavigate();
   // const { pathname, search } = useLocation();
   const { name, id } = useParams();
-  console.log({ topRatedMovies });
+  // console.log({ topRatedMovies });
   // console.log({id})
 
   useEffect(() => {
@@ -36,13 +36,13 @@ export const GenreFilms = () => {
         newFilms = topRatedMovies.filter((item) =>
           item.genre_ids.includes(Number(id))
         );
-        console.log({ selectedPeliculas: newFilms });
+        // console.log({ selectedPeliculas: newFilms });
       }
       if (selected === "Series") {
         newFilms = topRatedSeries.filter((item) =>
           item.genre_ids.includes(Number(id))
         );
-        console.log({ selectedSeries: newFilms });
+        // console.log({ selectedSeries: newFilms });
       }
       // console.log({newFilms})
       setFilms(newFilms);

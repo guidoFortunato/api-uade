@@ -142,7 +142,7 @@ export const SideBar4 = () => {
                           aria-labelledby="doubleDropdownButton"
                         >
                           {moviesGenres.map((item, index) => (
-                            <li key={index} className="mr-">
+                            <li key={index}>
                               <Link
                                 to={`/generos/${item.name.toLowerCase()}/${item.id}`}
                                 className="block px-4 py-2 text-white hover:underline truncate w-full"
