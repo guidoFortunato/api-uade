@@ -5,12 +5,15 @@ import { IoMdHome } from "react-icons/io";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { SearchBar3 } from "./SearchBar3";
+import { Spinner } from "../Spinner";
+import { BiSolidCameraMovie } from "react-icons/bi";
 
 export const SideBar4 = () => {
-  const { handleAuth } = useContext(UserContext);
+  const { handleAuth, moviesGenres, seriesGenres, handleSelected } = useContext(UserContext);
   const [isOpenSearchBar, setIsSearchOpenBar] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
-  
+
+  // console.log({ moviesGenres, seriesGenres });
 
   const handleLogout = () => {
     handleAuth(false);
@@ -20,7 +23,7 @@ export const SideBar4 = () => {
   return (
     <>
       <nav className="flex justify-between items-center bg-[#19063A] text-white max-w-screen-3xl px-5 py-3 sticky top-0 z-50">
-        <div className="flex flex-wrap flex-col md:flex-row">
+        <div className="flex flex-wrap flex-col md:flex-row items-center justify-center">
           <div className="mb-2 md:mb-0 mt-2 md:mr-8">
             <Link to="/">
               <h3 className="self-center whitespace-nowrap text-xl md:text-2xl font-semibold italic">
@@ -29,19 +32,19 @@ export const SideBar4 = () => {
             </Link>
           </div>
           <div className="hidden md:flex md:items-center mt-2">
-            <ul className="flex flex-row justify-center font-medium mt-0 space-x-4 rtl:space-x-reverse text-sm">
+            <ul className="flex flex-row justify-center items-center font-medium mt-0 space-x-4 rtl:space-x-reverse text-sm">
               <li>
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `flex items-center mb-1 md:mb-0 py-1 lg:py-0 ${
+                    `flex  mb-1 md:mb-0 py-1 lg:py-0 ${
                       isActive ? "text-violet-light" : ""
                     }  rounded md:bg-transparent md:p-0`
                   }
                   aria-current="page"
                 >
-                  <IoMdHome className="text-xl" />
-                  <span className="ml-1 text-sm">Home</span>
+                  <IoMdHome className="text-base" />
+                  <span className="ml-1 text-xs">Home</span>
                 </NavLink>
               </li>
               <li>
@@ -53,30 +56,162 @@ export const SideBar4 = () => {
                     }  rounded md:bg-transparent md:p-0`
                   }
                 >
-                  <FaHeart className="text-base" />
-                  <span className="ml-1 text-sm">Mis Favoritos</span>
+                  <FaHeart className="text-xs" />
+                  <span className="ml-1 text-xs">Mis Favoritos</span>
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/mi-lista"
                   className={({ isActive }) =>
-                    `flex items-center py-1 lg:py-0 ${
+                    `flex py-1 lg:py-0 ${
                       isActive ? "text-violet-light" : ""
                     }  rounded md:bg-transparent md:p-0`
                   }
                 >
-                  <FaStar className="text-lg" />
-                  <span className="ml-1 text-sm">Mi Lista</span>
+                  <FaStar className="text-sm" />
+                  <span className="ml-1 text-xs">Mi Lista</span>
                 </NavLink>
+              </li>
+
+              <li>
+                <button
+                  id="dropdownNavbarLink"
+                  data-dropdown-toggle="dropdownNavbar"
+                  className="flex items-center justify-between w-full py-2 px-3 text-white text-xs hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto"
+                >
+                  <BiSolidCameraMovie className="text-white text-sm mr-1" />
+                  <span>Géneros</span>
+                  <svg
+                    className="w-2.5 h-2.5 ms-2.5"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m1 1 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  id="dropdownNavbar"
+                  className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+                >
+                  <ul
+                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownLargeButton"
+                  >
+                    <li aria-labelledby="dropdownNavbarLink">
+                      <button
+                        id="doubleDropdownButton"
+                        data-dropdown-toggle="doubleDropdown"
+                        data-dropdown-placement="right-start"
+                        type="button"
+                        className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100"
+                        onClick={ ()=>handleSelected("Películas") }
+                      >
+                        Películas
+                        <svg
+                          className="w-2.5 h-2.5 ms-2.5"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 10 6"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="m1 1 4 4 4-4"
+                          />
+                        </svg>
+                      </button>
+                      <div
+                        id="doubleDropdown"
+                        className="z-10 hidden bg-violet-dark text-white opacity-9 divide-y divide-gray-100 rounded-lg shadow w-96 overflow-hidden"
+                      >
+                        <ul
+                          className="py-2 text-sm text-gray-700 grid grid-cols-2 gap-2"
+                          aria-labelledby="doubleDropdownButton"
+                        >
+                          {moviesGenres.map((item, index) => (
+                            <li key={index} className="mr-">
+                              <Link
+                                to={`/generos/${item.name.toLowerCase()}/${item.id}`}
+                                className="block px-4 py-2 text-white hover:underline truncate w-full"
+                              >
+                                {item.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </li>
+                    <li aria-labelledby="dropdownNavbarLink">
+                      <button
+                        id="doubleDropdownButton4"
+                        data-dropdown-toggle="doubleDropdown4"
+                        data-dropdown-placement="right-start"
+                        type="button"
+                        className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100"
+                        onClick={ ()=>handleSelected("Series") }
+                      >
+                        Series
+                        <svg
+                          className="w-2.5 h-2.5 ms-2.5"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 10 6"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="m1 1 4 4 4-4"
+                          />
+                        </svg>
+                      </button>
+                      <div
+                        id="doubleDropdown4"
+                        className="z-10 hidden bg-violet-dark text-white opacity-9 divide-y divide-gray-100 rounded-lg shadow w-96 overflow-hidden"
+                      >
+                        <ul
+                          className="py-2 text-sm text-gray-700 grid grid-cols-2 gap-2"
+                          aria-labelledby="doubleDropdownButton4"
+                        >
+                          {seriesGenres.map((item, index) => (
+                            <li key={index}>
+                              <Link
+                                to={`/generos/${item.name.toLowerCase()}/${item.id}`}
+                                className="block px-4 py-2 text-white hover:underline truncate w-full"
+                              >
+                                {item.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </li>
             </ul>
           </div>
         </div>
         <div className="flex items-center justify-center">
-        <div
-          className={`p-0 m-0 transform transition-transform origin-right duration-500 hidden ${
-          isOpenSearchBar ? 'scale-x-100' : 'scale-x-0'} md:flex`}
+          <div
+            className={`p-0 m-0 transform transition-transform origin-right duration-500 hidden ${
+              isOpenSearchBar ? "scale-x-100" : "scale-x-0"
+            } md:flex`}
           >
             <SearchBar3 />
           </div>
@@ -142,26 +277,31 @@ export const SideBar4 = () => {
                 />
               }
             >
-              
               <div className="bg-white">
-              <Dropdown.Header>
-                <span className="block text-base text-[#693fb1] font-semibold">Bonnie Green</span>
-                <span className="block truncate italic text-xs text-[#855ace] font-medium">
-                  name@test.com
-                </span>
-              </Dropdown.Header>
+                <Dropdown.Header>
+                  <span className="block text-base text-[#693fb1] font-semibold">
+                    Bonnie Green
+                  </span>
+                  <span className="block truncate italic text-xs text-[#855ace] font-medium">
+                    name@test.com
+                  </span>
+                </Dropdown.Header>
               </div>
               <div className="hover:bg-[#ffffff]">
-              <Link to="/">
-                <Dropdown.Item className="text-[#5A189A] hover:text-violet-light">Home</Dropdown.Item>
-              </Link>
+                <Link to="/">
+                  <Dropdown.Item className="text-[#5A189A] hover:text-violet-light">
+                    Home
+                  </Dropdown.Item>
+                </Link>
               </div>
               <Dropdown.Divider />
-              <Dropdown.Item onClick={handleLogout} className="text-[#5A189A] hover:text-violet-light">
+              <Dropdown.Item
+                onClick={handleLogout}
+                className="text-[#5A189A] hover:text-violet-light"
+              >
                 Cerrar sesión
               </Dropdown.Item>
             </Dropdown>
-
           </div>
         </div>
       </nav>
@@ -224,6 +364,136 @@ export const SideBar4 = () => {
                 <FaStar className="text-lg" />
                 <span className="ml-1 text-sm">Mi Lista</span>
               </NavLink>
+            </li>
+            <li>
+              <button
+                id="dropdownNavbarLink2"
+                data-dropdown-toggle="dropdownNavbar2"
+                className="flex items-center justify-between pb-2 px-1 text-white text-sm  md:hover:bg-transparent md:border-0 md:hover:text-violet-light md:p-0 md:w-auto "
+              >
+                <BiSolidCameraMovie className="text-white text-sm mr-1" />
+                <span>Géneros</span>
+                <svg
+                  className="w-2.5 h-2.5 ms-2.5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+
+              <div
+                id="dropdownNavbar2"
+                className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+              >
+                <ul
+                  className="py-2 text-sm text-gray-700"
+                  aria-labelledby="dropdownLargeButton"
+                >
+                  <li aria-labelledby="dropdownNavbarLink2">
+                    <button
+                      id="doubleDropdownButton2"
+                      data-dropdown-toggle="doubleDropdown2"
+                      data-dropdown-placement="bottom"
+                      type="button"
+                      className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100"
+                      onClick={ ()=>handleSelected("Películas") }
+                    >
+                      Películas
+                      <svg
+                        className="w-2.5 h-2.5 ms-2.5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 10 6"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="m1 1 4 4 4-4"
+                        />
+                      </svg>
+                    </button>
+                    <div
+                      id="doubleDropdown2"
+                      className="z-10 hidden bg-violet-dark text-white opacity-9 divide-y divide-gray-100 rounded-lg shadow w-80 px-2"
+                    >
+                      <ul
+                        className="py-2 text-sm text-gray-700 grid grid-cols-2 gap-1"
+                        aria-labelledby="doubleDropdownButton2"
+                      >
+                        {moviesGenres.map((item, index) => (
+                          <li key={index}>
+                            <Link
+                              to={`/generos/${item.name.toLowerCase()}/${item.id}`}
+                              className="block px-4 py-2 text-white hover:underline w-full"
+                            >
+                              {item.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                  <li aria-labelledby="dropdownNavbarLink2">
+                    <button
+                      id="doubleDropdownButton3"
+                      data-dropdown-toggle="doubleDropdown3"
+                      data-dropdown-placement="bottom"
+                      type="button"
+                      className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100"
+                      onClick={ ()=>handleSelected("Series") }
+                    >
+                      Series
+                      <svg
+                        className="w-2.5 h-2.5 ms-2.5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 10 6"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="m1 1 4 4 4-4"
+                        />
+                      </svg>
+                    </button>
+                    <div
+                      id="doubleDropdown3"
+                      className="z-10 hidden bg-violet-dark text-white opacity-9 divide-y divide-gray-100 rounded-lg shadow w-80 overflow-hidden"
+                    >
+                      <ul
+                        className="py-2 text-sm text-gray-700 grid grid-cols-2 gap-1"
+                        aria-labelledby="doubleDropdownButton3"
+                      >
+                        {seriesGenres.map((item, index) => (
+                          <li key={index} className="mr-">
+                            <Link
+                              to={`/generos/${item.name.toLowerCase()}/${item.id}`}
+                              className="block px-4 py-2 text-white hover:underline truncate w-full"
+                            >
+                              {item.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
         </div>

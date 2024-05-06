@@ -57,7 +57,7 @@ export const MovieCard = ({
         }
       >
         <div className="rounded text-white opacity-100 transition duration-500 ease-in-out h-full from-[rgb(0,0,0)] to-[rgba(30,16,3,0.13)] hover:from-[rgb(0,0,0)] hover:to-[rgba(30,16,3,0)] bg-gradient-to-t absolute bottom-0 right-0 left-0 top-0">
-          <span className="whitespace-normal text-xs font-semibold flex justify-center items-end h-full text-center pb-2 capitalize">
+          <span className="whitespace-normal text-xs font-semibold flex justify-center items-end h-full text-center pb-2 capitalize px-1">
             {newTitle}
           </span>
         </div>

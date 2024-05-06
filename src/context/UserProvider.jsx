@@ -15,12 +15,18 @@ const UserProvider = ({ children }) => {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [topRatedSeries, setTopRatedSeries] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
-  const [genres, setGenres] = useState([]);
+  const [totalGenres, setTotalGenres] = useState([]);
+  const [moviesGenres, setMoviesGenres] = useState([]);
+  const [seriesGenres, setSeriesGenres] = useState([]);
   const [imageHome, setImageHome] = useState("");
   const [searchBarOpen, setSearchBarOpen] = useState(false);
-  const [favoritesMovies, setFavoritesMovies] = useState( JSON.parse(localStorage.getItem("favorites")) || [] );
-  const [listMovies, setListMovies] = useState( JSON.parse(localStorage.getItem("list")) || [] );
-  const [selected, setSelected] = useState("Películas");
+  const [favoritesMovies, setFavoritesMovies] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
+  const [listMovies, setListMovies] = useState(
+    JSON.parse(localStorage.getItem("list")) || []
+  );
+  const [selected, setSelected] = useState(JSON.parse(localStorage.getItem("selected")) || "Películas");
   const [dataMovieDashboard, setDataMovieDashboard] = useState();
 
   useEffect(() => {
@@ -39,25 +45,30 @@ const UserProvider = ({ children }) => {
       const dataGenresMovies = await getData(
         `https://api.themoviedb.org/3/genre/movie/list?language=es`
       );
+      setMoviesGenres(dataGenresMovies.genres);
       const dataGenresSeries = await getData(
         `https://api.themoviedb.org/3/genre/tv/list?language=es`
       );
+      setSeriesGenres(dataGenresSeries.genres);
       // console.log({ dataGenresMovies, dataGenresSeries });
-      const dataGenres = getGenres(dataGenresMovies.genres, dataGenresSeries.genres);
-      console.log({dataGenres})
+      const dataGenres = getGenres(
+        dataGenresMovies.genres,
+        dataGenresSeries.genres
+      );
+      // console.log({dataGenres})
 
-      setGenres(dataGenres);
+      setTotalGenres(dataGenres);
     };
     getDataGenres();
   }, []);
-  
+
   useEffect(() => {
     const getDataMovieDashboard = async () => {
       const data = await getData(
-        'https://api.themoviedb.org/3/find/thegodfather?external_source=facebook_id&language=es-ES'
+        "https://api.themoviedb.org/3/find/thegodfather?external_source=facebook_id&language=es-ES"
       );
       // console.log({ data });
-      setDataMovieDashboard(data.movie_results[1]);
+      setDataMovieDashboard(data.movie_results[0]);
     };
     getDataMovieDashboard();
   }, []);
@@ -75,8 +86,10 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const data = await getData(`https://api.themoviedb.org/3/movie/popular?language=es-ES&page=2`);
-      console.log({ data });
+      const data = await getData(
+        `https://api.themoviedb.org/3/movie/popular?language=es-ES&page=2`
+      );
+      // console.log({ data });
       setPopularMovies(data.results);
     };
     getMovies();
@@ -94,7 +107,9 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const data = await getData(`https://api.themoviedb.org/3/movie/upcoming?language=es-ES&page=3`);
+      const data = await getData(
+        `https://api.themoviedb.org/3/movie/upcoming?language=es-ES&page=3`
+      );
       // console.log({ data });
       setUpcomingMovies(data.results);
     };
@@ -103,7 +118,9 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const getSeries = async () => {
-      const data = await getData(`https://api.themoviedb.org/3/tv/top_rated?language=es-ES&page=1'`);
+      const data = await getData(
+        `https://api.themoviedb.org/3/tv/top_rated?language=es-ES&page=1'`
+      );
       // console.log({ data });
       setTopRatedSeries(data.results);
     };
@@ -120,6 +137,7 @@ const UserProvider = ({ children }) => {
 
   const handleSelected = (value) => {
     setSelected(value);
+    localStorage.setItem("selected", JSON.stringify(value));
   };
 
   const handleFavoritesMovies = (movie) => {
@@ -145,9 +163,7 @@ const UserProvider = ({ children }) => {
   const handleListMovies = (movie) => {
     // console.log({ movie });
 
-    const isList = listMovies.some(
-      (listMovie) => listMovie.id === movie.id
-    );
+    const isList = listMovies.some((listMovie) => listMovie.id === movie.id);
 
     if (!isList) {
       const updatedList = [...listMovies, movie];
@@ -176,10 +192,12 @@ const UserProvider = ({ children }) => {
         handleSelected,
         imageHome,
         listMovies,
+        moviesGenres,
         nowPlayingMovies,
         popularMovies,
         searchBarOpen,
         selected,
+        seriesGenres,
         topRatedMovies,
         topRatedSeries,
         upcomingMovies,
