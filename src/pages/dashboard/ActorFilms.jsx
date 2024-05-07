@@ -36,7 +36,7 @@ export const ActorFilms = () => {
           `https://api.themoviedb.org/3/search/person?query=${name}&language=es-ES&page=1`
         );
 
-        console.log({ data });
+        // console.log({ data });
         if (data.results.length === 0) {
           setStatus(false);
           return;

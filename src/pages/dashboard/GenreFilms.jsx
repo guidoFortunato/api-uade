@@ -78,7 +78,7 @@ export const GenreFilms = () => {
         </h3>
       </div>
       <div className="container px-10 py-10 mx-auto">
-        {status ? (
+        {films.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
             {films.map((movie) => (
               <MovieCard
@@ -106,13 +106,13 @@ export const GenreFilms = () => {
           >
             <span className="sr-only">Info</span>
             <div>
-              <span className="font-semibold text-lg text-center text-white flex justify-center items-center flex-col">
+              <span className="font-base text-lg text-center text-white flex justify-center items-center flex-col">
                 <img
                   className="w-60 lg:w-1/2"
                   src="https://www.tuentrada.com/teatro/gran-rex/imagenes/error.png"
                   alt="no hay películas"
                 />
-                No se encontraron coincidencias
+                No hay resultados por el momento
               </span>
             </div>
           </div>
