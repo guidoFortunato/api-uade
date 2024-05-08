@@ -114,10 +114,12 @@ export const Dashboard = () => {
 
                 <p className="w-[80%] md:max-w-[60%] lg:max-w-[50%] xl:max-w-[35%] text-gray-200 mt-1">
                   <span className="inline md:hidden">
-                    {dataMovieDashboard.overview?.slice(0, 200)}
+                    {dataMovieDashboard.overview?.slice(0, 198) + "..."}
+                    
                   </span>
                   <span className="hidden md:inline">
-                    {dataMovieDashboard.overview?.slice(0, 200)}
+                    {/* {dataMovieDashboard.overview?.slice(0, 200)} */}
+                    {dataMovieDashboard.overview}
                   </span>
                 </p>
               </div>

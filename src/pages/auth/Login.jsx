@@ -61,7 +61,7 @@ export const Login = () => {
             type="text"
             id="email"
             className={clsx(
-              "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5 pr-10",
+              "bg-violet-light border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5 pr-10",
               {
                 "border-red-500 focus:ring-red-600 focus:border-red-500":
                   errors.email,
@@ -99,7 +99,7 @@ export const Login = () => {
               type={seePassword ? "text" : "password"}
               id="password"
               className={clsx(
-                "bg-violet-light font-semibold border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5 pr-10",
+                "bg-violet-light border border-[violet-light] text-white text-sm rounded-lg block w-full p-2.5 pr-10",
                 {
                   "border-red-500 focus:ring-red-600 focus:border-red-500":
                     errors.email,

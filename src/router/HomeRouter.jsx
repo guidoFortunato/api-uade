@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { HomeLayout } from "../layout";
-import { Favorites, List, Dashboard, SearchMovies, FilmDetails, ActorFilms } from "../pages/dashboard";
+import { Favorites, List, Dashboard, SearchMovies, FilmDetails, ActorFilms, GenreFilms } from "../pages/dashboard";
 
 export const HomeRouter = () => {
   return (
@@ -12,9 +12,8 @@ export const HomeRouter = () => {
         <Route path="busqueda/:name" element={<SearchMovies />} />
         <Route path="/peliculas/:name/:id" element={<FilmDetails />} />
         <Route path="/series/:name/:id" element={<FilmDetails />} />
-        // todo en vez de filmDetail tien que ir un commponente con las movieCards del actor
         <Route path="/actores/:name/:id" element={<ActorFilms />} />
-        {/* <Route path="/generos/:name/:id" element={<FilmDetails />} /> */}
+        <Route path="/generos/:name/:id" element={<GenreFilms />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Route>

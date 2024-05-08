@@ -41,8 +41,9 @@ export const DashboardRow = ({ title, movies }) => {
           slidesToScroll: 2,
         },
       },
+      
       {
-        breakpoint: 480,
+        breakpoint: 344,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -67,6 +68,10 @@ export const DashboardRow = ({ title, movies }) => {
             image={
               movie.backdrop_path
                 ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+                : movie.profile_path 
+                ? `https://image.tmdb.org/t/p/original${movie.profile_path}`
+                : movie.poster_path
+                ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
                 : "https://placehold.co/3840x2160"
             }
             description={movie.overview}
