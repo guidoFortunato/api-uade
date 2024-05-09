@@ -2,6 +2,8 @@ import { Avatar, Dropdown } from "flowbite-react";
 import { useContext, useState } from "react";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
+import { PiPencilSimpleFill } from "react-icons/pi";
+import { RiLogoutBoxRFill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { SearchBar3 } from "./SearchBar3";
@@ -175,11 +177,21 @@ export const SideBar4 = () => {
                 </Link>
               </div>
               <Dropdown.Divider />
+              <div className="hover:bg-[#ffffff]">
+                
+                  <Dropdown.Item className="text-[#5A189A] hover:text-violet-light">
+                  <PiPencilSimpleFill className="mr-2" />
+                    Editar Perfil
+                  </Dropdown.Item>
+                
+              </div>
+              <Dropdown.Divider />
               <Dropdown.Item
                 onClick={handleLogout}
                 className="text-[#5A189A] hover:text-violet-light"
                 icon={HiLogout}
               >
+                <RiLogoutBoxRFill className="mr-2" />
                 Cerrar sesión
               </Dropdown.Item>
             </Dropdown>
