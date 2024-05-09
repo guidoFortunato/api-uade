@@ -7,13 +7,16 @@ import { UserContext } from "../../context/UserProvider";
 import { SearchBar3 } from "./SearchBar3";
 import { Spinner } from "../Spinner";
 import { BiSolidCameraMovie } from "react-icons/bi";
+import { HiLogout, HiViewGrid } from "react-icons/hi";
+import { Genres } from "./Genres";
+import clsx from "clsx";
 
 export const SideBar4 = () => {
-  const { handleAuth, moviesGenres, seriesGenres, handleSelected } = useContext(UserContext);
+  const { handleAuth, moviesGenres, seriesGenres, totalGenres } = useContext(UserContext);
   const [isOpenSearchBar, setIsSearchOpenBar] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
 
-  // console.log({ moviesGenres, seriesGenres });
+  // console.log({ totalGenres });
 
   const handleLogout = () => {
     handleAuth(false);
@@ -37,14 +40,14 @@ export const SideBar4 = () => {
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `flex  mb-1 md:mb-0 py-1 lg:py-0 ${
+                    `flex  md:mb-0 lg:py-0 ${
                       isActive ? "text-violet-light" : ""
                     }  rounded md:bg-transparent md:p-0`
                   }
                   aria-current="page"
                 >
                   <IoMdHome className="text-base" />
-                  <span className="ml-1 text-xs">Home</span>
+                  <span className="ml-[0.10rem] text-xs">Home</span>
                 </NavLink>
               </li>
               <li>
@@ -60,12 +63,6 @@ export const SideBar4 = () => {
                   <span className="ml-1 text-xs">Mis Favoritos</span>
                 </NavLink>
               </li>
-              <Dropdown label="Dropdown button" dismissOnClick={false}>
-      <Dropdown.Item>Dashboard</Dropdown.Item>
-      <Dropdown.Item>Settings</Dropdown.Item>
-      <Dropdown.Item>Earnings</Dropdown.Item>
-      <Dropdown.Item>Sign out</Dropdown.Item>
-    </Dropdown>
               <li>
                 <NavLink
                   to="/mi-lista"
@@ -79,145 +76,19 @@ export const SideBar4 = () => {
                   <span className="ml-1 text-xs">Mi Lista</span>
                 </NavLink>
               </li>
-
-              <li>
-                <button
-                  id="dropdownNavbarLink"
-                  data-dropdown-toggle="dropdownNavbar"
-                  className="flex items-center justify-between w-full py-2 px-3 text-white text-xs hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto"
-                >
-                  <BiSolidCameraMovie className="text-white text-sm mr-1" />
-                  <span>Géneros</span>
-                  <svg
-                    className="w-2.5 h-2.5 ms-2.5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 10 6"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m1 1 4 4 4-4"
-                    />
-                  </svg>
-                </button>
-
-                <div
-                  id="dropdownNavbar"
-                  className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
-                >
-                  <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownLargeButton"
-                  >
-                    <li aria-labelledby="dropdownNavbarLink">
-                      <button
-                        id="doubleDropdownButton"
-                        data-dropdown-toggle="doubleDropdown"
-                        data-dropdown-placement="right-start"
-                        type="button"
-                        className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100"
-                        onClick={ ()=>handleSelected("Películas") }
-                      >
-                        Películas
-                        <svg
-                          className="w-2.5 h-2.5 ms-2.5"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 10 6"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="m1 1 4 4 4-4"
-                          />
-                        </svg>
-                      </button>
-                      <div
-                        id="doubleDropdown"
-                        className="z-10 hidden bg-violet-dark text-white opacity-9 divide-y divide-gray-100 rounded-lg shadow w-96 overflow-hidden"
-                      >
-                        <ul
-                          className="py-2 text-sm text-gray-700 grid grid-cols-2 gap-2"
-                          aria-labelledby="doubleDropdownButton"
-                        >
-                          {moviesGenres.map((item, index) => (
-                            <li key={index}>
-                              <Link
-                                to={`/generos/${item.name.toLowerCase()}/${item.id}`}
-                                className="block px-4 py-2 text-white hover:underline truncate w-full"
-                              >
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </li>
-                    <li aria-labelledby="dropdownNavbarLink">
-                      <button
-                        id="doubleDropdownButton4"
-                        data-dropdown-toggle="doubleDropdown4"
-                        data-dropdown-placement="right-start"
-                        type="button"
-                        className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100"
-                        onClick={ ()=>handleSelected("Series") }
-                      >
-                        Series
-                        <svg
-                          className="w-2.5 h-2.5 ms-2.5"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 10 6"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="m1 1 4 4 4-4"
-                          />
-                        </svg>
-                      </button>
-                      <div
-                        id="doubleDropdown4"
-                        className="z-10 hidden bg-violet-dark text-white opacity-9 divide-y divide-gray-100 rounded-lg shadow w-96 overflow-hidden"
-                      >
-                        <ul
-                          className="py-2 text-sm text-gray-700 grid grid-cols-2 gap-2"
-                          aria-labelledby="doubleDropdownButton4"
-                        >
-                          {seriesGenres.map((item, index) => (
-                            <li key={index}>
-                              <Link
-                                to={`/generos/${item.name.toLowerCase()}/${item.id}`}
-                                className="block px-4 py-2 text-white hover:underline truncate w-full"
-                              >
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </li>
+              <Genres totalGenres={totalGenres} />
             </ul>
           </div>
         </div>
         <div className="flex items-center justify-center">
           <div
-            className={`p-0 m-0 transform transition-transform origin-right duration-500 hidden ${
-              isOpenSearchBar ? "scale-x-100" : "scale-x-0"
-            } md:flex`}
+            className={clsx(
+              "p-0 m-0 transform transition-transform origin-right duration-500 hidden md:flex",
+              {
+                "scale-x-100": isOpenSearchBar,
+                "scale-x-0": !isOpenSearchBar,
+              }
+            )}
           >
             <SearchBar3 />
           </div>
@@ -295,7 +166,10 @@ export const SideBar4 = () => {
               </div>
               <div className="hover:bg-[#ffffff]">
                 <Link to="/">
-                  <Dropdown.Item className="text-[#5A189A] hover:text-violet-light">
+                  <Dropdown.Item
+                    className="text-[#5A189A] hover:text-violet-light"
+                    icon={HiViewGrid}
+                  >
                     Home
                   </Dropdown.Item>
                 </Link>
@@ -304,6 +178,7 @@ export const SideBar4 = () => {
               <Dropdown.Item
                 onClick={handleLogout}
                 className="text-[#5A189A] hover:text-violet-light"
+                icon={HiLogout}
               >
                 Cerrar sesión
               </Dropdown.Item>
@@ -312,9 +187,12 @@ export const SideBar4 = () => {
         </div>
       </nav>
       <nav
-        className={`flex flex-col bg-[#19063A] ${
-          !isOpenList && !isOpenSearchBar && "hidden"
-        } md:hidden justify-between items-center text-white max-w-screen-3xl pt-2`}
+        className={clsx(
+          "flex flex-col bg-[#19063A] md:hidden justify-between items-center text-white max-w-screen-3xl pt-2 pb-3",
+          {
+            hidden: !isOpenList && !isOpenSearchBar,
+          }
+        )}
       >
         <div
           className={`transition-all duration-300 pb-2 ${
@@ -342,10 +220,10 @@ export const SideBar4 = () => {
                 aria-current="page"
               >
                 <IoMdHome className="text-xl" />
-                <span className="ml-1 text-sm">Home</span>
+                <span className="ml-[0.10rem] text-sm">Home</span>
               </NavLink>
             </li>
-            
+
             <li>
               <NavLink
                 to="/favoritos"
@@ -372,137 +250,7 @@ export const SideBar4 = () => {
                 <span className="ml-1 text-sm">Mi Lista</span>
               </NavLink>
             </li>
-            <li>
-              <button
-                id="dropdownNavbarLink2"
-                data-dropdown-toggle="dropdownNavbar2"
-                className="flex items-center justify-between pb-2 px-1 text-white text-sm  md:hover:bg-transparent md:border-0 md:hover:text-violet-light md:p-0 md:w-auto "
-                onClick={ ()=> console.log('click') }
-              >
-                <BiSolidCameraMovie className="text-white text-sm mr-1" />
-                <span>Géneros</span>
-                <svg
-                  className="w-2.5 h-2.5 ms-2.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-
-              <div
-                id="dropdownNavbar2"
-                className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
-              >
-                <ul
-                  className="py-2 text-sm text-gray-700"
-                  aria-labelledby="dropdownLargeButton"
-                >
-                  <li aria-labelledby="dropdownNavbarLink2">
-                    <button
-                      id="doubleDropdownButton2"
-                      data-dropdown-toggle="doubleDropdown2"
-                      data-dropdown-placement="bottom"
-                      type="button"
-                      className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100"
-                      onClick={ ()=>handleSelected("Películas") }
-                    >
-                      Películas
-                      <svg
-                        className="w-2.5 h-2.5 ms-2.5"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 10 6"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="m1 1 4 4 4-4"
-                        />
-                      </svg>
-                    </button>
-                    <div
-                      id="doubleDropdown2"
-                      className="z-10 hidden bg-violet-dark text-white opacity-9 divide-y divide-gray-100 rounded-lg shadow w-80 px-2"
-                    >
-                      <ul
-                        className="py-2 text-sm text-gray-700 grid grid-cols-2 gap-1"
-                        aria-labelledby="doubleDropdownButton2"
-                      >
-                        {moviesGenres.map((item, index) => (
-                          <li key={index}>
-                            <Link
-                              to={`/generos/${item.name.toLowerCase()}/${item.id}`}
-                              className="block px-4 py-2 text-white hover:underline w-full"
-                            >
-                              {item.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </li>
-                  <li aria-labelledby="dropdownNavbarLink2">
-                    <button
-                      id="doubleDropdownButton3"
-                      data-dropdown-toggle="doubleDropdown3"
-                      data-dropdown-placement="bottom"
-                      type="button"
-                      className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100"
-                      onClick={ ()=>handleSelected("Series") }
-                    >
-                      Series
-                      <svg
-                        className="w-2.5 h-2.5 ms-2.5"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 10 6"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="m1 1 4 4 4-4"
-                        />
-                      </svg>
-                    </button>
-                    <div
-                      id="doubleDropdown3"
-                      className="z-10 hidden bg-violet-dark text-white opacity-9 divide-y divide-gray-100 rounded-lg shadow w-80 overflow-hidden"
-                    >
-                      <ul
-                        className="py-2 text-sm text-gray-700 grid grid-cols-2 gap-1"
-                        aria-labelledby="doubleDropdownButton3"
-                      >
-                        {seriesGenres.map((item, index) => (
-                          <li key={index} className="mr-">
-                            <Link
-                              to={`/generos/${item.name.toLowerCase()}/${item.id}`}
-                              className="block px-4 py-2 text-white hover:underline truncate w-full"
-                            >
-                              {item.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
+            <Genres totalGenres={totalGenres} isResponsive={true} />
           </ul>
         </div>
       </nav>

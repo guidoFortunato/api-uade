@@ -200,6 +200,7 @@ const UserProvider = ({ children }) => {
         seriesGenres,
         topRatedMovies,
         topRatedSeries,
+        totalGenres,
         upcomingMovies,
       }}
     >
