@@ -1,12 +1,12 @@
 import { Avatar, Dropdown } from "flowbite-react";
 import { useContext, useState } from "react";
+import { BiSolidCameraMovie } from "react-icons/bi";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
+import { RiLogoutBoxRFill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { SearchBar3 } from "./SearchBar3";
-import { Spinner } from "../Spinner";
-import { BiSolidCameraMovie } from "react-icons/bi";
 
 export const SideBar4 = () => {
   const { handleAuth, moviesGenres, seriesGenres, handleSelected } = useContext(UserContext);
@@ -296,6 +296,7 @@ export const SideBar4 = () => {
               <div className="hover:bg-[#ffffff]">
                 <Link to="/">
                   <Dropdown.Item className="text-[#5A189A] hover:text-violet-light">
+                  <IoMdHome className="mr-2" />
                     Home
                   </Dropdown.Item>
                 </Link>
@@ -305,6 +306,7 @@ export const SideBar4 = () => {
                 onClick={handleLogout}
                 className="text-[#5A189A] hover:text-violet-light"
               >
+                <RiLogoutBoxRFill className="mr-2" />
                 Cerrar sesión
               </Dropdown.Item>
             </Dropdown>
