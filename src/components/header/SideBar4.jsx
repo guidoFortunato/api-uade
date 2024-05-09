@@ -60,6 +60,12 @@ export const SideBar4 = () => {
                   <span className="ml-1 text-xs">Mis Favoritos</span>
                 </NavLink>
               </li>
+              <Dropdown label="Dropdown button" dismissOnClick={false}>
+      <Dropdown.Item>Dashboard</Dropdown.Item>
+      <Dropdown.Item>Settings</Dropdown.Item>
+      <Dropdown.Item>Earnings</Dropdown.Item>
+      <Dropdown.Item>Sign out</Dropdown.Item>
+    </Dropdown>
               <li>
                 <NavLink
                   to="/mi-lista"
@@ -339,6 +345,7 @@ export const SideBar4 = () => {
                 <span className="ml-1 text-sm">Home</span>
               </NavLink>
             </li>
+            
             <li>
               <NavLink
                 to="/favoritos"
@@ -370,6 +377,7 @@ export const SideBar4 = () => {
                 id="dropdownNavbarLink2"
                 data-dropdown-toggle="dropdownNavbar2"
                 className="flex items-center justify-between pb-2 px-1 text-white text-sm  md:hover:bg-transparent md:border-0 md:hover:text-violet-light md:p-0 md:w-auto "
+                onClick={ ()=> console.log('click') }
               >
                 <BiSolidCameraMovie className="text-white text-sm mr-1" />
                 <span>Géneros</span>
