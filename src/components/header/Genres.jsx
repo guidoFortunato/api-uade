@@ -1,6 +1,7 @@
-import { useContext, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useContext } from "react";
 import { Dropdown } from "flowbite-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { BiSolidCameraMovie } from "react-icons/bi";
 import { IoIosArrowDown } from "react-icons/io";
@@ -33,7 +34,7 @@ export const Genres = ({ totalGenres, isResponsive = false }) => {
         )}
         dismissOnClick={false}
         inline
-        className="bg-violet-dark opacity-95 text-sm"
+        className="bg-violet-dark opacity-95 text-sm border-violet-dark"
       >
         <div className="grid grid-cols-2 md:grid-cols-3">
           {totalGenres.map((item, index) => (

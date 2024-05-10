@@ -11,7 +11,7 @@ import { Genres } from "./Genres";
 import { SearchBar3 } from "./SearchBar3";
 
 export const SideBar4 = () => {
-  const { handleAuth, moviesGenres, seriesGenres, totalGenres } = useContext(UserContext);
+  const { handleAuth, totalGenres } = useContext(UserContext);
   const [isOpenSearchBar, setIsSearchOpenBar] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
 

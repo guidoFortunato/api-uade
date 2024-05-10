@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getData, getEnvVariables, getGenres } from "../helpers/";
+import { getData, getGenres } from "../helpers/";
 
 // const { VITE_API_URL } = getEnvVariables();
 

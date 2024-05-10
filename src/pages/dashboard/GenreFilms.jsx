@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useContext, useEffect, useState } from "react";
 import {
   useNavigate,
@@ -61,7 +62,7 @@ export const GenreFilms = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [name, id, topRatedMovies, topRatedSeries]);
+  }, [name, id, topRatedMovies, topRatedSeries, selected]);
 
   if (isLoading) return <Spinner />;
   if (status === null) return <Spinner />;

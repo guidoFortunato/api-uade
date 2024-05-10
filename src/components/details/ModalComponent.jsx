@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Modal } from "flowbite-react";
 import { useState } from "react";
 
