@@ -19,8 +19,8 @@ export const GenreFilms = () => {
   const navigate = useNavigate();
   // const { pathname, search } = useLocation();
   const { name, id } = useParams();
-  // console.log({ topRatedMovies });
-  // console.log({id})
+  console.log({ selected });
+  console.log({films})
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,19 +32,29 @@ export const GenreFilms = () => {
     try {
       setIsLoading(true);
       let newFilms;
-      if (selected === "Películas") {
+      if (selected === "movie") {
         newFilms = topRatedMovies.filter((item) =>
           item.genre_ids.includes(Number(id))
         );
         // console.log({ selectedPeliculas: newFilms });
       }
-      if (selected === "Series") {
+      if (selected === "tv") {
         newFilms = topRatedSeries.filter((item) =>
           item.genre_ids.includes(Number(id))
         );
         // console.log({ selectedSeries: newFilms });
       }
-      // console.log({newFilms})
+      if (selected === "both") {
+        const movieFilms = topRatedMovies.filter(item =>
+          item.genre_ids.includes(Number(id))
+        );
+        const tvFilms = topRatedSeries.filter(item =>
+          item.genre_ids.includes(Number(id))
+        );
+        newFilms = movieFilms.concat(tvFilms);
+        // console.log({ selectedSeries: newFilms });
+      }
+      console.log({newFilms})
       setFilms(newFilms);
 
       setStatus(true);
@@ -78,7 +88,7 @@ export const GenreFilms = () => {
         </h3>
       </div>
       <div className="container px-10 py-10 mx-auto">
-        {films.length > 0 ? (
+        {films?.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
             {films.map((movie) => (
               <MovieCard
@@ -95,7 +105,7 @@ export const GenreFilms = () => {
                 }
                 description={movie.overview}
                 movie={movie}
-                mediaType={movie.media_type}
+                mediaType={movie.title ? "movie" : "tv"}
               />
             ))}
           </div>
