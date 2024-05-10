@@ -304,12 +304,12 @@ export const SideBar4 = () => {
               </div>
               <Dropdown.Divider />
               <div className="hover:bg-[#ffffff]">
-                
+                <Link to="/perfil">
                   <Dropdown.Item className="text-[#5A189A] hover:text-violet-light">
                   <PiPencilSimpleFill className="mr-2" />
                     Editar Perfil
                   </Dropdown.Item>
-                
+                  </Link>
               </div>
               <Dropdown.Divider />
               <Dropdown.Item
