@@ -32,7 +32,7 @@ export const Profile = () => {
     <>
       <div className="w-full h-[200px] md:h-[250px] relative">
         <img
-          src="/FondoFAV3.jpeg"
+          src="/FondoFAV6.jpeg"
           alt=""
           className="object-cover h-full w-full"
         />
