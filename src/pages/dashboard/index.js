@@ -5,4 +5,5 @@ export * from "./List";
 export * from "./FilmDetails";
 export * from "./ActorFilms";
 export * from "./GenreFilms";
+export * from "./Profile";
 
