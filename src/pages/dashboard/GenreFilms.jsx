@@ -1,13 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import {
-  Navigate,
-  useLocation,
   useNavigate,
-  useParams,
+  useParams
 } from "react-router-dom";
-import { UserContext } from "../../context/UserProvider";
 import { MovieCard, Spinner } from "../../components";
-import { getData, getEnvVariables } from "../../helpers";
+import { UserContext } from "../../context/UserProvider";
 
 // const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
 
@@ -78,7 +75,7 @@ export const GenreFilms = () => {
     <>
       <div className="w-full h-[200px] md:h-[250px] relative">
         <img
-          src="/FondoFAV3.jpeg"
+          src="/FondoFAV4.jpeg"
           alt=""
           className="object-cover h-full w-full"
         />
