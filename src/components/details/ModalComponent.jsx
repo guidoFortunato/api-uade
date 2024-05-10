@@ -10,7 +10,7 @@ export const ModalComponent = ({textButton, children, size }) => {
         {textButton}
       </button>
       <Modal show={openModal} className="bg-black" size={size} onClose={() => setOpenModal(false)}>
-        <Modal.Header className="bg-[#5A189A] p-2"></Modal.Header>
+        <Modal.Header className="bg-black p-2"></Modal.Header>
         <Modal.Body className="bg-black">
           { children }
         </Modal.Body>
