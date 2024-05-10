@@ -1,17 +1,14 @@
+import clsx from "clsx";
 import { Avatar, Dropdown } from "flowbite-react";
 import { useContext, useState } from "react";
 import { FaHeart, FaStar } from "react-icons/fa";
+import { HiLogout, HiViewGrid } from "react-icons/hi";
 import { IoMdHome } from "react-icons/io";
 import { PiPencilSimpleFill } from "react-icons/pi";
-import { RiLogoutBoxRFill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
-import { SearchBar3 } from "./SearchBar3";
-import { Spinner } from "../Spinner";
-import { BiSolidCameraMovie } from "react-icons/bi";
-import { HiLogout, HiViewGrid } from "react-icons/hi";
 import { Genres } from "./Genres";
-import clsx from "clsx";
+import { SearchBar3 } from "./SearchBar3";
 
 export const SideBar4 = () => {
   const { handleAuth, moviesGenres, seriesGenres, totalGenres } = useContext(UserContext);
@@ -191,7 +188,7 @@ export const SideBar4 = () => {
                 className="text-[#5A189A] hover:text-violet-light"
                 icon={HiLogout}
               >
-                <RiLogoutBoxRFill className="mr-2" />
+                
                 Cerrar sesión
               </Dropdown.Item>
             </Dropdown>
