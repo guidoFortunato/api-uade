@@ -26,7 +26,7 @@ const UserProvider = ({ children }) => {
   const [listMovies, setListMovies] = useState(
     JSON.parse(localStorage.getItem("list")) || []
   );
-  const [selected, setSelected] = useState(JSON.parse(localStorage.getItem("selected")) || "Películas");
+  const [selected, setSelected] = useState("");
   const [dataMovieDashboard, setDataMovieDashboard] = useState();
 
   useEffect(() => {
