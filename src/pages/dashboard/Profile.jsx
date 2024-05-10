@@ -71,7 +71,7 @@ export const Profile = () => {
                 Nombre
               </label>
               <input
-                className="bg-[#5A189A]  border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5"
+                className="bg-[#5A189A] border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5 focus:ring-[#9757ca] focus:border-[#9757ca] focus:outline-none"
                 id="nombre"
                 type="text"
                 name="nombre"
@@ -89,7 +89,7 @@ export const Profile = () => {
                 Apellido
               </label>
               <input
-                className="bg-[#5A189A]  border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5"
+                className="bg-[#5A189A]  border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5 focus:ring-[#9757ca] focus:border-[#9757ca] focus:outline-none"
                 id="apellido"
                 type="text"
                 name="apellido"
@@ -104,10 +104,10 @@ export const Profile = () => {
                 className="block text-white text-sm mb-2"
                 htmlFor="correoElectronico"
               >
-                Correo electronico
+                Correo electrónico
               </label>
               <input
-                className="bg-[#5A189A]  border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5"
+                className="bg-[#5A189A]  border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5 focus:ring-[#9757ca] focus:border-[#9757ca] focus:outline-none"
                 id="correoElectronico"
                 type="email"
                 name="correoElectronico"
@@ -125,7 +125,7 @@ export const Profile = () => {
                 Contraseña
               </label>
               <input
-                className="bg-[#5A189A]  border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5"
+                className="bg-[#5A189A]  border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5 focus:ring-[#9757ca] focus:border-[#9757ca] focus:outline-none"
                 id="contrasena"
                 type="password"
                 name="contrasena"
@@ -143,7 +143,7 @@ export const Profile = () => {
                 Repetir contraseña
               </label>
               <input
-                className="bg-[#5A189A]  border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5"
+                className="bg-[#5A189A]  border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5 focus:ring-[#9757ca] focus:border-[#9757ca] focus:outline-none"
                 id="repetirContrasena"
                 type="password"
                 name="repetirContrasena"
