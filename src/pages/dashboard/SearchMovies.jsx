@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { MovieCard, Spinner } from "../../components";
-import { getData, getEnvVariables } from "../../helpers";
+import { getData } from "../../helpers";
 
 // const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
 
@@ -52,7 +52,7 @@ export const SearchMovies = () => {
     <>
       <div className="w-full h-[200px] md:h-[250px] relative">
         <img
-          src="/FondoFAV3.jpeg"
+          src="/FondoFAV5.jpeg"
           alt=""
           className="object-cover h-full w-full"
         />
