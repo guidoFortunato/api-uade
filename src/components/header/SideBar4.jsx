@@ -1,14 +1,17 @@
-import clsx from "clsx";
 import { Avatar, Dropdown } from "flowbite-react";
 import { useContext, useState } from "react";
 import { FaHeart, FaStar } from "react-icons/fa";
-import { HiLogout, HiViewGrid } from "react-icons/hi";
 import { IoMdHome } from "react-icons/io";
 import { PiPencilSimpleFill } from "react-icons/pi";
+import { RiLogoutBoxRFill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
-import { Genres } from "./Genres";
 import { SearchBar3 } from "./SearchBar3";
+import { Spinner } from "../Spinner";
+import { BiSolidCameraMovie } from "react-icons/bi";
+import { HiLogout, HiViewGrid } from "react-icons/hi";
+import { Genres } from "./Genres";
+import clsx from "clsx";
 
 export const SideBar4 = () => {
   const { handleAuth, totalGenres } = useContext(UserContext);
@@ -156,10 +159,10 @@ export const SideBar4 = () => {
               <div className="bg-white">
                 <Dropdown.Header>
                   <span className="block text-base text-[#693fb1] font-semibold">
-                    Bonnie Green
+                    Guido Fortunato
                   </span>
                   <span className="block truncate italic text-xs text-[#855ace] font-medium">
-                    name@test.com
+                    guidofortunato10@gmail.com
                   </span>
                 </Dropdown.Header>
               </div>
@@ -177,10 +180,10 @@ export const SideBar4 = () => {
               <div className="hover:bg-[#ffffff]">
                 <Link to="/perfil">
                   <Dropdown.Item className="text-[#5A189A] hover:text-violet-light">
-                  <PiPencilSimpleFill className="mr-2" />
+                    <PiPencilSimpleFill className="mr-2" />
                     Editar Perfil
                   </Dropdown.Item>
-                  </Link>
+                </Link>
               </div>
               <Dropdown.Divider />
               <Dropdown.Item
