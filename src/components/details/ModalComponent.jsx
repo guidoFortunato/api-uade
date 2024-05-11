@@ -1,6 +1,6 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
 import { Modal } from "flowbite-react";
-import { Trailer } from "./Trailer";
+import { useState } from "react";
 
 export const ModalComponent = ({textButton, children, size }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -11,11 +11,11 @@ export const ModalComponent = ({textButton, children, size }) => {
         {textButton}
       </button>
       <Modal show={openModal} className="bg-black" size={size} onClose={() => setOpenModal(false)}>
-        <Modal.Header></Modal.Header>
-        <Modal.Body>
+        <Modal.Header className="bg-black p-2"></Modal.Header>
+        <Modal.Body className="bg-black">
           { children }
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
+        <Modal.Footer className="bg-black"></Modal.Footer>
       </Modal>
     </>
   );

@@ -9,7 +9,7 @@ import { getNameMonth } from "../../helpers/";
 export const FilmDetails = () => {
   const [filmDetail, setFilmDetail] = useState(null);
   const [trailer, setTrailer] = useState(null);
-  const { name, id } = useParams();
+  const { id } = useParams();
   const params = useLocation();
   const pathname = params.pathname.split("/")[1];
   const splitDate =

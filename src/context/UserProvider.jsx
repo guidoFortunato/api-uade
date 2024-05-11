@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { getData, getEnvVariables, getGenres } from "../helpers/";
+import { getData, getGenres } from "../helpers/";
 
-const { VITE_API_URL } = getEnvVariables();
+// const { VITE_API_URL } = getEnvVariables();
 
 export const UserContext = createContext();
 
@@ -26,7 +26,7 @@ const UserProvider = ({ children }) => {
   const [listMovies, setListMovies] = useState(
     JSON.parse(localStorage.getItem("list")) || []
   );
-  const [selected, setSelected] = useState(JSON.parse(localStorage.getItem("selected")) || "Películas");
+  const [selected, setSelected] = useState("");
   const [dataMovieDashboard, setDataMovieDashboard] = useState();
 
   useEffect(() => {
@@ -200,6 +200,7 @@ const UserProvider = ({ children }) => {
         seriesGenres,
         topRatedMovies,
         topRatedSeries,
+        totalGenres,
         upcomingMovies,
       }}
     >

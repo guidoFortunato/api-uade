@@ -1,13 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useContext, useEffect, useState } from "react";
 import {
-  Navigate,
-  useLocation,
   useNavigate,
-  useParams,
+  useParams
 } from "react-router-dom";
-import { UserContext } from "../../context/UserProvider";
 import { MovieCard, Spinner } from "../../components";
-import { getData, getEnvVariables } from "../../helpers";
+import { UserContext } from "../../context/UserProvider";
 
 // const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
 
@@ -19,8 +17,8 @@ export const GenreFilms = () => {
   const navigate = useNavigate();
   // const { pathname, search } = useLocation();
   const { name, id } = useParams();
-  // console.log({ topRatedMovies });
-  // console.log({id})
+  console.log({ selected });
+  console.log({films})
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,19 +30,29 @@ export const GenreFilms = () => {
     try {
       setIsLoading(true);
       let newFilms;
-      if (selected === "Películas") {
+      if (selected === "movie") {
         newFilms = topRatedMovies.filter((item) =>
           item.genre_ids.includes(Number(id))
         );
         // console.log({ selectedPeliculas: newFilms });
       }
-      if (selected === "Series") {
+      if (selected === "tv") {
         newFilms = topRatedSeries.filter((item) =>
           item.genre_ids.includes(Number(id))
         );
         // console.log({ selectedSeries: newFilms });
       }
-      // console.log({newFilms})
+      if (selected === "both") {
+        const movieFilms = topRatedMovies.filter(item =>
+          item.genre_ids.includes(Number(id))
+        );
+        const tvFilms = topRatedSeries.filter(item =>
+          item.genre_ids.includes(Number(id))
+        );
+        newFilms = movieFilms.concat(tvFilms);
+        // console.log({ selectedSeries: newFilms });
+      }
+      console.log({newFilms})
       setFilms(newFilms);
 
       setStatus(true);
@@ -54,7 +62,7 @@ export const GenreFilms = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [name, id, topRatedMovies, topRatedSeries]);
+  }, [name, id, topRatedMovies, topRatedSeries, selected]);
 
   if (isLoading) return <Spinner />;
   if (status === null) return <Spinner />;
@@ -68,7 +76,7 @@ export const GenreFilms = () => {
     <>
       <div className="w-full h-[200px] md:h-[250px] relative">
         <img
-          src="/FondoFAV3.jpeg"
+          src="/FondoFAV4.jpeg"
           alt=""
           className="object-cover h-full w-full"
         />
@@ -78,7 +86,7 @@ export const GenreFilms = () => {
         </h3>
       </div>
       <div className="container px-10 py-10 mx-auto">
-        {films.length > 0 ? (
+        {films?.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
             {films.map((movie) => (
               <MovieCard
@@ -95,7 +103,7 @@ export const GenreFilms = () => {
                 }
                 description={movie.overview}
                 movie={movie}
-                mediaType={movie.media_type}
+                mediaType={movie.title ? "movie" : "tv"}
               />
             ))}
           </div>
