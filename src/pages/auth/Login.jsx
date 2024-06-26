@@ -16,26 +16,38 @@ export const Login = () => {
   } = useForm();
   const { handleAuth } = useContext(UserContext);
   const [seePassword, setSeePassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = handleSubmit((data) => {
-    
+  const onSubmit = handleSubmit(async (data) => {
     const { email, password } = data;
-    let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-
-    if (existingUsers.length > 0) {
-      const existUser = existingUsers.find(
-        (user) => user.email === email && user.password === password
-      );
-      if (existUser !== undefined) {
-        handleAuth(true);
-        localStorage.setItem("auth", JSON.stringify(true));
-        return;
+    // console.log({ email, password });
+    
+    try {
+      setIsLoading(true);
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("x-token", localStorage.getItem("token"));
+      const res = await fetch("http://localhost:4000/api/auth/", {
+        method: "POST",
+        headers: myHeaders,
+        body: JSON.stringify({ email, password }),
+      });
+      console.log({ res });
+      const data = await res.json();
+      if (!data.ok) {
+        alertInfo(data.message);
+        setIsLoading(false);
+        return
       }
+      // TODO en vez de handleAuth tengo que hacer algo con el token 
+      // handleAuth(true)
+      localStorage.setItem("token", data.token);
+      console.log({ data });
+    } catch (error) {
+      console.log({ error });
     }
-    alertInfo(
-      `<p class="font-semibold text-md">Su email y/o contraseña son incorrectos</p>`,
-      6000
-    );
+    
+    setIsLoading(false);
     return;
   });
 
@@ -146,9 +158,15 @@ export const Login = () => {
           </Link>
         </div>
         <div className="flex justify-center w-full">
-          <button type="submit" className="btn-primary w-[200px]">
-            Ingresar
-          </button>
+          {isLoading ? (
+            <button type="button" className="btn-disabled w-[200px]" disabled>
+              Cargando...
+            </button>
+          ) : (
+            <button type="submit" className="btn-primary w-[200px]">
+              Ingresar
+            </button>
+          )}
         </div>
         <div className="flex flex-col items-center sm:flex-row  sm:justify-end text-white text-sm">
           <div>
