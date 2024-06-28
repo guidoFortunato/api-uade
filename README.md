@@ -10,6 +10,5 @@
 > 6. Cambiar las variables de entorno acorde a tu configuración
 > 7. Correr el servidor `npm start`
 
-#### Diseño
-> Diseño
+## Diseño
 En este enlace (https://www.figma.com/design/2w5d0sMuh9bSqZMRgmKVAW/Dise%C3%B1o_Api?node-id=0-1&t=XUUXnLeSbNFxdHC9-1) se puede ver el diseño realizado en Figma, además de poder observar las modificaciones por las cuales fue pasando hasta llegar al diseño que construimos
