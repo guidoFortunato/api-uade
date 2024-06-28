@@ -8,7 +8,7 @@
 > 4. Instalar las dependencias `npm install`
 > 5. Clonar el archivo de `.env.template` y renombrarlo a `.env`
 > 6. Cambiar las variables de entorno acorde a tu configuración
-> 7. Correr el servidor `npm start`
+> 7. Correr el servidor `npm run dev`
 
 ---
 
