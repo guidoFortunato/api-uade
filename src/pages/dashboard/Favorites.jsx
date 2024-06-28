@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MovieCard } from "../../components";
 import { UserContext } from "../../context/UserProvider";
 import { getEnvVariables } from "../../helpers";
@@ -7,7 +7,9 @@ const { VITE_API_IMAGE } = getEnvVariables();
 
 export const Favorites = () => {
   const { favoritesMovies } = useContext(UserContext);
-  // console.log({favoritesMovies})
+
+  console.log({favoritesMovies})
+
   return (
     <>
       <div className="w-full h-[200px] md:h-[250px] relative">
@@ -24,19 +26,16 @@ export const Favorites = () => {
       <div className="container px-10 py-10 mx-auto">
         {favoritesMovies.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-            {favoritesMovies.map((movie) => (
+            {favoritesMovies.map((movie, index) => (
               <MovieCard
-                key={movie.id}
+                key={index}
                 title={movie.title ? movie.title : movie.name}
                 image={
-                  movie.backdrop_path
-                    ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
-                    : movie.profile_path 
-                    ? `https://image.tmdb.org/t/p/original${movie.profile_path}`
-                    : movie.poster_path
-                    ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+                  movie.image
+                    ? `https://image.tmdb.org/t/p/original${movie.image}`
                     : "https://placehold.co/3840x2160"
                 }
+                movieId={movie.movieId}
                 description={movie.overview}
                 movie={movie}
                 mediaType={movie.media_type}
@@ -45,7 +44,7 @@ export const Favorites = () => {
           </div>
         ) : (
           <p className="text-white text-center text-sm">
-            No posees favoritos por el momento
+            Su lista se encuentra vacía
           </p>
         )}
       </div>

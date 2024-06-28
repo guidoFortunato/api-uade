@@ -14,12 +14,13 @@ export const MovieCard = ({
   image,
   isProfile = false,
   movie,
+  movieId,
   mediaType = "movie",
 }) => {
   const newTitle =
     title?.charAt().toUpperCase() + title?.substring(1).toLowerCase();
   // console.log({ mediaType });
-  // console.log({image})
+
   const pathTitle = title
     ?.replace(/[^\w\sáéíóú]/gi, "") // Reemplazar puntos, dos puntos y letras sin tilde por espacios
     .replace(/\s+/g, " ") // Reemplazar múltiples espacios consecutivos por un espacio
@@ -29,7 +30,7 @@ export const MovieCard = ({
     .join("-")
     .toLowerCase();
 
-  // console.log({ movieCard: movie });
+  console.log({ movieCard: movie });
 
   return (
     <div className={clsx(
@@ -48,11 +49,11 @@ export const MovieCard = ({
       <Link
         to={
           mediaType === "movie"
-            ? `/peliculas/${pathTitle}/${movie.id}`
+            ? `/peliculas/${pathTitle}/${movieId ? movieId : movie.id}`
             : mediaType === "tv"
-            ? `/series/${pathTitle}/${movie.id}`
+            ? `/series/${pathTitle}/${movieId ? movieId : movie.id}`
             : mediaType === "person"
-            ? `/actores/${pathTitle}/${movie.id}`
+            ? `/actores/${pathTitle}/${movieId ? movieId : movie.id}`
             : null
         }
       >

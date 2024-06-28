@@ -10,13 +10,15 @@ import { SearchBar3 } from "./SearchBar3";
 import { Spinner } from "../Spinner";
 import { BiSolidCameraMovie } from "react-icons/bi";
 import { HiLogout, HiViewGrid } from "react-icons/hi";
+import { MdOutlineWatchLater } from "react-icons/md";
 import { Genres } from "./Genres";
 import clsx from "clsx";
 
 export const SideBar4 = () => {
-  const { handleAuth, totalGenres, username } = useContext(UserContext);
+  const { handleAuth, totalGenres, dataUser } = useContext(UserContext);
   const [isOpenSearchBar, setIsSearchOpenBar] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
+  // console.log({dataUser})
 
   const handleLogout = () => {
     handleAuth(false);
@@ -60,12 +62,12 @@ export const SideBar4 = () => {
                   }
                 >
                   <FaHeart className="text-xs" />
-                  <span className="ml-1 text-xs">Mis Favoritos</span>
+                  <span className="ml-1 text-xs">Favoritos</span>
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/mi-lista"
+                  to="/vistas"
                   className={({ isActive }) =>
                     `flex py-1 lg:py-0 ${
                       isActive ? "text-violet-light" : ""
@@ -73,7 +75,21 @@ export const SideBar4 = () => {
                   }
                 >
                   <FaStar className="text-sm" />
-                  <span className="ml-1 text-xs">Mi Lista</span>
+                  <span className="ml-1 text-xs">Vistas</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/ver-mas-tarde"
+                  className={({ isActive }) =>
+                    `flex py-1 lg:py-0 ${
+                      isActive ? "text-violet-light" : ""
+                    }  rounded md:bg-transparent md:p-0`
+                  }
+                >
+                
+                  <MdOutlineWatchLater className="text-sm" />
+                  <span className="ml-1 text-xs">Ver más tarde</span>
                 </NavLink>
               </li>
               <Genres totalGenres={totalGenres} />
@@ -157,7 +173,7 @@ export const SideBar4 = () => {
               <div className="bg-white">
                 <Dropdown.Header>
                   <span className="block text-base text-[#693fb1] font-semibold">
-                    {username}
+                    { dataUser.name }
                   </span>
                  
                 </Dropdown.Header>

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getData, getGenres } from "../helpers/";
+import { getData, getGenres, getMoviesData } from "../helpers/";
 
 // const { VITE_API_URL } = getEnvVariables();
 
@@ -10,8 +10,10 @@ const UserProvider = ({ children }) => {
   const [auth, setAuth] = useState(
     JSON.parse(localStorage.getItem("token")) ? true : false
   );
-  const [username, setUsername] = useState("");
-  const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")) || "")
+  const [dataUser, setDataUser] = useState("");
+  const [token, setToken] = useState(
+    JSON.parse(localStorage.getItem("token")) || ""
+  );
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -22,12 +24,8 @@ const UserProvider = ({ children }) => {
   const [seriesGenres, setSeriesGenres] = useState([]);
   const [imageHome, setImageHome] = useState("");
   const [searchBarOpen, setSearchBarOpen] = useState(false);
-  const [favoritesMovies, setFavoritesMovies] = useState(
-    JSON.parse(localStorage.getItem("favorites")) || []
-  );
-  const [listMovies, setListMovies] = useState(
-    JSON.parse(localStorage.getItem("list")) || []
-  );
+  const [favoritesMovies, setFavoritesMovies] = useState([]);
+  const [listMovies, setListMovies] = useState([]);
   const [selected, setSelected] = useState("");
   const [dataMovieDashboard, setDataMovieDashboard] = useState();
 
@@ -48,23 +46,50 @@ const UserProvider = ({ children }) => {
         try {
           let myHeaders = new Headers();
           myHeaders.append("Content-Type", "application/json");
-          myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
-          const res = await fetch("http://localhost:4000/api/auth/username", {
+          myHeaders.append(
+            "x-token",
+            JSON.parse(localStorage.getItem("token"))
+          );
+          const res = await fetch("http://localhost:4000/api/auth/datauser", {
             method: "GET",
             headers: myHeaders,
           });
           // console.log({ res });
           const data = await res.json();
           // console.log({ data });
-          setUsername(data.name);
+          setDataUser(data);
         } catch (error) {
           console.log({ error });
         }
       };
-      
+
       getUser();
     }
   }, [token]);
+
+  useEffect(() => {
+    if (dataUser !== "") {
+      const getFavoritesMovies = async () => {
+        const data = await getMoviesData(
+          `/user/favorites/${dataUser.uid}`
+        );
+        setFavoritesMovies(data.favoriteMovies);
+      };
+      getFavoritesMovies();
+    }
+  }, [dataUser]);
+
+  useEffect(() => {
+    if (dataUser !== "") {
+      const getVistasMovies = async () => {
+        const data = await getMoviesData(
+          `/user/watched/${dataUser.uid}`
+        );
+        setListMovies(data.watchedMovies);
+      };
+      getVistasMovies();
+    }
+  }, [dataUser]);
 
   useEffect(() => {
     const getDataGenres = async () => {
@@ -94,7 +119,7 @@ const UserProvider = ({ children }) => {
         "https://api.themoviedb.org/3/find/thegodfather?external_source=facebook_id&language=es-ES"
       );
       // console.log({ data });
-      setDataMovieDashboard(data.movie_results[0]);
+      setDataMovieDashboard(data.movie_results[1]);
     };
     getDataMovieDashboard();
   }, []);
@@ -172,40 +197,39 @@ const UserProvider = ({ children }) => {
   };
 
   const handleFavoritesMovies = (movie) => {
-    // console.log({ movie });
+
+    console.log({movie})
+    const { title, description, id, backdrop_path } = movie
 
     const isFavorite = favoritesMovies.some(
-      (favoriteMovie) => favoriteMovie.id === movie.id
+      (favoriteMovie) => favoriteMovie.title.toLowerCase() === title.toLowerCase()
     );
 
+    // console.log({isFavorite})
+
     if (!isFavorite) {
-      const updatedFavorites = [...favoritesMovies, movie];
-      // console.log({updatedFavorites})
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      const updatedFavorites = [...favoritesMovies, { title, description, image: backdrop_path, movieId: id }];
       setFavoritesMovies(updatedFavorites);
     } else {
       const updatedFavorites = favoritesMovies.filter(
-        (favoriteMovie) => favoriteMovie.id !== movie.id
+        (favoriteMovie) => favoriteMovie.title.toLowerCase() !== title.toLowerCase()
       );
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       setFavoritesMovies(updatedFavorites);
     }
   };
-  const handleListMovies = (movie) => {
-    // console.log({ movie });
+  const handleListMovies = async(movie) => {
+    
+    const { title, description, id, backdrop_path } = movie
 
-    const isList = listMovies.some((listMovie) => listMovie.id === movie.id);
+    const isList = listMovies.some((listMovie) => listMovie.title.toLowerCase() === title.toLowerCase());
 
     if (!isList) {
-      const updatedList = [...listMovies, movie];
-      // console.log({updatedFavorites})
-      localStorage.setItem("list", JSON.stringify(updatedList));
+      const updatedList = [...listMovies, { title, description, image: backdrop_path, movieId: id }];
       setListMovies(updatedList);
     } else {
       const updatedList = listMovies.filter(
-        (listMovie) => listMovie.id !== movie.id
+        (listMovie) => listMovie.title.toLowerCase() !== title.toLowerCase()
       );
-      localStorage.setItem("list", JSON.stringify(updatedList));
       setListMovies(updatedList);
     }
   };
@@ -215,6 +239,7 @@ const UserProvider = ({ children }) => {
       value={{
         auth,
         dataMovieDashboard,
+        dataUser,
         favoritesMovies,
         handleAuth,
         handleFavoritesMovies,
@@ -234,7 +259,6 @@ const UserProvider = ({ children }) => {
         topRatedSeries,
         totalGenres,
         upcomingMovies,
-        username,
       }}
     >
       {children}
