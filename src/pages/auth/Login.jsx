@@ -14,39 +14,41 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { handleAuth } = useContext(UserContext);
+  const { handleAuth, handleToken } = useContext(UserContext);
   const [seePassword, setSeePassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
     const { email, password } = data;
     // console.log({ email, password });
-    
+
     try {
       setIsLoading(true);
-      let myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("x-token", localStorage.getItem("token"));
+
       const res = await fetch("http://localhost:4000/api/auth/", {
         method: "POST",
-        headers: myHeaders,
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({ email, password }),
       });
-      console.log({ res });
+      // console.log({ res });
       const data = await res.json();
+      // console.log({ data });
+
       if (!data.ok) {
         alertInfo(data.message);
         setIsLoading(false);
-        return
+        return;
       }
-      // TODO en vez de handleAuth tengo que hacer algo con el token 
-      // handleAuth(true)
-      localStorage.setItem("token", data.token);
-      console.log({ data });
+
+      localStorage.setItem("token", JSON.stringify(data.token));
+      handleAuth(true);
+      handleToken(data.token)
     } catch (error) {
       console.log({ error });
     }
-    
+
     setIsLoading(false);
     return;
   });

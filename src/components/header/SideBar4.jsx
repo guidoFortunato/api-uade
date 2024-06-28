@@ -14,15 +14,13 @@ import { Genres } from "./Genres";
 import clsx from "clsx";
 
 export const SideBar4 = () => {
-  const { handleAuth, totalGenres } = useContext(UserContext);
+  const { handleAuth, totalGenres, username } = useContext(UserContext);
   const [isOpenSearchBar, setIsSearchOpenBar] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
 
-  // console.log({ totalGenres });
-
   const handleLogout = () => {
     handleAuth(false);
-    localStorage.setItem("auth", JSON.stringify(false));
+    localStorage.removeItem("token");
   };
 
   return (
@@ -159,11 +157,9 @@ export const SideBar4 = () => {
               <div className="bg-white">
                 <Dropdown.Header>
                   <span className="block text-base text-[#693fb1] font-semibold">
-                    Guido Fortunato
+                    {username}
                   </span>
-                  <span className="block truncate italic text-xs text-[#855ace] font-medium">
-                    guidofortunato10@gmail.com
-                  </span>
+                 
                 </Dropdown.Header>
               </div>
               <div className="hover:bg-[#ffffff]">
@@ -191,7 +187,6 @@ export const SideBar4 = () => {
                 className="text-[#5A189A] hover:text-violet-light"
                 icon={HiLogout}
               >
-                
                 Cerrar sesión
               </Dropdown.Item>
             </Dropdown>

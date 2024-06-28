@@ -8,8 +8,10 @@ export const UserContext = createContext();
 // eslint-disable-next-line react/prop-types
 const UserProvider = ({ children }) => {
   const [auth, setAuth] = useState(
-    JSON.parse(localStorage.getItem("auth")) || false
+    JSON.parse(localStorage.getItem("token")) ? true : false
   );
+  const [username, setUsername] = useState("");
+  const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")) || "")
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -39,6 +41,30 @@ const UserProvider = ({ children }) => {
     };
     getMovies();
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      const getUser = async () => {
+        try {
+          let myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+          myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+          const res = await fetch("http://localhost:4000/api/auth/username", {
+            method: "GET",
+            headers: myHeaders,
+          });
+          // console.log({ res });
+          const data = await res.json();
+          // console.log({ data });
+          setUsername(data.name);
+        } catch (error) {
+          console.log({ error });
+        }
+      };
+      
+      getUser();
+    }
+  }, [token]);
 
   useEffect(() => {
     const getDataGenres = async () => {
@@ -94,6 +120,7 @@ const UserProvider = ({ children }) => {
     };
     getMovies();
   }, []);
+
   useEffect(() => {
     const getMovies = async () => {
       const data = await getData(
@@ -129,6 +156,10 @@ const UserProvider = ({ children }) => {
 
   const handleAuth = (user) => {
     setAuth(user);
+  };
+
+  const handleToken = (value) => {
+    setToken(value);
   };
 
   const handleSearchBar = (boolean) => {
@@ -190,6 +221,7 @@ const UserProvider = ({ children }) => {
         handleListMovies,
         handleSearchBar,
         handleSelected,
+        handleToken,
         imageHome,
         listMovies,
         moviesGenres,
@@ -202,6 +234,7 @@ const UserProvider = ({ children }) => {
         topRatedSeries,
         totalGenres,
         upcomingMovies,
+        username,
       }}
     >
       {children}

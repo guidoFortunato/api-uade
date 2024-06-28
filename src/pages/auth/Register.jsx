@@ -9,7 +9,7 @@ import { UserContext } from "../../context/UserProvider";
 import { alertInfo } from "../../helpers";
 
 export const Register = () => {
-  const { handleAuth } = useContext(UserContext);
+  const { handleAuth, handleToken } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -25,17 +25,18 @@ export const Register = () => {
     const { name, email, password } = data;
     try {
       setIsLoading(true);
-      let myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("x-token", localStorage.getItem("token"));
+
+
       const res = await fetch("http://localhost:4000/api/auth/register", {
         method: "POST",
-        headers: myHeaders,
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({ email, password, name }),
       });
       // console.log({ res });
       const data = await res.json();
-      console.log({ data });
+      // console.log({ data });
 
       if (!data.ok) {
         alertInfo(data.message);
@@ -43,10 +44,9 @@ export const Register = () => {
         return;
       }
 
-      // TODO en vez de handleAuth tengo que hacer algo con el token
-      // handleAuth(true)
-      localStorage.setItem("token", data.token);
-      
+      localStorage.setItem("token", JSON.stringify(data.token));
+      handleAuth(true);
+      handleToken(data.token)
     } catch (error) {
       console.log({ error });
     } finally {
@@ -275,7 +275,7 @@ export const Register = () => {
           )}
         </div>
         <div className="flex justify-center w-full">
-        {isLoading ? (
+          {isLoading ? (
             <button type="button" className="btn-disabled w-[200px]" disabled>
               Cargando...
             </button>
@@ -284,7 +284,6 @@ export const Register = () => {
               Crear cuenta
             </button>
           )}
-         
         </div>
         <div className="flex flex-col items-center sm:flex-row  sm:justify-end text-white text-sm">
           <div>
