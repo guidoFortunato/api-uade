@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { FaHeart, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { UserContext } from "../../context/UserProvider";
-import { getMoviesData, postMoviesData } from "../../helpers";
 
 const notifySuccess = (text) => {
   toast.success(text, {
@@ -25,26 +25,19 @@ export const Icons = ({ movie, isCard = false }) => {
     listMovies,
   } = useContext(UserContext);
   const [like, setLike] = useState(
-    listMovies?.find((listMovie) => listMovie.id === movie.id) ? true : false
+    listMovies?.some((listMovie) => listMovie.movieId === movie.movieId)
   );
   const [favorite, setFavorite] = useState(
-    favoritesMovies?.find((favorite) => favorite.id === movie.id) ? true : false
+    favoritesMovies?.some((favorite) => favorite.movieId === movie.movieId)
   );
+  // console.log({movie})
+  // console.log({favoritesMovies, listMovies})
 
-  // console.log({like})
-
-  // const handleLike = () => {
-  //   setLike((prev) => !prev);
-  //   // handleIconLike(!iconLike)
-  //   if (like) {
-  //     notifyError("Removido de tu lista");
-  //   } else {
-  //     notifySuccess("Agregado a tu lista");
-  //   }
-  //   handleListMovies(movie);
-  // };
+  const { pathname } = useLocation();
+  // console.log({pathname})
 
   const addFavorites = async () => {
+    console.log("entra a addFavorites");
     console.log({ movie });
     try {
       let myHeaders = new Headers();
@@ -56,11 +49,12 @@ export const Icons = ({ movie, isCard = false }) => {
         headers: myHeaders,
         body: JSON.stringify({
           title: movie.title ? movie.title : movie.name,
-          description: movie.overview,
-          image: movie.backdrop_path,
-          movieId: movie.id,
-          // media_type: movie.title ? "movie" : "tv",
-          // release_date: movie.release_date ? movie.release_date : "",
+          image: movie.image
+            ? movie.image
+            : movie.backdrop_path
+            ? movie.backdrop_path
+            : movie.poster_path,
+          movieId: movie.movieId ? movie.movieId : movie.id,
         }),
       });
 
@@ -74,28 +68,33 @@ export const Icons = ({ movie, isCard = false }) => {
       setFavorite((prev) => !prev);
 
       notifySuccess("Agregado a tus favoritos");
-      // handleFavoritesMovies(movie);
+      handleFavoritesMovies(data.movie);
     } catch (error) {
       console.log({ error });
     }
   };
+
   const removeFavorites = async () => {
+    console.log("entra a removeFavorites");
     console.log({ movie });
+    const pathUrl = pathname === "/vistas" ? "watched" : "favorites";
+
     try {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
 
       const res = await fetch(
-        `http://localhost:4000/api/user/favorites/${movie._id}`,
+        `http://localhost:4000/api/user/${pathUrl}/${movie._id ? movie._id : movie.id}`,
         {
           method: "DELETE",
           headers: myHeaders,
+          body: JSON.stringify({ isIdDb: movie._id ? true : false })
         }
       );
-      console.log({res})
+      // console.log({res})
       const data = await res.json();
-      // console.log({ data });
+      console.log({ data });
 
       if (!data.ok) {
         return;
@@ -104,12 +103,14 @@ export const Icons = ({ movie, isCard = false }) => {
       setFavorite((prev) => !prev);
 
       notifyError("Removido de tus favoritos");
-      // handleFavoritesMovies(movie);
+      handleFavoritesMovies(movie);
     } catch (error) {
       console.log({ error });
     }
   };
+
   const addWatched = async () => {
+    console.log("entra a addWatched");
     // console.log({ movie });
     try {
       let myHeaders = new Headers();
@@ -121,11 +122,12 @@ export const Icons = ({ movie, isCard = false }) => {
         headers: myHeaders,
         body: JSON.stringify({
           title: movie.title ? movie.title : movie.name,
-          description: movie.overview,
-          image: movie.backdrop_path,
-          movieId: movie.id,
-          // media_type: movie.title ? "movie" : "tv",
-          // release_date: movie.release_date ? movie.release_date : "",
+          image: movie.image
+            ? movie.image
+            : movie.backdrop_path
+            ? movie.backdrop_path
+            : movie.poster_path,
+          movieId: movie.movieId ? movie.movieId : movie.id,
         }),
       });
 
@@ -136,15 +138,18 @@ export const Icons = ({ movie, isCard = false }) => {
         return;
       }
 
-      setLike((prev) => !prev)
+      setLike((prev) => !prev);
 
       notifySuccess("Agregado a tus vistas");
-      // handleListMovies(movie);
+      handleListMovies(data.movie);
     } catch (error) {
       console.log({ error });
     }
   };
+
   const removeWatched = async () => {
+    console.log("entra a removeWatched");
+    const pathUrl = pathname === "/favoritos" ? "favorites" : "watched";
     // console.log({ movie });
     try {
       let myHeaders = new Headers();
@@ -152,7 +157,7 @@ export const Icons = ({ movie, isCard = false }) => {
       myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
 
       const res = await fetch(
-        `http://localhost:4000/api/user/watched/${movie._id}`,
+        `http://localhost:4000/api/user/${pathUrl}/${movie._id ? movie._id : movie.id}`,
         {
           method: "DELETE",
           headers: myHeaders,
@@ -160,16 +165,16 @@ export const Icons = ({ movie, isCard = false }) => {
       );
 
       const data = await res.json();
-      // console.log({ data });
+      console.log({ data });
 
       if (!data.ok) {
         return;
       }
 
-      setLike((prev) => !prev)
+      setLike((prev) => !prev);
 
       notifyError("Removido de tus vistas");
-      // handleListMovies(movie);
+      handleListMovies(movie);
     } catch (error) {
       console.log({ error });
     }

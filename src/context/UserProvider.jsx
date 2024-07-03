@@ -197,18 +197,16 @@ const UserProvider = ({ children }) => {
   };
 
   const handleFavoritesMovies = (movie) => {
-
     console.log({movie})
-    const { title, description, id, backdrop_path } = movie
 
-    const isFavorite = favoritesMovies.some(
+    const { title, _id, image, movieId } = movie
+
+    const existInFavorite = favoritesMovies.some(
       (favoriteMovie) => favoriteMovie.title.toLowerCase() === title.toLowerCase()
-    );
+    );   
 
-    // console.log({isFavorite})
-
-    if (!isFavorite) {
-      const updatedFavorites = [...favoritesMovies, { title, description, image: backdrop_path, movieId: id }];
+    if (!existInFavorite) {
+      const updatedFavorites = [...favoritesMovies, { title, _id, image, movieId }];
       setFavoritesMovies(updatedFavorites);
     } else {
       const updatedFavorites = favoritesMovies.filter(
@@ -218,13 +216,15 @@ const UserProvider = ({ children }) => {
     }
   };
   const handleListMovies = async(movie) => {
+    console.log({handleListMovies: movie})
     
-    const { title, description, id, backdrop_path } = movie
+    const { title, _id, image, movieId } = movie
+   
 
     const isList = listMovies.some((listMovie) => listMovie.title.toLowerCase() === title.toLowerCase());
 
     if (!isList) {
-      const updatedList = [...listMovies, { title, description, image: backdrop_path, movieId: id }];
+      const updatedList = [...listMovies, { title, _id, image, movieId }];
       setListMovies(updatedList);
     } else {
       const updatedList = listMovies.filter(

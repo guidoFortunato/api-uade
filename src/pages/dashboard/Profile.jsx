@@ -68,7 +68,7 @@ export const Profile = () => {
           <form onSubmit={handleSubmit} className="col-span-2">
             <div className="mb-4 ">
               <label className="block text-white text-sm mb-2" htmlFor="nombre">
-                Nombre
+                Nombre Completo
               </label>
               <input
                 className="bg-[#5A189A] border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5 focus:ring-[#9757ca] focus:border-[#9757ca] focus:outline-none"
@@ -78,24 +78,6 @@ export const Profile = () => {
                 value={formData.nombre}
                 onChange={handleChange}
                 //placeholder="Ingrese su nombre"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label
-                className="block text-white text-sm mb-2"
-                htmlFor="apellido"
-              >
-                Apellido
-              </label>
-              <input
-                className="bg-[#5A189A]  border border-[#9D4EDD] text-white text-sm rounded-lg block w-full p-2.5 focus:ring-[#9757ca] focus:border-[#9757ca] focus:outline-none"
-                id="apellido"
-                type="text"
-                name="apellido"
-                value={formData.apellido}
-                onChange={handleChange}
-                //placeholder="Ingrese su apellido"
               />
             </div>
 

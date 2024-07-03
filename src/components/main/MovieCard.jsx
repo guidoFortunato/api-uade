@@ -30,7 +30,7 @@ export const MovieCard = ({
     .join("-")
     .toLowerCase();
 
-  console.log({ movieCard: movie });
+  // console.log({ movieCard: movie });
 
   return (
     <div className={clsx(

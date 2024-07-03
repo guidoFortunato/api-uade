@@ -24,14 +24,13 @@ export const List = () => {
             {listMovies.map((movie,index) => (
               <MovieCard
               key={index}
-              title={movie.title ? movie.title : movie.name}
+              title={movie.title}
               image={
                 movie.image
                   ? `https://image.tmdb.org/t/p/original${movie.image}`
                   : "https://placehold.co/3840x2160"
               }
               movieId={movie.movieId}
-              description={movie.overview}
               movie={movie}
               mediaType={movie.media_type}
             />

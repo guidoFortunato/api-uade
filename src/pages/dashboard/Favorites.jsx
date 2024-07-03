@@ -1,14 +1,11 @@
 import { useContext, useEffect } from "react";
 import { MovieCard } from "../../components";
 import { UserContext } from "../../context/UserProvider";
-import { getEnvVariables } from "../../helpers";
-
-const { VITE_API_IMAGE } = getEnvVariables();
 
 export const Favorites = () => {
   const { favoritesMovies } = useContext(UserContext);
 
-  console.log({favoritesMovies})
+  // console.log({favoritesMovies})
 
   return (
     <>
@@ -36,7 +33,6 @@ export const Favorites = () => {
                     : "https://placehold.co/3840x2160"
                 }
                 movieId={movie.movieId}
-                description={movie.overview}
                 movie={movie}
                 mediaType={movie.media_type}
               />
