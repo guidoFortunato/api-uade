@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { FaHeart, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { UserContext } from "../../context/UserProvider";
+import { Spinner } from "../Spinner";
 
 const notifySuccess = (text) => {
   toast.success(text, {
@@ -24,14 +25,17 @@ export const Icons = ({ movie, isCard = false }) => {
     favoritesMovies,
     listMovies,
   } = useContext(UserContext);
-  const [like, setLike] = useState(
-    listMovies?.some((listMovie) => listMovie.movieId === movie.movieId)
-  );
-  const [favorite, setFavorite] = useState(
-    favoritesMovies?.some((favorite) => favorite.movieId === movie.movieId)
-  );
-  // console.log({movie})
-  // console.log({favoritesMovies, listMovies})
+  const [like, setLike] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+
+  useEffect(() => {
+    setLike(
+      listMovies?.find((listMovie) => listMovie.movieId === movie.movieId)
+    );
+    setFavorite(
+      favoritesMovies?.find((favorite) => favorite.movieId === movie.movieId)
+    );
+  }, [favoritesMovies, listMovies]);
 
   const { pathname } = useLocation();
   // console.log({pathname})
@@ -85,11 +89,13 @@ export const Icons = ({ movie, isCard = false }) => {
       myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
 
       const res = await fetch(
-        `http://localhost:4000/api/user/${pathUrl}/${movie._id ? movie._id : movie.id}`,
+        `http://localhost:4000/api/user/${pathUrl}/${
+          movie._id ? movie._id : movie.id
+        }`,
         {
           method: "DELETE",
           headers: myHeaders,
-          body: JSON.stringify({ isIdDb: movie._id ? true : false })
+          body: JSON.stringify({ isIdDb: movie._id ? true : false }),
         }
       );
       // console.log({res})
@@ -111,7 +117,7 @@ export const Icons = ({ movie, isCard = false }) => {
 
   const addWatched = async () => {
     console.log("entra a addWatched");
-    // console.log({ movie });
+    console.log({ movie });
     try {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -150,14 +156,16 @@ export const Icons = ({ movie, isCard = false }) => {
   const removeWatched = async () => {
     console.log("entra a removeWatched");
     const pathUrl = pathname === "/favoritos" ? "favorites" : "watched";
-    // console.log({ movie });
+    console.log({ movie });
     try {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
 
       const res = await fetch(
-        `http://localhost:4000/api/user/${pathUrl}/${movie._id ? movie._id : movie.id}`,
+        `http://localhost:4000/api/user/${pathUrl}/${
+          movie._id ? movie._id : movie.id
+        }`,
         {
           method: "DELETE",
           headers: myHeaders,

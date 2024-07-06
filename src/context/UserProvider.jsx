@@ -70,6 +70,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     if (dataUser !== "") {
       const getFavoritesMovies = async () => {
+        // console.log({dataUser})
         const data = await getMoviesData(
           `/user/favorites/${dataUser.uid}`
         );
