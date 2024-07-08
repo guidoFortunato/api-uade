@@ -28,17 +28,24 @@ export const Icons = ({ movie, isCard = false }) => {
   const [like, setLike] = useState(false);
   const [favorite, setFavorite] = useState(false);
 
+  // console.log({favoritesMovies})
+
   useEffect(() => {
     setLike(
-      listMovies?.find((listMovie) => listMovie.movieId === movie.movieId)
+      listMovies?.find((listMovie) => movie.movieId ? listMovie.movieId === movie.movieId : listMovie.movieId === movie.id.toString())
     );
     setFavorite(
-      favoritesMovies?.find((favorite) => favorite.movieId === movie.movieId)
+      favoritesMovies?.find((favorite) => movie.movieId ? favorite.movieId === movie.movieId : favorite.movieId === movie.id.toString())
     );
   }, [favoritesMovies, listMovies]);
 
   const { pathname } = useLocation();
-  // console.log({pathname})
+
+  // if (movie.id  === 467244) {
+  //   console.log({movie})
+  //   console.log({favoritesMovies})
+    
+  // }
 
   const addFavorites = async () => {
     console.log("entra a addFavorites");
@@ -58,7 +65,7 @@ export const Icons = ({ movie, isCard = false }) => {
             : movie.backdrop_path
             ? movie.backdrop_path
             : movie.poster_path,
-          movieId: movie.movieId ? movie.movieId : movie.id,
+          movieId: movie.movieId ? movie.movieId : movie.id.toString(),
         }),
       });
 
@@ -81,7 +88,8 @@ export const Icons = ({ movie, isCard = false }) => {
   const removeFavorites = async () => {
     console.log("entra a removeFavorites");
     console.log({ movie });
-    const pathUrl = pathname === "/vistas" ? "watched" : "favorites";
+    // const pathUrl = pathname === "/vistas" ? "watched" : "favorites";
+    // console.log({pathUrl})
 
     try {
       let myHeaders = new Headers();
@@ -89,13 +97,13 @@ export const Icons = ({ movie, isCard = false }) => {
       myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
 
       const res = await fetch(
-        `http://localhost:4000/api/user/${pathUrl}/${
-          movie._id ? movie._id : movie.id
+        `http://localhost:4000/api/user/favorites/${
+          movie.movieId ? movie.movieId : movie.id
         }`,
         {
           method: "DELETE",
           headers: myHeaders,
-          body: JSON.stringify({ isIdDb: movie._id ? true : false }),
+          // body: JSON.stringify({ isIdDb: movie._id ? true : false }),
         }
       );
       // console.log({res})
@@ -103,6 +111,7 @@ export const Icons = ({ movie, isCard = false }) => {
       console.log({ data });
 
       if (!data.ok) {
+        console.log({ data });
         return;
       }
 
@@ -133,7 +142,7 @@ export const Icons = ({ movie, isCard = false }) => {
             : movie.backdrop_path
             ? movie.backdrop_path
             : movie.poster_path,
-          movieId: movie.movieId ? movie.movieId : movie.id,
+          movieId: movie.movieId ? movie.movieId : movie.id.toString(),
         }),
       });
 
@@ -155,7 +164,7 @@ export const Icons = ({ movie, isCard = false }) => {
 
   const removeWatched = async () => {
     console.log("entra a removeWatched");
-    const pathUrl = pathname === "/favoritos" ? "favorites" : "watched";
+    // const pathUrl = pathname === "/favoritos" ? "favorites" : "watched";
     console.log({ movie });
     try {
       let myHeaders = new Headers();
@@ -163,8 +172,8 @@ export const Icons = ({ movie, isCard = false }) => {
       myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
 
       const res = await fetch(
-        `http://localhost:4000/api/user/${pathUrl}/${
-          movie._id ? movie._id : movie.id
+        `http://localhost:4000/api/user/watched/${
+          movie._id ? movie._id : movie.id.toString()
         }`,
         {
           method: "DELETE",
