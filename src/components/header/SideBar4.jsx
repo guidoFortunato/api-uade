@@ -189,15 +189,15 @@ export const SideBar4 = () => {
                 </Link>
               </div>
               <Dropdown.Divider />
-              <div className="hover:bg-[#ffffff]">
+              {/* <div className="hover:bg-[#ffffff]">
                 <Link to="/perfil">
                   <Dropdown.Item className="text-[#5A189A] hover:text-violet-light">
                     <PiPencilSimpleFill className="mr-2" />
                     Editar Perfil
                   </Dropdown.Item>
                 </Link>
-              </div>
-              <Dropdown.Divider />
+              </div> */}
+              {/* <Dropdown.Divider /> */}
               <Dropdown.Item
                 onClick={handleLogout}
                 className="text-[#5A189A] hover:text-violet-light"

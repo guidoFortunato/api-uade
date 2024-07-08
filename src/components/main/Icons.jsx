@@ -28,24 +28,22 @@ export const Icons = ({ movie, isCard = false }) => {
   const [like, setLike] = useState(false);
   const [favorite, setFavorite] = useState(false);
 
-  // console.log({favoritesMovies})
-
   useEffect(() => {
     setLike(
-      listMovies?.find((listMovie) => movie.movieId ? listMovie.movieId === movie.movieId : listMovie.movieId === movie.id.toString())
+      listMovies?.find((listMovie) =>
+        movie.movieId
+          ? listMovie.movieId === movie.movieId
+          : listMovie.movieId === movie.id.toString()
+      )
     );
     setFavorite(
-      favoritesMovies?.find((favorite) => movie.movieId ? favorite.movieId === movie.movieId : favorite.movieId === movie.id.toString())
+      favoritesMovies?.find((favorite) =>
+        movie.movieId
+          ? favorite.movieId === movie.movieId
+          : favorite.movieId === movie.id.toString()
+      )
     );
   }, [favoritesMovies, listMovies]);
-
-  const { pathname } = useLocation();
-
-  // if (movie.id  === 467244) {
-  //   console.log({movie})
-  //   console.log({favoritesMovies})
-    
-  // }
 
   const addFavorites = async () => {
     console.log("entra a addFavorites");
@@ -95,11 +93,10 @@ export const Icons = ({ movie, isCard = false }) => {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      const id = movie.movieId ? movie.movieId : movie.id;
 
       const res = await fetch(
-        `http://localhost:4000/api/user/favorites/${
-          movie.movieId ? movie.movieId : movie.id
-        }`,
+        `http://localhost:4000/api/user/favorites/${id}`,
         {
           method: "DELETE",
           headers: myHeaders,
@@ -170,16 +167,12 @@ export const Icons = ({ movie, isCard = false }) => {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      const id = movie.movieId ? movie.movieId : movie.id;
 
-      const res = await fetch(
-        `http://localhost:4000/api/user/watched/${
-          movie._id ? movie._id : movie.id.toString()
-        }`,
-        {
-          method: "DELETE",
-          headers: myHeaders,
-        }
-      );
+      const res = await fetch(`http://localhost:4000/api/user/watched/${id}`, {
+        method: "DELETE",
+        headers: myHeaders,
+      });
 
       const data = await res.json();
       console.log({ data });
