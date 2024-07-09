@@ -52,6 +52,10 @@ body {
   @apply bg-violet-600 hover:bg-violet-800 text-white py-2 px-4 rounded-lg transition-all;
 }
 
+.btn-disabled {
+  @apply bg-violet-400 text-white py-2 px-4 rounded-lg transition-all;
+}
+
 /* spinner */
 
 .spinner {

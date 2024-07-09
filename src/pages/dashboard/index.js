@@ -6,4 +6,5 @@ export * from "./FilmDetails";
 export * from "./ActorFilms";
 export * from "./GenreFilms";
 export * from "./Profile";
+export * from "./SeeLater";
 

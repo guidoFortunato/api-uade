@@ -11,11 +11,11 @@ export const alertWarning = (text = "Este campo es obligatorio", timer = 2000) =
   })
 }
 
-export const alertInfo = (text = "Este campo es obligatorio", timer = 2000) => {
+export const alertInfo = (text = "Este campo es obligatorio", timer = 6000) => {
   
   Swal.fire({
     icon: 'info',
-    html: `<b>${text}</b>`,
+    html: `<b><p class="font-semibold text-md">${text}</p></b>`,
     timer: timer,
     confirmButtonColor: "#444444",
     iconColor: "#c77dff",

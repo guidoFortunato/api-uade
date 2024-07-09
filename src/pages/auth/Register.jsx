@@ -9,7 +9,7 @@ import { UserContext } from "../../context/UserProvider";
 import { alertInfo } from "../../helpers";
 
 export const Register = () => {
-  const { handleAuth } = useContext(UserContext);
+  const { handleAuth, handleToken } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -19,28 +19,41 @@ export const Register = () => {
 
   const [seePassword, setSeePassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     const { name, email, password } = data;
-    const newUser = { name, email, password };
+    try {
+      setIsLoading(true);
 
-    let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-    if (existingUsers.length > 0) {
-      const existUser = existingUsers.find((user) => user.email === email);
-      if (existUser !== undefined) {
-        alertInfo(
-          `<p class="font-semibold text-md">El usuario <span class="text-violet-dark">"${existUser.email}"</span> ya tiene una cuenta creada</p>`,
-          6000
-        );
+      const res = await fetch("http://localhost:4000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password, name }),
+      });
+      // console.log({ res });
+      const data = await res.json();
+      // console.log({ data });
+
+      if (!data.ok) {
+        alertInfo(data.message);
+        setIsLoading(false);
         return;
       }
-    }
-    existingUsers.push(newUser);
 
-    localStorage.setItem("users", JSON.stringify(existingUsers));
-    localStorage.setItem("auth", JSON.stringify(true));
-    handleAuth(true);
+      localStorage.setItem("token", JSON.stringify(data.token));
+      handleAuth(true);
+      handleToken(data.token)
+    } catch (error) {
+      console.log({ error });
+    } finally {
+      setIsLoading(false);
+    }
+
+    return;
   });
 
   return (
@@ -262,9 +275,15 @@ export const Register = () => {
           )}
         </div>
         <div className="flex justify-center w-full">
-          <button type="submit" className="btn-primary w-[200px]">
-            Crear cuenta
-          </button>
+          {isLoading ? (
+            <button type="button" className="btn-disabled w-[200px]" disabled>
+              Cargando...
+            </button>
+          ) : (
+            <button type="submit" className="btn-primary w-[200px]">
+              Crear cuenta
+            </button>
+          )}
         </div>
         <div className="flex flex-col items-center sm:flex-row  sm:justify-end text-white text-sm">
           <div>

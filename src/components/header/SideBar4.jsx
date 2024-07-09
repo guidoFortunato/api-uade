@@ -1,28 +1,24 @@
+import clsx from "clsx";
 import { Avatar, Dropdown } from "flowbite-react";
 import { useContext, useState } from "react";
 import { FaHeart, FaStar } from "react-icons/fa";
+import { HiLogout, HiViewGrid } from "react-icons/hi";
 import { IoMdHome } from "react-icons/io";
-import { PiPencilSimpleFill } from "react-icons/pi";
-import { RiLogoutBoxRFill } from "react-icons/ri";
+import { MdOutlineWatchLater } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
-import { SearchBar3 } from "./SearchBar3";
-import { Spinner } from "../Spinner";
-import { BiSolidCameraMovie } from "react-icons/bi";
-import { HiLogout, HiViewGrid } from "react-icons/hi";
 import { Genres } from "./Genres";
-import clsx from "clsx";
+import { SearchBar3 } from "./SearchBar3";
 
 export const SideBar4 = () => {
-  const { handleAuth, totalGenres } = useContext(UserContext);
+  const { handleAuth, totalGenres, dataUser } = useContext(UserContext);
   const [isOpenSearchBar, setIsSearchOpenBar] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
-
-  // console.log({ totalGenres });
+  // console.log({dataUser})
 
   const handleLogout = () => {
     handleAuth(false);
-    localStorage.setItem("auth", JSON.stringify(false));
+    localStorage.removeItem("token");
   };
 
   return (
@@ -62,12 +58,12 @@ export const SideBar4 = () => {
                   }
                 >
                   <FaHeart className="text-xs" />
-                  <span className="ml-1 text-xs">Mis Favoritos</span>
+                  <span className="ml-1 text-xs">Favoritos</span>
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/mi-lista"
+                  to="/vistas"
                   className={({ isActive }) =>
                     `flex py-1 lg:py-0 ${
                       isActive ? "text-violet-light" : ""
@@ -75,7 +71,21 @@ export const SideBar4 = () => {
                   }
                 >
                   <FaStar className="text-sm" />
-                  <span className="ml-1 text-xs">Mi Lista</span>
+                  <span className="ml-1 text-xs">Vistas</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/ver-mas-tarde"
+                  className={({ isActive }) =>
+                    `flex py-1 lg:py-0 ${
+                      isActive ? "text-violet-light" : ""
+                    }  rounded md:bg-transparent md:p-0`
+                  }
+                >
+                
+                  <MdOutlineWatchLater className="text-sm" />
+                  <span className="ml-1 text-xs">Ver más tarde</span>
                 </NavLink>
               </li>
               <Genres totalGenres={totalGenres} />
@@ -151,7 +161,7 @@ export const SideBar4 = () => {
               label={
                 <Avatar
                   alt="User settings"
-                  img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  img="public/ImagenDePerfil.jpeg"
                   rounded
                 />
               }
@@ -159,11 +169,9 @@ export const SideBar4 = () => {
               <div className="bg-white">
                 <Dropdown.Header>
                   <span className="block text-base text-[#693fb1] font-semibold">
-                    Guido Fortunato
+                    { dataUser.name }
                   </span>
-                  <span className="block truncate italic text-xs text-[#855ace] font-medium">
-                    guidofortunato10@gmail.com
-                  </span>
+                 
                 </Dropdown.Header>
               </div>
               <div className="hover:bg-[#ffffff]">
@@ -177,21 +185,20 @@ export const SideBar4 = () => {
                 </Link>
               </div>
               <Dropdown.Divider />
-              <div className="hover:bg-[#ffffff]">
+              {/* <div className="hover:bg-[#ffffff]">
                 <Link to="/perfil">
                   <Dropdown.Item className="text-[#5A189A] hover:text-violet-light">
                     <PiPencilSimpleFill className="mr-2" />
                     Editar Perfil
                   </Dropdown.Item>
                 </Link>
-              </div>
-              <Dropdown.Divider />
+              </div> */}
+              {/* <Dropdown.Divider /> */}
               <Dropdown.Item
                 onClick={handleLogout}
                 className="text-[#5A189A] hover:text-violet-light"
                 icon={HiLogout}
               >
-                
                 Cerrar sesión
               </Dropdown.Item>
             </Dropdown>
@@ -246,7 +253,7 @@ export const SideBar4 = () => {
                 }
               >
                 <FaHeart className="text-base" />
-                <span className="ml-1 text-sm">Mis Favoritos</span>
+                <span className="ml-1 text-sm">Favoritos</span>
               </NavLink>
             </li>
             <li className="pb-4">
