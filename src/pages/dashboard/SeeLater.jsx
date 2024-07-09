@@ -1,6 +1,5 @@
 
 import { useContext } from "react";
-import { MovieCard } from "../../components";
 import { UserContext } from "../../context/UserProvider";
 
 export const SeeLater = () => {
@@ -10,7 +9,7 @@ export const SeeLater = () => {
     <>
       <div className="w-full h-[200px] md:h-[250px] relative">
         <img
-          src="/FondoFAV1.jpeg"
+          src="/FondoFAV7.JPG"
           alt=""
           className="object-cover h-full w-full"
         />

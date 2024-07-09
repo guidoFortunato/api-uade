@@ -110,7 +110,7 @@ export const SideBar2 = () => {
             <span className="sr-only">Open user menu</span>
             <Avatar
               alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              
               rounded
             />
           </button>
