@@ -23,7 +23,7 @@ export const Favorites = () => {
       <div className="container px-10 py-10 mx-auto">
         {favoritesMovies.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-            {favoritesMovies.map((movie, index) => (
+            {favoritesMovies?.map((movie, index) => (
               <MovieCard
                 key={index}
                 title={movie.title ? movie.title : movie.name}

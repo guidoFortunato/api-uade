@@ -26,6 +26,7 @@ const UserProvider = ({ children }) => {
   const [searchBarOpen, setSearchBarOpen] = useState(false);
   const [favoritesMovies, setFavoritesMovies] = useState([]);
   const [listMovies, setListMovies] = useState([]);
+  const [toWatchMovies, setToWatchMovies] = useState([]);
   const [selected, setSelected] = useState("");
   const [dataMovieDashboard, setDataMovieDashboard] = useState();
 
@@ -89,6 +90,19 @@ const UserProvider = ({ children }) => {
         setListMovies(data.watchedMovies);
       };
       getVistasMovies();
+    }
+  }, [dataUser]);
+
+  useEffect(() => {
+    if (dataUser !== "") {
+      const getToWatchMovies = async () => {
+        const data = await getMoviesData(
+          `/user/to-watch/${dataUser.uid}`
+        );
+        // console.log({data})
+        setToWatchMovies(data.toWatchMovies);
+      };
+      getToWatchMovies();
     }
   }, [dataUser]);
 
@@ -198,10 +212,11 @@ const UserProvider = ({ children }) => {
   };
 
   const handleFavoritesMovies = (movie) => {
-    console.log({movie})
+    // console.log({movie})
 
     const { title, _id, image, movieId } = movie
 
+    //TODO: hacerlo por ID, no por title
     const existInFavorite = favoritesMovies.some(
       (favoriteMovie) => favoriteMovie.title.toLowerCase() === title.toLowerCase()
     );   
@@ -216,12 +231,13 @@ const UserProvider = ({ children }) => {
       setFavoritesMovies(updatedFavorites);
     }
   };
+
   const handleListMovies = async(movie) => {
-    console.log({handleListMovies: movie})
+    // console.log({handleListMovies: movie})
     
     const { title, _id, image, movieId } = movie
    
-
+    //TODO: hacerlo por ID, no por title
     const isList = listMovies.some((listMovie) => listMovie.title.toLowerCase() === title.toLowerCase());
 
     if (!isList) {
@@ -232,6 +248,26 @@ const UserProvider = ({ children }) => {
         (listMovie) => listMovie.title.toLowerCase() !== title.toLowerCase()
       );
       setListMovies(updatedList);
+    }
+  };
+
+  const handleToWatchMovies = async(movie) => {
+    console.log({movie})
+    // console.log({handleToWatchMovies: movie})
+    
+    const { title, _id, image, movieId } = movie
+   
+    //TODO: hacerlo por ID, no por title
+    const isinToWatch = toWatchMovies.some((movie) => movie.title.toLowerCase() === title.toLowerCase());
+
+    if (!isinToWatch) {
+      const updatedList = [...toWatchMovies, { title, _id, image, movieId }];
+      setToWatchMovies(updatedList);
+    } else {
+      const updatedList = toWatchMovies.filter(
+        (movie) => movie.title.toLowerCase() !== title.toLowerCase()
+      );
+      setToWatchMovies(updatedList);
     }
   };
 
@@ -248,6 +284,7 @@ const UserProvider = ({ children }) => {
         handleSearchBar,
         handleSelected,
         handleToken,
+        handleToWatchMovies,
         imageHome,
         listMovies,
         moviesGenres,
@@ -259,6 +296,7 @@ const UserProvider = ({ children }) => {
         topRatedMovies,
         topRatedSeries,
         totalGenres,
+        toWatchMovies,
         upcomingMovies,
       }}
     >

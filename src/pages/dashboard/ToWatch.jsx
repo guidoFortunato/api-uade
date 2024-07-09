@@ -1,10 +1,10 @@
-
 import { useContext } from "react";
 import { UserContext } from "../../context/UserProvider";
+import { MovieCard } from "../../components";
 
-export const SeeLater = () => {
-  const { listMovies } = useContext(UserContext);
-  // console.log({favoritesMovies})
+export const ToWatch = () => {
+  const { toWatchMovies } = useContext(UserContext);
+  // console.log({ toWatchMovies });
   return (
     <>
       <div className="w-full h-[200px] md:h-[250px] relative">
@@ -19,23 +19,22 @@ export const SeeLater = () => {
         </h3>
       </div>
       <div className="container px-10 py-10 mx-auto">
-        {listMovies.length > 0 ? (
+        {toWatchMovies?.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-            {/* {listMovies.map((movie, index) => (
+            {toWatchMovies?.map((movie, index) => (
               <MovieCard
-              key={index}
-              title={movie.title ? movie.title : movie.name}
-              image={
-                movie.image
-                  ? `https://image.tmdb.org/t/p/original${movie.image}`
-                  : "https://placehold.co/3840x2160"
-              }
-              movieId={movie.movieId}
-              description={movie.overview}
-              movie={movie}
-              mediaType={movie.media_type}
-            />
-            ))} */}
+                key={index}
+                title={movie.title ? movie.title : movie.name}
+                image={
+                  movie.image
+                    ? `https://image.tmdb.org/t/p/original${movie.image}`
+                    : "https://placehold.co/3840x2160"
+                }
+                movieId={movie.movieId}
+                movie={movie}
+                mediaType={movie.media_type}
+              />
+            ))}
           </div>
         ) : (
           <p className="text-white text-center text-sm">

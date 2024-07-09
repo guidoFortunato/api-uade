@@ -9,6 +9,7 @@ import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { Genres } from "./Genres";
 import { SearchBar3 } from "./SearchBar3";
+import { BiMoviePlay } from "react-icons/bi";
 
 export const SideBar4 = () => {
   const { handleAuth, totalGenres, dataUser } = useContext(UserContext);
@@ -84,7 +85,7 @@ export const SideBar4 = () => {
                   }
                 >
                 
-                  <MdOutlineWatchLater className="text-sm" />
+                  <BiMoviePlay className="text-sm" />
                   <span className="ml-1 text-xs">Ver más tarde</span>
                 </NavLink>
               </li>
@@ -161,7 +162,7 @@ export const SideBar4 = () => {
               label={
                 <Avatar
                   alt="User settings"
-                  img="public/ImagenDePerfil.jpeg"
+                  img="public/Logo.png"
                   rounded
                 />
               }
@@ -258,7 +259,7 @@ export const SideBar4 = () => {
             </li>
             <li className="pb-4">
               <NavLink
-                to="/mi-lista"
+                to="/vistas"
                 className={({ isActive }) =>
                   `flex items-center py-2 px-1 ${
                     isActive ? "bg-violet-light text-white w-full" : ""
@@ -266,7 +267,20 @@ export const SideBar4 = () => {
                 }
               >
                 <FaStar className="text-lg" />
-                <span className="ml-1 text-sm">Mi Lista</span>
+                <span className="ml-1 text-sm">Vistas</span>
+              </NavLink>
+            </li>
+            <li className="pb-4">
+              <NavLink
+                to="/ver-mas-tarde"
+                className={({ isActive }) =>
+                  `flex items-center py-2 px-1 ${
+                    isActive ? "bg-violet-light text-white w-full" : ""
+                  }  rounded md:bg-transparent md:p-0`
+                }
+              >
+                <BiMoviePlay className="text-lg" />
+                <span className="ml-1 text-sm">Ver más tarde</span>
               </NavLink>
             </li>
             <Genres totalGenres={totalGenres} isResponsive={true} />

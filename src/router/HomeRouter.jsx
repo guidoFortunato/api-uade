@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { HomeLayout } from "../layout";
-import { ActorFilms, Dashboard, Favorites, FilmDetails, GenreFilms, List, Profile, SearchMovies, SeeLater } from "../pages/dashboard";
+import { ActorFilms, Dashboard, Favorites, FilmDetails, GenreFilms, List, Profile, SearchMovies, ToWatch } from "../pages/dashboard";
 
 export const HomeRouter = () => {
   return (
@@ -9,7 +9,7 @@ export const HomeRouter = () => {
         <Route index element={<Dashboard />} />
         <Route path="favoritos" element={<Favorites />} />
         <Route path="vistas" element={<List />} />
-        <Route path="ver-mas-tarde" element={<SeeLater />} />
+        <Route path="ver-mas-tarde" element={<ToWatch />} />
         <Route path="busqueda/:name" element={<SearchMovies />} />
         <Route path="/peliculas/:name/:id" element={<FilmDetails />} />
         <Route path="/series/:name/:id" element={<FilmDetails />} />
