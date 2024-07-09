@@ -257,7 +257,7 @@ export const SideBar4 = () => {
                 }
               >
                 <FaHeart className="text-base" />
-                <span className="ml-1 text-sm">Mis Favoritos</span>
+                <span className="ml-1 text-sm">Favoritos</span>
               </NavLink>
             </li>
             <li className="pb-4">

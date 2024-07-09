@@ -51,7 +51,7 @@ export const DashboardRow = ({ title, movies }) => {
       },
     ],
   };
-  // console.log({movies})
+  console.log({movies})
 
   if (movies.length === 0) return <Spinner />;
 
