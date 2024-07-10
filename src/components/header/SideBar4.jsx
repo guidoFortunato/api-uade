@@ -162,7 +162,7 @@ export const SideBar4 = () => {
               label={
                 <Avatar
                   alt="User settings"
-                  img="public/Logo.png"
+                  img="/Logo.png"
                   rounded
                 />
               }
