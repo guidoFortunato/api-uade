@@ -27,7 +27,7 @@ export const SearchMovies = () => {
           `https://api.themoviedb.org/3/search/multi?query=${query}&language=es-ES`
         );
 
-        console.log({ data });
+        // console.log({ data });
         setMovies(data.results);
         if (data.results.length === 0) {
           setStatus(false);
@@ -80,7 +80,7 @@ export const SearchMovies = () => {
                 isProfile={true}
                 description={movie.overview}
                 movie={movie}
-                mediaType={movie.media_type}
+                mediaType={ movie.media_type ? movie.media_type : movie.title ? "movie" : movie.name ? "tv" : "person"}
               />
             ))}
           </div>

@@ -103,7 +103,7 @@ export const GenreFilms = () => {
                 }
                 description={movie.overview}
                 movie={movie}
-                mediaType={movie.title ? "movie" : "tv"}
+                mediaType={ movie.media_type ? movie.media_type : movie.title ? "movie" : movie.name ? "tv" : "person"}
               />
             ))}
           </div>

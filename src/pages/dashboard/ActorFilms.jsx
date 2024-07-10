@@ -89,7 +89,7 @@ export const ActorFilms = () => {
                 }
                 description={movie.overview}
                 movie={movie}
-                mediaType={movie.media_type}
+                mediaType={ movie.media_type ? movie.media_type : movie.title ? "movie" : movie.name ? "tv" : "person" }
               />
             ))}
           </div>

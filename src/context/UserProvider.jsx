@@ -26,8 +26,11 @@ const UserProvider = ({ children }) => {
   const [searchBarOpen, setSearchBarOpen] = useState(false);
   const [favoritesMovies, setFavoritesMovies] = useState([]);
   const [listMovies, setListMovies] = useState([]);
+  const [toWatchMovies, setToWatchMovies] = useState([]);
   const [selected, setSelected] = useState("");
   const [dataMovieDashboard, setDataMovieDashboard] = useState();
+
+  // console.log({favoritesMovies})
 
   useEffect(() => {
     const getMovies = async () => {
@@ -89,6 +92,19 @@ const UserProvider = ({ children }) => {
         setListMovies(data.watchedMovies);
       };
       getVistasMovies();
+    }
+  }, [dataUser]);
+
+  useEffect(() => {
+    if (dataUser !== "") {
+      const getToWatchMovies = async () => {
+        const data = await getMoviesData(
+          `/user/to-watch/${dataUser.uid}`
+        );
+        // console.log({data})
+        setToWatchMovies(data.toWatchMovies);
+      };
+      getToWatchMovies();
     }
   }, [dataUser]);
 
@@ -198,40 +214,59 @@ const UserProvider = ({ children }) => {
   };
 
   const handleFavoritesMovies = (movie) => {
-    console.log({movie})
+    // console.log({handleFavoritesMovie: movie})
 
-    const { title, _id, image, movieId } = movie
-
+    const { title, _id, image, movieId, media_type } = movie
+   
     const existInFavorite = favoritesMovies.some(
-      (favoriteMovie) => favoriteMovie.title.toLowerCase() === title.toLowerCase()
+      (favoriteMovie) => favoriteMovie.movieId.toString() === movieId.toString() && favoriteMovie.media_type === media_type && favoriteMovie.title.toLowerCase() === title.toLowerCase()
     );   
 
     if (!existInFavorite) {
-      const updatedFavorites = [...favoritesMovies, { title, _id, image, movieId }];
+      const updatedFavorites = [...favoritesMovies, { title, _id, image, movieId, media_type }];
       setFavoritesMovies(updatedFavorites);
     } else {
       const updatedFavorites = favoritesMovies.filter(
-        (favoriteMovie) => favoriteMovie.title.toLowerCase() !== title.toLowerCase()
+        (favoriteMovie) => favoriteMovie.movieId.toString() !== movieId.toString() || favoriteMovie.media_type !== media_type || favoriteMovie.title.toLowerCase() !== title.toLowerCase()
       );
       setFavoritesMovies(updatedFavorites);
     }
   };
-  const handleListMovies = async(movie) => {
-    console.log({handleListMovies: movie})
-    
-    const { title, _id, image, movieId } = movie
-   
 
-    const isList = listMovies.some((listMovie) => listMovie.title.toLowerCase() === title.toLowerCase());
+  const handleListMovies = async(movie) => {
+    // console.log({handleListMovie: movie})
+    
+    const { title, _id, image, movieId, media_type } = movie
+   
+    const isList = listMovies.some((listMovie) => listMovie.movieId.toString() === movieId.toString() && listMovie.media_type === media_type && listMovie.title.toLowerCase() === title.toLowerCase());
 
     if (!isList) {
-      const updatedList = [...listMovies, { title, _id, image, movieId }];
+      const updatedList = [...listMovies, { title, _id, image, movieId, media_type }];
       setListMovies(updatedList);
     } else {
       const updatedList = listMovies.filter(
-        (listMovie) => listMovie.title.toLowerCase() !== title.toLowerCase()
+        (listMovie) => listMovie.movieId.toString() !== movieId.toString() || listMovie.media_type !== media_type || listMovie.title.toLowerCase() !== title.toLowerCase()
       );
       setListMovies(updatedList);
+    }
+  };
+
+  const handleToWatchMovies = async(movie) => {
+    
+    // console.log({handleToWatchMovie: movie})
+    
+    const { title, _id, image, movieId, media_type } = movie
+   
+    const isinToWatch = toWatchMovies.some((movie) => movie.movieId.toString() === movieId.toString() && movie.media_type === media_type && movie.title.toLowerCase() === title.toLowerCase());
+
+    if (!isinToWatch) {
+      const updatedList = [...toWatchMovies, { title, _id, image, movieId, media_type }];
+      setToWatchMovies(updatedList);
+    } else {
+      const updatedList = toWatchMovies.filter(
+        (movie) => movie.movieId.toString() !== movieId.toString() || movie.media_type !== media_type || movie.title.toLowerCase() !== title.toLowerCase()
+      );
+      setToWatchMovies(updatedList);
     }
   };
 
@@ -248,6 +283,7 @@ const UserProvider = ({ children }) => {
         handleSearchBar,
         handleSelected,
         handleToken,
+        handleToWatchMovies,
         imageHome,
         listMovies,
         moviesGenres,
@@ -259,6 +295,7 @@ const UserProvider = ({ children }) => {
         topRatedMovies,
         topRatedSeries,
         totalGenres,
+        toWatchMovies,
         upcomingMovies,
       }}
     >

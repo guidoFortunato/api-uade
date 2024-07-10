@@ -65,7 +65,7 @@ export const Dashboard = () => {
                       ? dataMovieDashboard?.title
                       : dataMovieDashboard?.name}
                   </h1>
-                  <Icons movie={dataMovieDashboard} />
+                  <Icons isCard={false} movie={dataMovieDashboard} />
                 </div>
                 <div className="mt-10 mb-2 flex items-center">
                   <Link
