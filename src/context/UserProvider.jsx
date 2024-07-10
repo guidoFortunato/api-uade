@@ -30,6 +30,8 @@ const UserProvider = ({ children }) => {
   const [selected, setSelected] = useState("");
   const [dataMovieDashboard, setDataMovieDashboard] = useState();
 
+  // console.log({favoritesMovies})
+
   useEffect(() => {
     const getMovies = async () => {
       const data = await getData(
@@ -212,60 +214,57 @@ const UserProvider = ({ children }) => {
   };
 
   const handleFavoritesMovies = (movie) => {
-    // console.log({movie})
+    // console.log({handleFavoritesMovie: movie})
 
-    const { title, _id, image, movieId } = movie
-
-    //TODO: hacerlo por ID, no por title
+    const { title, _id, image, movieId, media_type } = movie
+   
     const existInFavorite = favoritesMovies.some(
-      (favoriteMovie) => favoriteMovie.title.toLowerCase() === title.toLowerCase()
+      (favoriteMovie) => favoriteMovie.movieId.toString() === movieId.toString() && favoriteMovie.media_type === media_type && favoriteMovie.title.toLowerCase() === title.toLowerCase()
     );   
 
     if (!existInFavorite) {
-      const updatedFavorites = [...favoritesMovies, { title, _id, image, movieId }];
+      const updatedFavorites = [...favoritesMovies, { title, _id, image, movieId, media_type }];
       setFavoritesMovies(updatedFavorites);
     } else {
       const updatedFavorites = favoritesMovies.filter(
-        (favoriteMovie) => favoriteMovie.title.toLowerCase() !== title.toLowerCase()
+        (favoriteMovie) => favoriteMovie.movieId.toString() !== movieId.toString() || favoriteMovie.media_type !== media_type || favoriteMovie.title.toLowerCase() !== title.toLowerCase()
       );
       setFavoritesMovies(updatedFavorites);
     }
   };
 
   const handleListMovies = async(movie) => {
-    // console.log({handleListMovies: movie})
+    // console.log({handleListMovie: movie})
     
-    const { title, _id, image, movieId } = movie
+    const { title, _id, image, movieId, media_type } = movie
    
-    //TODO: hacerlo por ID, no por title
-    const isList = listMovies.some((listMovie) => listMovie.title.toLowerCase() === title.toLowerCase());
+    const isList = listMovies.some((listMovie) => listMovie.movieId.toString() === movieId.toString() && listMovie.media_type === media_type && listMovie.title.toLowerCase() === title.toLowerCase());
 
     if (!isList) {
-      const updatedList = [...listMovies, { title, _id, image, movieId }];
+      const updatedList = [...listMovies, { title, _id, image, movieId, media_type }];
       setListMovies(updatedList);
     } else {
       const updatedList = listMovies.filter(
-        (listMovie) => listMovie.title.toLowerCase() !== title.toLowerCase()
+        (listMovie) => listMovie.movieId.toString() !== movieId.toString() || listMovie.media_type !== media_type || listMovie.title.toLowerCase() !== title.toLowerCase()
       );
       setListMovies(updatedList);
     }
   };
 
   const handleToWatchMovies = async(movie) => {
-    console.log({movie})
-    // console.log({handleToWatchMovies: movie})
     
-    const { title, _id, image, movieId } = movie
+    // console.log({handleToWatchMovie: movie})
+    
+    const { title, _id, image, movieId, media_type } = movie
    
-    //TODO: hacerlo por ID, no por title
-    const isinToWatch = toWatchMovies.some((movie) => movie.title.toLowerCase() === title.toLowerCase());
+    const isinToWatch = toWatchMovies.some((movie) => movie.movieId.toString() === movieId.toString() && movie.media_type === media_type && movie.title.toLowerCase() === title.toLowerCase());
 
     if (!isinToWatch) {
-      const updatedList = [...toWatchMovies, { title, _id, image, movieId }];
+      const updatedList = [...toWatchMovies, { title, _id, image, movieId, media_type }];
       setToWatchMovies(updatedList);
     } else {
       const updatedList = toWatchMovies.filter(
-        (movie) => movie.title.toLowerCase() !== title.toLowerCase()
+        (movie) => movie.movieId.toString() !== movieId.toString() || movie.media_type !== media_type || movie.title.toLowerCase() !== title.toLowerCase()
       );
       setToWatchMovies(updatedList);
     }

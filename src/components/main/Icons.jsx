@@ -33,6 +33,8 @@ export const Icons = ({ movie, isCard = false }) => {
   const [favorite, setFavorite] = useState(false);
   const [toWatch, setToWatch] = useState(false);
 
+  // console.log({favoritesMovies})
+
   useEffect(() => {
     setFavorite(
       favoritesMovies?.find((favorite) =>
@@ -41,9 +43,7 @@ export const Icons = ({ movie, isCard = false }) => {
           : favorite.movieId === movie.id.toString()
       )
     );
-  }, [favoritesMovies]);
 
-  useEffect(() => {
     setLike(
       listMovies?.find((listMovie) =>
         movie.movieId
@@ -51,9 +51,6 @@ export const Icons = ({ movie, isCard = false }) => {
           : listMovie.movieId === movie.id.toString()
       )
     );
-  }, [listMovies]);
-
-  useEffect(() => {
 
     setToWatch(
       toWatchMovies?.find((item) =>
@@ -62,8 +59,7 @@ export const Icons = ({ movie, isCard = false }) => {
           : item.movieId === movie.id.toString()
       )
     );
-    
-  }, [toWatchMovies]);
+  }, [toWatchMovies, listMovies, favoritesMovies]);
 
   const addFavorites = async () => {
     console.log("entra a addFavorites");
@@ -84,6 +80,7 @@ export const Icons = ({ movie, isCard = false }) => {
             ? movie.backdrop_path
             : movie.poster_path,
           movieId: movie.movieId ? movie.movieId : movie.id.toString(),
+          media_type: movie.media_type ? movie.media_type : movie.title ? "movie" : "tv"
         }),
       });
 
@@ -161,6 +158,7 @@ export const Icons = ({ movie, isCard = false }) => {
             ? movie.backdrop_path
             : movie.poster_path,
           movieId: movie.movieId ? movie.movieId : movie.id.toString(),
+          media_type: movie.media_type ? movie.media_type : movie.title ? "movie" : "tv"
         }),
       });
 
@@ -232,6 +230,7 @@ export const Icons = ({ movie, isCard = false }) => {
             ? movie.backdrop_path
             : movie.poster_path,
           movieId: movie.movieId ? movie.movieId : movie.id.toString(),
+          media_type: movie.media_type ? movie.media_type : movie.title ? "movie" : "tv"
         }),
       });
 
@@ -334,10 +333,10 @@ export const Icons = ({ movie, isCard = false }) => {
           onClick={removeToWatch}
           // className={`absolute text-yellow-300 top-1 left-7 ${ isCard ? "text-lg" : "text-xl" } cursor-pointer`}
           className={clsx(
-            "absolute text-violet-400 top-1 left-[3.2rem] cursor-pointer",
+            "absolute text-violet-400 top-1 cursor-pointer",
             {
-              "text-lg": isCard,
-              "text-xl": !isCard,
+              "text-lg left-[3.2rem]": isCard,
+              "text-xl left-14": !isCard,
             }
           )}
         />
