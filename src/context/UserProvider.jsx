@@ -211,34 +211,67 @@ const UserProvider = ({ children }) => {
 
   const handleFavoritesMovies = (movie) => {
     console.log({ handleFavoritesMovie: movie });
+    
+    if (movie.id) {
+      const { title, id, backdrop_path, poster_path } = movie;
+      const media_type = movie.media_type ? movie.media_type : movie.known_for ? "person" : movie.name ? "tv" : "movie"
+      const image = backdrop_path ? backdrop_path : poster_path
+      const movieId = id.toString()
 
-    const { title, _id, image, movieId, media_type } = movie;
-    const existInFavorite = favoritesMovies.some(
-      (favoriteMovie) =>
-        favoriteMovie.movieId.toString() === movieId.toString() &&
-        favoriteMovie.media_type === media_type &&
-        favoriteMovie.title.toLowerCase() === title.toLowerCase()
-    );
-
-    if (!existInFavorite) {
-      const updatedFavorites = [
-        ...favoritesMovies,
-        { title, _id, image, movieId, media_type },
-      ];
-      setFavoritesMovies(updatedFavorites);
-    } else {
-      const updatedFavorites = favoritesMovies.filter(
+      const existInFavorite = favoritesMovies.some(
         (favoriteMovie) =>
-          favoriteMovie.movieId.toString() !== movieId.toString() ||
-          favoriteMovie.media_type !== media_type ||
-          favoriteMovie.title.toLowerCase() !== title.toLowerCase()
+          favoriteMovie.movieId.toString() === id.toString() &&
+          favoriteMovie.title.toLowerCase() === title.toLowerCase()
       );
-      setFavoritesMovies(updatedFavorites);
+  
+      if (!existInFavorite) {
+        const updatedFavorites = [
+          ...favoritesMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setFavoritesMovies(updatedFavorites);
+      } else {
+        const updatedFavorites = favoritesMovies.filter(
+          (favoriteMovie) =>
+            favoriteMovie.movieId.toString() !== movieId.toString() ||
+            favoriteMovie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setFavoritesMovies(updatedFavorites);
+      }
+
+    }else{
+      const { title, _id, image, movieId, media_type } = movie;
+      const existInFavorite = favoritesMovies.some(
+        (favoriteMovie) =>
+          favoriteMovie.movieId.toString() === movieId.toString() &&
+          favoriteMovie.media_type === media_type &&
+          favoriteMovie.title.toLowerCase() === title.toLowerCase()
+      );
+  
+      if (!existInFavorite) {
+        const updatedFavorites = [
+          ...favoritesMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setFavoritesMovies(updatedFavorites);
+      } else {
+        const updatedFavorites = favoritesMovies.filter(
+          (favoriteMovie) =>
+            favoriteMovie.movieId.toString() !== movieId.toString() ||
+            favoriteMovie.media_type !== media_type ||
+            favoriteMovie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setFavoritesMovies(updatedFavorites);
+      }
+
     }
+
   };
 
   const handleListMovies = async (movie) => {
     // console.log({handleListMovie: movie})
+
+    // TODO: repetir el procedimiento de favorites 
 
     const { title, _id, image, movieId, media_type } = movie;
 
@@ -268,6 +301,8 @@ const UserProvider = ({ children }) => {
 
   const handleToWatchMovies = async (movie) => {
     // console.log({handleToWatchMovie: movie})
+
+     // TODO: repetir el procedimiento de favorites 
 
     const { title, _id, image, movieId, media_type } = movie;
 

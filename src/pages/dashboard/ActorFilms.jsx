@@ -92,7 +92,7 @@ export const ActorFilms = () => {
                   Descripción
                 </h3>
                 <span className="text-sm md:text-base">
-                  {actor.biography}
+                  {actor.biography.slice(0,1100) + "..."}
                 </span>
               </div>
             )}
@@ -131,18 +131,9 @@ export const ActorFilms = () => {
         </div>
       </div>
     </div>
-      {/* <div className="w-full h-[200px] md:h-[250px] relative">
-        <img
-          src="/FondoFAV5.jpeg"
-          alt=""
-          className="object-cover h-full w-full"
-        />
-        <div className="w-full h-full absolute top-0 bg-black bg-opacity-85" />
-        <h3 className="text-white text-center text-xl md:text-2xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] absolute whitespace-nowrap capitalize">
-          {name.split("-").join(" ")}
-        </h3>
-      </div> */}
+      
       <div className="container px-10 py-10 mx-auto">
+        <h2 className="text-base md:text-lg font-semibold text-white mb-5">Películas/series de {actor.name}</h2>
         
         {status ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">

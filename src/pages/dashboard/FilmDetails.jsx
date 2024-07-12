@@ -198,11 +198,7 @@ export const FilmDetails = () => {
                   Fecha de estreno:
                 </h3>
                 {/* <span className="ml-1 whitespace-nowrap text-sm md:text-base">{filmDetail.release_date}</span> */}
-                <span className="whitespace-nowrap text-sm md:text-base">{`${
-                  splitDate[2]
-                } de ${getNameMonth(splitDate[1])} de ${
-                  splitDate[0]
-                }`}</span>
+                <span className="whitespace-nowrap text-sm md:text-base">{`${splitDate[2]} de ${getNameMonth(splitDate[1])} de ${splitDate[0]}`}</span>
               </>
             )}
           </div>
