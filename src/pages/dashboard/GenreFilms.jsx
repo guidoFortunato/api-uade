@@ -4,6 +4,7 @@ import {
   useNavigate,
   useParams
 } from "react-router-dom";
+import Cookie from "js-cookie";
 import { MovieCard, Spinner } from "../../components";
 import { UserContext } from "../../context/UserProvider";
 
@@ -30,28 +31,20 @@ export const GenreFilms = () => {
     try {
       setIsLoading(true);
       let newFilms;
-      if (selected === "movie") {
+      const selected = Cookie.get("selected")
+      if (selected === "Películas") {
         newFilms = topRatedMovies.filter((item) =>
           item.genre_ids.includes(Number(id))
         );
         // console.log({ selectedPeliculas: newFilms });
       }
-      if (selected === "tv") {
+      if (selected === "Series") {
         newFilms = topRatedSeries.filter((item) =>
           item.genre_ids.includes(Number(id))
         );
         // console.log({ selectedSeries: newFilms });
       }
-      if (selected === "both") {
-        const movieFilms = topRatedMovies.filter(item =>
-          item.genre_ids.includes(Number(id))
-        );
-        const tvFilms = topRatedSeries.filter(item =>
-          item.genre_ids.includes(Number(id))
-        );
-        newFilms = movieFilms.concat(tvFilms);
-        // console.log({ selectedSeries: newFilms });
-      }
+      
       console.log({newFilms})
       setFilms(newFilms);
 

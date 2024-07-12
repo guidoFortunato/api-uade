@@ -32,7 +32,7 @@ export const Genres = ({ totalGenres, isResponsive = false }) => {
             <span className="mr-1">Géneros</span> <IoIosArrowDown />{" "}
           </div>
         )}
-        dismissOnClick={false}
+        dismissOnClick={true}
         inline
         className="bg-violet-dark opacity-95 text-sm border-violet-dark"
       >
