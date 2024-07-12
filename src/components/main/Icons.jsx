@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { FaHeart, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { UserContext } from "../../context/UserProvider";
-import { Spinner } from "../Spinner";
 import { BiMoviePlay, BiSolidMoviePlay } from "react-icons/bi";
 import { alertWarning } from "../../helpers";
 

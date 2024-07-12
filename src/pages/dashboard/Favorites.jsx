@@ -1,11 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { MovieCard } from "../../components";
 import { UserContext } from "../../context/UserProvider";
 
 export const Favorites = () => {
   const { favoritesMovies } = useContext(UserContext);
 
-  console.log({favoritesMovies})
+  // console.log({favoritesMovies})
 
   return (
     <>

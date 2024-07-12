@@ -21,7 +21,7 @@ export const FilmDetails = () => {
       ? filmDetail?.release_date
       : filmDetail?.first_air_date;
 
-  console.log({ filmDetail });
+  // console.log({ filmDetail });
 
   useEffect(() => {
     const getfilmDetails = async () => {

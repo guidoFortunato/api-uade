@@ -211,71 +211,34 @@ const UserProvider = ({ children }) => {
 
   const handleFavoritesMovies = (movie) => {
     console.log({ handleFavoritesMovie: movie });
-    let media_type_person = "person";
 
-    if (movie.known_for) {
-      const { title: name, image: profile_path, movieId: id } = movie;
+    const { title, _id, image, movieId, media_type } = movie;
+    const existInFavorite = favoritesMovies.some(
+      (favoriteMovie) =>
+        favoriteMovie.movieId.toString() === movieId.toString() &&
+        favoriteMovie.media_type === media_type &&
+        favoriteMovie.title.toLowerCase() === title.toLowerCase()
+    );
 
-      
-      const existInFavorite = favoritesMovies.some(
-        (favoriteMovie) =>
-          favoriteMovie.id.toString() === id.toString() &&
-          favoriteMovie.name.toLowerCase() === name.toLowerCase()
-      );
-  
-      if (!existInFavorite) {
-        const updatedFavorites = [
-          ...favoritesMovies,
-          { title, image, movieId: id, media_type: media_type_person },
-        ];
-        setFavoritesMovies(updatedFavorites);
-      } else {
-        const updatedFavorites = favoritesMovies.filter(
-          (favoriteMovie) =>
-            favoriteMovie.id.toString() !== id.toString() ||
-            favoriteMovie.name.toLowerCase() !== name.toLowerCase()
-        );
-        setFavoritesMovies(updatedFavorites);
-      }
-
-
-
-
-
-
+    if (!existInFavorite) {
+      const updatedFavorites = [
+        ...favoritesMovies,
+        { title, _id, image, movieId, media_type },
+      ];
+      setFavoritesMovies(updatedFavorites);
     } else {
-      const { title, _id, image, movieId, media_type } = movie;
-      const existInFavorite = favoritesMovies.some(
+      const updatedFavorites = favoritesMovies.filter(
         (favoriteMovie) =>
-          favoriteMovie.movieId.toString() === movieId.toString() &&
-          favoriteMovie.media_type === media_type &&
-          favoriteMovie.title.toLowerCase() === title.toLowerCase()
+          favoriteMovie.movieId.toString() !== movieId.toString() ||
+          favoriteMovie.media_type !== media_type ||
+          favoriteMovie.title.toLowerCase() !== title.toLowerCase()
       );
-  
-      if (!existInFavorite) {
-        const updatedFavorites = [
-          ...favoritesMovies,
-          { title, _id, image, movieId, media_type },
-        ];
-        setFavoritesMovies(updatedFavorites);
-      } else {
-        const updatedFavorites = favoritesMovies.filter(
-          (favoriteMovie) =>
-            favoriteMovie.movieId.toString() !== movieId.toString() ||
-            favoriteMovie.media_type !== media_type ||
-            favoriteMovie.title.toLowerCase() !== title.toLowerCase()
-        );
-        setFavoritesMovies(updatedFavorites);
-      }
+      setFavoritesMovies(updatedFavorites);
     }
-
-    
   };
 
   const handleListMovies = async (movie) => {
     // console.log({handleListMovie: movie})
-
-    // TODO: falta si es actor
 
     const { title, _id, image, movieId, media_type } = movie;
 
@@ -305,8 +268,6 @@ const UserProvider = ({ children }) => {
 
   const handleToWatchMovies = async (movie) => {
     // console.log({handleToWatchMovie: movie})
-
-    // TODO: falta si es actor
 
     const { title, _id, image, movieId, media_type } = movie;
 
