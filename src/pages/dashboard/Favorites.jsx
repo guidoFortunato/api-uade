@@ -5,7 +5,7 @@ import { UserContext } from "../../context/UserProvider";
 export const Favorites = () => {
   const { favoritesMovies } = useContext(UserContext);
 
-  // console.log({favoritesMovies})
+  console.log({favoritesMovies})
 
   return (
     <>
@@ -34,7 +34,7 @@ export const Favorites = () => {
                 }
                 movieId={movie.movieId}
                 movie={movie}
-                mediaType={ movie.media_type ? movie.media_type : movie.title ? "movie" : movie.name ? "tv" : "person"}
+                mediaType={ movie.media_type ? movie.media_type : movie.known_for ? "person" : movie.name ? "tv" : "movie"}
               />
             ))}
           </div>

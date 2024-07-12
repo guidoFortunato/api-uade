@@ -78,9 +78,17 @@ export const Icons = ({ movie, isCard = false }) => {
             ? movie.image
             : movie.backdrop_path
             ? movie.backdrop_path
-            : movie.poster_path,
+            : movie.poster_path
+            ? movie.poster_path
+            : movie.profile_path,
           movieId: movie.movieId ? movie.movieId : movie.id.toString(),
-          media_type: movie.media_type ? movie.media_type : movie.title ? "movie" : "tv"
+          media_type: movie.media_type
+            ? movie.media_type
+            : movie.known_for
+            ? "person"
+            : movie.name
+            ? "tv"
+            : "movie",
         }),
       });
 
@@ -156,9 +164,17 @@ export const Icons = ({ movie, isCard = false }) => {
             ? movie.image
             : movie.backdrop_path
             ? movie.backdrop_path
-            : movie.poster_path,
+            : movie.poster_path
+            ? movie.poster_path
+            : movie.profile_path,
           movieId: movie.movieId ? movie.movieId : movie.id.toString(),
-          media_type: movie.media_type ? movie.media_type : movie.title ? "movie" : "tv"
+          media_type: movie.media_type
+            ? movie.media_type
+            : movie.known_for
+            ? "person"
+            : movie.name
+            ? "tv"
+            : "movie",
         }),
       });
 
@@ -228,9 +244,17 @@ export const Icons = ({ movie, isCard = false }) => {
             ? movie.image
             : movie.backdrop_path
             ? movie.backdrop_path
-            : movie.poster_path,
+            : movie.poster_path
+            ? movie.poster_path
+            : movie.profile_path,
           movieId: movie.movieId ? movie.movieId : movie.id.toString(),
-          media_type: movie.media_type ? movie.media_type : movie.title ? "movie" : "tv"
+          media_type: movie.media_type
+            ? movie.media_type
+            : movie.known_for
+            ? "person"
+            : movie.name
+            ? "tv"
+            : "movie",
         }),
       });
 
@@ -332,13 +356,10 @@ export const Icons = ({ movie, isCard = false }) => {
         <BiSolidMoviePlay
           onClick={removeToWatch}
           // className={`absolute text-yellow-300 top-1 left-7 ${ isCard ? "text-lg" : "text-xl" } cursor-pointer`}
-          className={clsx(
-            "absolute text-violet-400 top-1 cursor-pointer",
-            {
-              "text-lg left-[3.2rem]": isCard,
-              "text-xl left-14": !isCard,
-            }
-          )}
+          className={clsx("absolute text-violet-400 top-1 cursor-pointer", {
+            "text-lg left-[3.2rem]": isCard,
+            "text-xl left-14": !isCard,
+          })}
         />
       ) : (
         <BiMoviePlay

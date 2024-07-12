@@ -12,7 +12,6 @@ import clsx from "clsx";
 export const MovieCard = ({
   title,
   image,
-  isProfile = false,
   movie,
   movieId,
   mediaType = "movie",
@@ -36,7 +35,7 @@ export const MovieCard = ({
     <div className={clsx(
       "rounded relative hover:cursor-pointer mx-1 h-[200px]",
       {
-        "w-full" : isProfile
+        "w-full" : mediaType === "person"
       }
     )}>
       <LazyLoadImage

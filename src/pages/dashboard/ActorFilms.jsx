@@ -10,15 +10,13 @@ import { getData } from "../../helpers";
 // const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
 
 export const ActorFilms = () => {
-  const { selected } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [dataActor, setDataActor] = useState([]);
   const [status, setStatus] = useState(null);
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
   // const { pathname, search } = useLocation();
   const { name } = useParams();
-  // const paramSearch = (pathname.split("/")[2] + search).split("=")[0] + "=";
-  // console.log({movies})
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,16 +28,20 @@ export const ActorFilms = () => {
     try {
       setIsLoading(true);
       const getFullData = async () => {
-        const data = await getData(
+        const dataActor = await getData(
+          `https://api.themoviedb.org/3/search/person?query=${name}&language=es-ES&page=1`
+        );
+        const dataMoviesActor = await getData(
           `https://api.themoviedb.org/3/search/person?query=${name}&language=es-ES&page=1`
         );
 
-        // console.log({ data });
-        if (data.results.length === 0) {
+        console.log({ dataMoviesActor });
+        if (dataMoviesActor.results.length === 0) {
           setStatus(false);
           return;
         }
-        setMovies(data.results[0].known_for);
+        setDataActor(dataMoviesActor.results)
+        setMovies(dataMoviesActor.results[0].known_for);
         setStatus(true);
       };
 
@@ -57,6 +59,8 @@ export const ActorFilms = () => {
     navigate("/");
     return;
   }
+
+
 
   return (
     <>
@@ -89,7 +93,7 @@ export const ActorFilms = () => {
                 }
                 description={movie.overview}
                 movie={movie}
-                mediaType={ movie.media_type ? movie.media_type : movie.title ? "movie" : movie.name ? "tv" : "person" }
+                mediaType={ movie.media_type ? movie.media_type : movie.known_for ? "person" : movie.name ? "tv" : "movie"}
               />
             ))}
           </div>

@@ -4,12 +4,51 @@ import { useContext, useState } from "react";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { HiLogout, HiViewGrid } from "react-icons/hi";
 import { IoMdHome } from "react-icons/io";
-import { MdOutlineWatchLater } from "react-icons/md";
+import { MdOutlineWatchLater, MdPerson } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { Genres } from "./Genres";
 import { SearchBar3 } from "./SearchBar3";
 import { BiMoviePlay } from "react-icons/bi";
+import { SearchBar } from "./SearchBar";
+import { SearchBar2 } from "./SearchBar2";
+import SearchForm from "./SearchForm";
+
+const itemsSidebar = [
+  {
+    id: 1,
+    title: "Home",
+    icon: <IoMdHome className="text-base" />,
+    href: "/",
+    classTitle: "ml-[0.10rem] text-xs",
+    classNavlink: "md:mb-0 lg:py-0",
+  },
+  {
+    id: 2,
+    title: "Favoritos",
+    icon: <FaHeart className="text-xs" />,
+    href: "/favoritos",
+    classTitle: "ml-1 text-xs",
+    classNavlink: "items-center mb-1 md:mb-0 py-1 lg:py-0",
+  },
+  {
+    id: 3,
+    title: "Vistas",
+    icon: <FaStar className="text-sm" />,
+    href: "/vistas",
+    classTitle: "ml-1 text-xs",
+    classNavlink: "py-1 lg:py-0",
+  },
+  {
+    id: 4,
+    title: "Ver más tarde",
+    icon: <BiMoviePlay className="text-sm" />,
+    href: "/ver-mas-tarde",
+    classTitle: "ml-1 text-xs",
+    classNavlink: "py-1 lg:py-0",
+  },
+ 
+];
 
 export const SideBar4 = () => {
   const { handleAuth, totalGenres, dataUser } = useContext(UserContext);
@@ -35,60 +74,22 @@ export const SideBar4 = () => {
           </div>
           <div className="hidden md:flex md:items-center mt-2">
             <ul className="flex flex-row justify-center items-center font-medium mt-0 space-x-4 rtl:space-x-reverse text-sm">
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    `flex  md:mb-0 lg:py-0 ${
-                      isActive ? "text-violet-light" : ""
-                    }  rounded md:bg-transparent md:p-0`
-                  }
-                  aria-current="page"
-                >
-                  <IoMdHome className="text-base" />
-                  <span className="ml-[0.10rem] text-xs">Home</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/favoritos"
-                  className={({ isActive }) =>
-                    `flex items-center mb-1 md:mb-0 py-1 lg:py-0 ${
-                      isActive ? "text-violet-light" : ""
-                    }  rounded md:bg-transparent md:p-0`
-                  }
-                >
-                  <FaHeart className="text-xs" />
-                  <span className="ml-1 text-xs">Favoritos</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/vistas"
-                  className={({ isActive }) =>
-                    `flex py-1 lg:py-0 ${
-                      isActive ? "text-violet-light" : ""
-                    }  rounded md:bg-transparent md:p-0`
-                  }
-                >
-                  <FaStar className="text-sm" />
-                  <span className="ml-1 text-xs">Vistas</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/ver-mas-tarde"
-                  className={({ isActive }) =>
-                    `flex py-1 lg:py-0 ${
-                      isActive ? "text-violet-light" : ""
-                    }  rounded md:bg-transparent md:p-0`
-                  }
-                >
-                
-                  <BiMoviePlay className="text-sm" />
-                  <span className="ml-1 text-xs">Ver más tarde</span>
-                </NavLink>
-              </li>
+              {itemsSidebar.map((item) => (
+                <li key={item.id}>
+                  <NavLink
+                    to={item.href}
+                    className={({ isActive }) =>
+                      `flex ${item.classNavlink} ${
+                        isActive ? "text-violet-light" : ""
+                      }  rounded md:bg-transparent md:p-0`
+                    }
+                  >
+                    {item.icon}
+                    <span className={item.classTitle}>{item.title}</span>
+                  </NavLink>
+                </li>
+              ))}
+
               <Genres totalGenres={totalGenres} />
             </ul>
           </div>
@@ -103,7 +104,10 @@ export const SideBar4 = () => {
               }
             )}
           >
-            <SearchBar3 />
+            {/* <SearchBar /> */}
+            {/* <SearchBar2 /> */}
+            {/* <SearchBar3 /> */}
+            <SearchForm />
           </div>
           <div>
             <button
@@ -159,20 +163,13 @@ export const SideBar4 = () => {
             <Dropdown
               arrowIcon={true}
               inline
-              label={
-                <Avatar
-                  alt="User settings"
-                  img="/Logo.png"
-                  rounded
-                />
-              }
+              label={<Avatar alt="User settings" img="/Logo.png" rounded />}
             >
               <div className="bg-white">
                 <Dropdown.Header>
                   <span className="block text-base text-[#693fb1] font-semibold">
-                    { dataUser.name }
+                    {dataUser.name}
                   </span>
-                 
                 </Dropdown.Header>
               </div>
               <div className="hover:bg-[#ffffff]">

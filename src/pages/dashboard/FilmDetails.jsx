@@ -21,7 +21,7 @@ export const FilmDetails = () => {
       ? filmDetail?.release_date
       : filmDetail?.first_air_date;
 
-  // console.log({ filmDetail });
+  console.log({ filmDetail });
 
   useEffect(() => {
     const getfilmDetails = async () => {
@@ -61,12 +61,12 @@ export const FilmDetails = () => {
       <div className="md:col-span-2 mx-auto">
         <img
           className="hidden lg:block h-full object-cover"
-          src={`https://image.tmdb.org/t/p/original/${filmDetail.poster_path}`}
+          src={ filmDetail.poster_path ? `https://image.tmdb.org/t/p/original/${filmDetail.poster_path}` : filmDetail.backdrop_path ? `https://image.tmdb.org/t/p/original/${filmDetail.backdrop_path}` : "https://placehold.co/2000x3000" }
           alt={pathname === "peliculas" ? filmDetail.title : filmDetail.name}
         />
         <img
           className="block lg:hidden"
-          src={`https://image.tmdb.org/t/p/original/${filmDetail.backdrop_path}`}
+          src={ filmDetail.backdrop_path ? `https://image.tmdb.org/t/p/original/${filmDetail.backdrop_path}` : filmDetail.poster_path ? `https://image.tmdb.org/t/p/original/${filmDetail.poster_path}` : "https://placehold.co/3840x3000" }
           alt={pathname === "peliculas" ? filmDetail.title : filmDetail.name}
         />
       </div>

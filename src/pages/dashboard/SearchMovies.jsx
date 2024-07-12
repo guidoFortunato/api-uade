@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Navigate, useLocation, useSearchParams } from "react-router-dom";
+import { UserContext } from "../../context/UserProvider";
 import { MovieCard, Spinner } from "../../components";
 import { getData } from "../../helpers";
 
 // const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
 
 export const SearchMovies = () => {
+  const { selectedOption } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState(null);
   const [movies, setMovies] = useState([]);
@@ -13,26 +15,33 @@ export const SearchMovies = () => {
   const query = search.split("=")[1];
   const paramSearch = (pathname.split("/")[2] + search).split("=")[0] + "=";
 
+  const option = selectedOption === "Películas" ? "movie" : selectedOption === "Series" ? "tv" : "person"
+  // console.log({option})
+
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 100);
   }, []);
 
+  // TODO: dependencia de selectedOption
+
   useEffect(() => {
     try {
       setIsLoading(true);
       const getFullData = async () => {
         const data = await getData(
-          `https://api.themoviedb.org/3/search/multi?query=${query}&language=es-ES`
+          `https://api.themoviedb.org/3/search/${option}?query=${query}&language=es-ES`
         );
-
-        // console.log({ data });
-        setMovies(data.results);
-        if (data.results.length === 0) {
+        // console.log({data})
+        const { results } = data
+        // console.log({results})
+        if (results.length === 0) {
           setStatus(false);
           return;
         }
+        // const newResults = results.filter( item => item.media_type !== "person" )
+        setMovies(results);
         setStatus(true);
       };
 
@@ -42,7 +51,7 @@ export const SearchMovies = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [query, search]);
+  }, [query, search, selectedOption]);
 
   if (isLoading) return <Spinner />;
   if (status === null) return <Spinner />;
@@ -80,7 +89,7 @@ export const SearchMovies = () => {
                 isProfile={true}
                 description={movie.overview}
                 movie={movie}
-                mediaType={ movie.media_type ? movie.media_type : movie.title ? "movie" : movie.name ? "tv" : "person"}
+                mediaType={ movie.media_type ? movie.media_type : movie.known_for ? "person" : movie.name ? "tv" : "movie"}
               />
             ))}
           </div>
