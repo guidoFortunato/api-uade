@@ -271,63 +271,121 @@ const UserProvider = ({ children }) => {
   const handleListMovies = async (movie) => {
     // console.log({handleListMovie: movie})
 
-    // TODO: repetir el procedimiento de favorites 
+    if (movie.id) {
+      const { title, id, backdrop_path, poster_path } = movie;
+      const media_type = movie.media_type ? movie.media_type : movie.known_for ? "person" : movie.name ? "tv" : "movie"
+      const image = backdrop_path ? backdrop_path : poster_path
+      const movieId = id.toString()
 
-    const { title, _id, image, movieId, media_type } = movie;
-
-    const isList = listMovies.some(
-      (listMovie) =>
-        listMovie.movieId.toString() === movieId.toString() &&
-        listMovie.media_type === media_type &&
-        listMovie.title.toLowerCase() === title.toLowerCase()
-    );
-
-    if (!isList) {
-      const updatedList = [
-        ...listMovies,
-        { title, _id, image, movieId, media_type },
-      ];
-      setListMovies(updatedList);
-    } else {
-      const updatedList = listMovies.filter(
+      const isList = listMovies.some(
         (listMovie) =>
-          listMovie.movieId.toString() !== movieId.toString() ||
-          listMovie.media_type !== media_type ||
-          listMovie.title.toLowerCase() !== title.toLowerCase()
+          listMovie.movieId.toString() === id.toString() &&
+        listMovie.title.toLowerCase() === title.toLowerCase()
       );
-      setListMovies(updatedList);
+  
+      if (!isList) {
+        const updatedList = [
+          ...listMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setListMovies(updatedList);
+      } else {
+        const updatedList = listMovies.filter(
+          (listMovie) =>
+            listMovie.movieId.toString() !== movieId.toString() ||
+          listMovie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setListMovies(updatedList);
+      }
+    }else{
+
+      const { title, _id, image, movieId, media_type } = movie;
+  
+      const isList = listMovies.some(
+        (listMovie) =>
+          listMovie.movieId.toString() === movieId.toString() &&
+          listMovie.media_type === media_type &&
+          listMovie.title.toLowerCase() === title.toLowerCase()
+      );
+  
+      if (!isList) {
+        const updatedList = [
+          ...listMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setListMovies(updatedList);
+      } else {
+        const updatedList = listMovies.filter(
+          (listMovie) =>
+            listMovie.movieId.toString() !== movieId.toString() ||
+            listMovie.media_type !== media_type ||
+            listMovie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setListMovies(updatedList);
+      }
     }
+
   };
 
   const handleToWatchMovies = async (movie) => {
     // console.log({handleToWatchMovie: movie})
 
-     // TODO: repetir el procedimiento de favorites 
+     if (movie.id) {
+      const { title, id, backdrop_path, poster_path } = movie;
+      const media_type = movie.media_type ? movie.media_type : movie.known_for ? "person" : movie.name ? "tv" : "movie"
+      const image = backdrop_path ? backdrop_path : poster_path
+      const movieId = id.toString()
 
-    const { title, _id, image, movieId, media_type } = movie;
-
-    const isinToWatch = toWatchMovies.some(
-      (movie) =>
-        movie.movieId.toString() === movieId.toString() &&
-        movie.media_type === media_type &&
-        movie.title.toLowerCase() === title.toLowerCase()
-    );
-
-    if (!isinToWatch) {
-      const updatedList = [
-        ...toWatchMovies,
-        { title, _id, image, movieId, media_type },
-      ];
-      setToWatchMovies(updatedList);
-    } else {
-      const updatedList = toWatchMovies.filter(
+      const isInToWatch = toWatchMovies.some(
         (movie) =>
-          movie.movieId.toString() !== movieId.toString() ||
-          movie.media_type !== media_type ||
-          movie.title.toLowerCase() !== title.toLowerCase()
+          movie.movieId.toString() === id.toString() &&
+        movie.title.toLowerCase() === title.toLowerCase()
       );
-      setToWatchMovies(updatedList);
-    }
+  
+      if (!isInToWatch) {
+        const updatedList = [
+          ...toWatchMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setToWatchMovies(updatedList);
+      } else {
+        const updatedList = toWatchMovies.filter(
+          (movie) =>
+            movie.movieId.toString() !== movieId.toString() ||
+          movie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setToWatchMovies(updatedList);
+      }
+
+   
+     }else{
+
+       const { title, _id, image, movieId, media_type } = movie;
+   
+       const isInToWatch = toWatchMovies.some(
+         (movie) =>
+           movie.movieId.toString() === movieId.toString() &&
+           movie.media_type === media_type &&
+           movie.title.toLowerCase() === title.toLowerCase()
+       );
+   
+       if (!isInToWatch) {
+         const updatedList = [
+           ...toWatchMovies,
+           { title, _id, image, movieId, media_type },
+         ];
+         setToWatchMovies(updatedList);
+       } else {
+         const updatedList = toWatchMovies.filter(
+           (movie) =>
+             movie.movieId.toString() !== movieId.toString() ||
+             movie.media_type !== media_type ||
+             movie.title.toLowerCase() !== title.toLowerCase()
+         );
+         setToWatchMovies(updatedList);
+       }
+     }
+
   };
 
   return (
