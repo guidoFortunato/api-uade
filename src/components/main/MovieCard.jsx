@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Icons } from "./Icons";
+import clsx from "clsx";
 
 import "react-lazy-load-image-component/src/effects/blur.css";
 
@@ -13,6 +14,7 @@ export const MovieCard = ({
   image,
   movie,
   movieId,
+  isInDashboard = false,
   mediaType = "movie",
 }) => {
   const newTitle =
@@ -32,7 +34,12 @@ export const MovieCard = ({
 
   return (
     <div
-      className="rounded relative hover:cursor-pointer mx-1 h-[200px] w-full"
+      className={clsx(
+        "rounded relative hover:cursor-pointer mx-1 h-[200px]",
+        {
+          "w-full": !isInDashboard
+        }
+      )}
     >
       <LazyLoadImage
         alt={newTitle}
