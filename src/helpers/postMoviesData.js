@@ -1,10 +1,11 @@
-
+import Cookies from "js-cookie";
 
 export const postMoviesData = async (url, method, body) => {
   try {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+    // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+    myHeaders.append("x-token", Cookies.get("ai_to"));
     const response = await fetch(`http://localhost:4000/api${url}`, {
       method: method,
       headers: myHeaders,

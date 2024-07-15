@@ -1,17 +1,15 @@
 import clsx from "clsx";
-import { Avatar, Dropdown } from "flowbite-react";
 import { useContext, useState } from "react";
+import { Avatar, Dropdown } from "flowbite-react";
+import Cookie from "js-cookie";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { HiLogout, HiViewGrid } from "react-icons/hi";
 import { IoMdHome } from "react-icons/io";
-import { MdOutlineWatchLater, MdPerson } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { Genres } from "./Genres";
 import { SearchBar3 } from "./SearchBar3";
 import { BiMoviePlay } from "react-icons/bi";
-import { SearchBar } from "./SearchBar";
-import { SearchBar2 } from "./SearchBar2";
 import SearchForm from "./SearchForm";
 
 const itemsSidebar = [
@@ -58,7 +56,8 @@ export const SideBar4 = () => {
 
   const handleLogout = () => {
     handleAuth(false);
-    localStorage.removeItem("token");
+    Cookie.remove('ai_to')
+    // localStorage.removeItem("token");
   };
 
   return (
@@ -104,9 +103,6 @@ export const SideBar4 = () => {
               }
             )}
           >
-            {/* <SearchBar /> */}
-            {/* <SearchBar2 /> */}
-            {/* <SearchBar3 /> */}
             <SearchForm />
           </div>
           <div>

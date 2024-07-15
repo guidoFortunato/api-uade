@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { FaHeart, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import clsx from "clsx";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 import { UserContext } from "../../context/UserProvider";
 import { BiMoviePlay, BiSolidMoviePlay } from "react-icons/bi";
 import { alertWarning } from "../../helpers";
@@ -65,7 +66,8 @@ export const Icons = ({ movie, isCard = false }) => {
     try {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      myHeaders.append("x-token", Cookies.get("ai_to"));
 
       const res = await fetch("http://localhost:4000/api/user/favorites/", {
         method: "PUT",
@@ -91,7 +93,7 @@ export const Icons = ({ movie, isCard = false }) => {
       });
 
       const data = await res.json();
-      console.log({ data });
+      // console.log({ data });
 
       if (!data.ok) {
         alertWarning(data.message);
@@ -108,15 +110,16 @@ export const Icons = ({ movie, isCard = false }) => {
   };
 
   const removeFavorites = async () => {
-    console.log("entra a removeFavorites");
-    console.log({ movie });
+    // console.log("entra a removeFavorites");
+    // console.log({ movie });
     // const pathUrl = pathname === "/vistas" ? "watched" : "favorites";
     // console.log({pathUrl})
 
     try {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      myHeaders.append("x-token", Cookies.get("ai_to"));
+      // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
       const id = movie.movieId ? movie.movieId : movie.id;
 
       const res = await fetch(
@@ -129,7 +132,7 @@ export const Icons = ({ movie, isCard = false }) => {
       );
       // console.log({res})
       const data = await res.json();
-      console.log({ data });
+      // console.log({ data });
 
       if (!data.ok) {
         alertWarning(data.message);
@@ -146,12 +149,13 @@ export const Icons = ({ movie, isCard = false }) => {
   };
 
   const addWatched = async () => {
-    console.log("entra a addWatched");
-    console.log({ movie });
+    // console.log("entra a addWatched");
+    // console.log({ movie });
     try {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      myHeaders.append("x-token", Cookies.get("ai_to"));
 
       const res = await fetch("http://localhost:4000/api/user/watched/", {
         method: "PUT",
@@ -177,7 +181,7 @@ export const Icons = ({ movie, isCard = false }) => {
       });
 
       const data = await res.json();
-      console.log({ data });
+      // console.log({ data });
 
       if (!data.ok) {
         alertWarning(data.message);
@@ -194,13 +198,15 @@ export const Icons = ({ movie, isCard = false }) => {
   };
 
   const removeWatched = async () => {
-    console.log("entra a removeWatched");
+    // console.log("entra a removeWatched");
     // const pathUrl = pathname === "/favoritos" ? "favorites" : "watched";
-    console.log({ movie });
+    // console.log({ movie });
     try {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      myHeaders.append("x-token", Cookies.get("ai_to"));
+
       const id = movie.movieId ? movie.movieId : movie.id;
 
       const res = await fetch(`http://localhost:4000/api/user/watched/${id}`, {
@@ -209,7 +215,7 @@ export const Icons = ({ movie, isCard = false }) => {
       });
 
       const data = await res.json();
-      console.log({ data });
+      // console.log({ data });
 
       if (!data.ok) {
         alertWarning(data.message);
@@ -226,12 +232,13 @@ export const Icons = ({ movie, isCard = false }) => {
   };
 
   const addToWatch = async () => {
-    console.log("entra a addToWatch");
-    console.log({ movie });
+    // console.log("entra a addToWatch");
+    // console.log({ movie });
     try {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      myHeaders.append("x-token", Cookies.get("ai_to"));
 
       const res = await fetch("http://localhost:4000/api/user/to-watch/", {
         method: "PUT",
@@ -257,7 +264,7 @@ export const Icons = ({ movie, isCard = false }) => {
       });
 
       const data = await res.json();
-      console.log({ data });
+      // console.log({ data });
 
       if (!data.ok) {
         alertWarning(data.message);
@@ -274,13 +281,15 @@ export const Icons = ({ movie, isCard = false }) => {
   };
 
   const removeToWatch = async () => {
-    console.log("entra a removeWatched");
+    // console.log("entra a removeWatched");
     // const pathUrl = pathname === "/favoritos" ? "favorites" : "watched";
-    console.log({ movie });
+    // console.log({ movie });
     try {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
+      myHeaders.append("x-token", Cookies.get("ai_to"));
+
       const id = movie.movieId ? movie.movieId : movie.id;
 
       const res = await fetch(`http://localhost:4000/api/user/to-watch/${id}`, {
@@ -289,7 +298,7 @@ export const Icons = ({ movie, isCard = false }) => {
       });
 
       const data = await res.json();
-      console.log({ data });
+      // console.log({ data });
 
       if (!data.ok) {
         alertWarning(data.message);

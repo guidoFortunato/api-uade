@@ -1,6 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useState } from "react"
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import clsx from "clsx";
 import { IoMdClose } from "react-icons/io";
 import { FaEye } from "react-icons/fa";
@@ -44,7 +45,8 @@ export const Register = () => {
         return;
       }
 
-      localStorage.setItem("token", JSON.stringify(data.token));
+      // localStorage.setItem("token", JSON.stringify(data.token));
+      Cookies.set("ai_to", data.token, { expires: 365 });
       handleAuth(true);
       handleToken(data.token)
     } catch (error) {

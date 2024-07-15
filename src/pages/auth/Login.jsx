@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import Cookies from "js-cookie";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
@@ -42,7 +43,8 @@ export const Login = () => {
         return;
       }
 
-      localStorage.setItem("token", JSON.stringify(data.token));
+      Cookies.set("ai_to", data.token, { expires: 365 });
+      // localStorage.setItem("token", JSON.stringify(data.token));
       handleAuth(true);
       handleToken(data.token)
     } catch (error) {
