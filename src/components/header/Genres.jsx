@@ -12,7 +12,7 @@ export const Genres = ({ totalGenres, isResponsive = false }) => {
   const navigate = useNavigate();
 
   const handleClick = (item) => {
-    console.log({item})
+    // console.log({item})
     handleSelected(item.usedBy)
     navigate(`/generos/${item.name.toLowerCase().split(" ").join("-")}/${item.id}`)
   };

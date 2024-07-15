@@ -354,7 +354,7 @@ export const Icons = ({ movie, isCard = false }) => {
         <BiSolidMoviePlay
           onClick={removeToWatch}
           // className={`absolute text-yellow-300 top-1 left-7 ${ isCard ? "text-lg" : "text-xl" } cursor-pointer`}
-          className={clsx("absolute text-violet-400 top-1 cursor-pointer", {
+          className={clsx("absolute text-[#FB8500] top-1 cursor-pointer", {
             "text-lg left-[3.2rem]": isCard,
             "text-xl left-14": !isCard,
           })}

@@ -1,9 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useContext, useEffect, useState } from "react";
-import {
-  useNavigate,
-  useParams
-} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Cookie from "js-cookie";
 import { MovieCard, Spinner } from "../../components";
 import { UserContext } from "../../context/UserProvider";
@@ -11,15 +8,16 @@ import { UserContext } from "../../context/UserProvider";
 // const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
 
 export const GenreFilms = () => {
-  const { selected, topRatedMovies, topRatedSeries } = useContext(UserContext);
+  const { selected, topRatedMovies, topRatedSeries, popularMovies, nowPlayingMovies, upcomingMovies } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState(null);
   const [films, setFilms] = useState(null);
   const navigate = useNavigate();
   // const { pathname, search } = useLocation();
   const { name, id } = useParams();
-  console.log({ selected });
-  console.log({films})
+
+  // console.log({ selected });
+  // console.log({films})
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,23 +28,36 @@ export const GenreFilms = () => {
   useEffect(() => {
     try {
       setIsLoading(true);
-      let newFilms;
-      const selected = Cookie.get("selected")
-      if (selected === "Películas") {
-        newFilms = topRatedMovies.filter((item) =>
-          item.genre_ids.includes(Number(id))
-        );
-        // console.log({ selectedPeliculas: newFilms });
-      }
-      if (selected === "Series") {
-        newFilms = topRatedSeries.filter((item) =>
-          item.genre_ids.includes(Number(id))
-        );
-        // console.log({ selectedSeries: newFilms });
-      }
-      
-      console.log({newFilms})
-      setFilms(newFilms);
+      let ratedMovies;
+      let ratedSeries;
+      let moviesPopular;
+      let moviesPlaying;
+      let moviesUpcoming;
+      let total;
+
+      ratedMovies = topRatedMovies.filter((item) =>
+        item.genre_ids.includes(Number(id))
+      );
+
+      ratedSeries = topRatedSeries.filter((item) =>
+        item.genre_ids.includes(Number(id))
+      );
+
+      moviesPopular = popularMovies.filter((item) =>
+        item.genre_ids.includes(Number(id))
+      );
+
+      moviesPlaying = nowPlayingMovies.filter((item) =>
+        item.genre_ids.includes(Number(id))
+      );
+
+      moviesUpcoming = upcomingMovies.filter((item) =>
+        item.genre_ids.includes(Number(id))
+      );
+
+      total = [...ratedMovies, ...ratedSeries, ...moviesPopular, ...moviesPlaying, ...moviesUpcoming];
+
+      setFilms(total);
 
       setStatus(true);
     } catch (error) {
@@ -96,7 +107,15 @@ export const GenreFilms = () => {
                 }
                 description={movie.overview}
                 movie={movie}
-                mediaType={ movie.media_type ? movie.media_type : movie.known_for ? "person" : movie.name ? "tv" : "movie"}
+                mediaType={
+                  movie.media_type
+                    ? movie.media_type
+                    : movie.known_for
+                    ? "person"
+                    : movie.name
+                    ? "tv"
+                    : "movie"
+                }
               />
             ))}
           </div>
