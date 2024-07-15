@@ -60,8 +60,8 @@ export const Icons = ({ movie, isCard = false }) => {
   }, [toWatchMovies, listMovies, favoritesMovies]);
 
   const addFavorites = async () => {
-    console.log("entra a addFavorites");
-    console.log({ movie });
+    // console.log("entra a addFavorites");
+    // console.log({ movie });
     try {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");

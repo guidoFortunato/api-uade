@@ -210,7 +210,7 @@ const UserProvider = ({ children }) => {
   };
 
   const handleFavoritesMovies = (movie) => {
-    console.log({ handleFavoritesMovie: movie });
+    // console.log({ handleFavoritesMovie: movie });
     
     if (movie.id) {
       const { title, id, backdrop_path, poster_path } = movie;

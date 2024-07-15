@@ -20,7 +20,7 @@ export const List = () => {
       </div>
       <div className="container px-10 py-10 mx-auto">
         {listMovies?.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 justify-items-center">
             {listMovies.map((movie,index) => (
               <MovieCard
               key={index}

@@ -133,10 +133,10 @@ export const ActorFilms = () => {
     </div>
       
       <div className="container px-10 py-10 mx-auto">
-        <h2 className="text-base md:text-lg font-semibold text-white mb-5">Películas/series de {actor.name}</h2>
+        <h2 className="text-base md:text-lg font-semibold text-white mb-5">Participaciones de {actor.name}</h2>
         
         {status ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 justify-items-center">
             {movies.map((movie) => (
               <MovieCard
                 key={movie.id}
