@@ -1,11 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Cookie from "js-cookie";
 import { MovieCard, Spinner } from "../../components";
 import { UserContext } from "../../context/UserProvider";
-
-// const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
 
 export const GenreFilms = () => {
   const { selected, topRatedMovies, topRatedSeries, popularMovies, nowPlayingMovies, upcomingMovies } = useContext(UserContext);

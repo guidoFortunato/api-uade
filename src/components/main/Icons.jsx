@@ -6,7 +6,9 @@ import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import { UserContext } from "../../context/UserProvider";
 import { BiMoviePlay, BiSolidMoviePlay } from "react-icons/bi";
-import { alertWarning } from "../../helpers";
+import { alertWarning, getEnvVariables } from "../../helpers";
+
+const { VITE_HOST } = getEnvVariables();
 
 const notifySuccess = (text) => {
   toast.success(text, {
@@ -69,7 +71,7 @@ export const Icons = ({ movie, isCard = false }) => {
       // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
       myHeaders.append("x-token", Cookies.get("ai_to"));
 
-      const res = await fetch("http://localhost:4000/api/user/favorites/", {
+      const res = await fetch(`${ VITE_HOST }/api/user/favorites/`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify({
@@ -123,7 +125,7 @@ export const Icons = ({ movie, isCard = false }) => {
       const id = movie.movieId ? movie.movieId : movie.id;
 
       const res = await fetch(
-        `http://localhost:4000/api/user/favorites/${id}`,
+        `${ VITE_HOST }/api/user/favorites/${id}`,
         {
           method: "DELETE",
           headers: myHeaders,
@@ -157,7 +159,7 @@ export const Icons = ({ movie, isCard = false }) => {
       // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
       myHeaders.append("x-token", Cookies.get("ai_to"));
 
-      const res = await fetch("http://localhost:4000/api/user/watched/", {
+      const res = await fetch(`${ VITE_HOST }/api/user/watched/`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify({
@@ -209,7 +211,7 @@ export const Icons = ({ movie, isCard = false }) => {
 
       const id = movie.movieId ? movie.movieId : movie.id;
 
-      const res = await fetch(`http://localhost:4000/api/user/watched/${id}`, {
+      const res = await fetch(`${ VITE_HOST }/api/user/watched/${id}`, {
         method: "DELETE",
         headers: myHeaders,
       });
@@ -240,7 +242,7 @@ export const Icons = ({ movie, isCard = false }) => {
       // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
       myHeaders.append("x-token", Cookies.get("ai_to"));
 
-      const res = await fetch("http://localhost:4000/api/user/to-watch/", {
+      const res = await fetch(`${ VITE_HOST }/api/user/to-watch/`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify({
@@ -292,7 +294,7 @@ export const Icons = ({ movie, isCard = false }) => {
 
       const id = movie.movieId ? movie.movieId : movie.id;
 
-      const res = await fetch(`http://localhost:4000/api/user/to-watch/${id}`, {
+      const res = await fetch(`${ VITE_HOST }/api/user/to-watch/${id}`, {
         method: "DELETE",
         headers: myHeaders,
       });

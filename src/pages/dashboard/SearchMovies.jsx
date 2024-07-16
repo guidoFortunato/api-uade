@@ -4,8 +4,6 @@ import { UserContext } from "../../context/UserProvider";
 import { MovieCard, Spinner } from "../../components";
 import { getData } from "../../helpers";
 
-// const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
-
 export const SearchMovies = () => {
   const { selectedOption } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);

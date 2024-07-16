@@ -6,8 +6,6 @@ import clsx from "clsx";
 
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-// import { getEnvVariables } from "../../helpers";
-// const { VITE_API_IMAGE } = getEnvVariables();
 
 export const MovieCard = ({
   title,
@@ -34,12 +32,9 @@ export const MovieCard = ({
 
   return (
     <div
-      className={clsx(
-        "rounded relative hover:cursor-pointer mx-1 h-[200px]",
-        {
-          "w-full": !isInDashboard
-        }
-      )}
+      className={clsx("rounded relative hover:cursor-pointer mx-1 h-[200px]", {
+        "w-full": !isInDashboard,
+      })}
     >
       <LazyLoadImage
         alt={newTitle}

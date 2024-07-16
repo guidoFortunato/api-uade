@@ -7,7 +7,9 @@ import { IoMdClose } from "react-icons/io";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
 import { UserContext } from "../../context/UserProvider";
-import { alertInfo } from "../../helpers";
+import { alertInfo, getEnvVariables } from "../../helpers";
+
+const { VITE_HOST } = getEnvVariables();
 
 export const Register = () => {
   const { handleAuth, handleToken } = useContext(UserContext);
@@ -28,7 +30,7 @@ export const Register = () => {
       setIsLoading(true);
 
 
-      const res = await fetch("http://localhost:4000/api/auth/register", {
+      const res = await fetch(`${ VITE_HOST }/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

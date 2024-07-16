@@ -1,4 +1,7 @@
 import Cookies from "js-cookie";
+import { getEnvVariables } from "./getEnvVariables";
+
+const { VITE_HOST } = getEnvVariables();
 
 export const postMoviesData = async (url, method, body) => {
   try {
@@ -6,7 +9,7 @@ export const postMoviesData = async (url, method, body) => {
     myHeaders.append("Content-Type", "application/json");
     // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
     myHeaders.append("x-token", Cookies.get("ai_to"));
-    const response = await fetch(`http://localhost:4000/api${url}`, {
+    const response = await fetch(`${ VITE_HOST }/api${url}`, {
       method: method,
       headers: myHeaders,
       body: JSON.stringify(body)

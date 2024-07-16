@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { getData, getGenres, getMoviesData } from "../helpers/";
+import { getData, getEnvVariables, getGenres, getMoviesData } from "../helpers/";
 import Cookies from "js-cookie";
+const { VITE_HOST } = getEnvVariables();
 
 // const { VITE_API_URL } = getEnvVariables();
 
@@ -59,7 +60,7 @@ const UserProvider = ({ children }) => {
           //   JSON.parse(localStorage.getItem("token"))
           // );
           myHeaders.append("x-token", Cookies.get("ai_to"));
-          const res = await fetch("http://localhost:4000/api/auth/datauser", {
+          const res = await fetch(`${ VITE_HOST }/api/auth/datauser`, {
             method: "GET",
             headers: myHeaders,
           });
