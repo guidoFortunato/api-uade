@@ -79,7 +79,7 @@ const FilterDropdown = ({ onSelect }) => {
   );
 };
 
-const SearchForm = () => {
+const SearchForm = ({myStyle = ""}) => {
   const { handleSelected } = useContext(UserContext);
   const [value, setValue] = useState("");
   const [selected, setSelected] = useState( Cookie.get("selected") || "Película" );
@@ -105,7 +105,7 @@ const SearchForm = () => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={myStyle}>
       <div className="relative">
         <FilterDropdown onSelect={handleFilterSelect} />
         <input

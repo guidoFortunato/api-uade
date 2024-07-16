@@ -212,7 +212,8 @@ export const SideBar4 = () => {
             isOpenSearchBar ? "flex" : "hidden"
           } md:hidden w-full sm:w-[60%]`}
         >
-          <SearchBar3 myStyle={"px-5 w-[90%] mx-auto"} />
+          {/* <SearchBar3 myStyle={"px-5 w-[90%] mx-auto"} /> */}
+          <SearchForm myStyle={"px-5 w-[90%] mx-auto"}/>
         </div>
         <div
           className={`flex flex-col md:hidden md:items-center mt-3 md:mt-0 w-full`}
