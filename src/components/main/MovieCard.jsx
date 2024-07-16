@@ -2,24 +2,22 @@
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Icons } from "./Icons";
-
-import "react-lazy-load-image-component/src/effects/blur.css";
 import clsx from "clsx";
 
-// import { getEnvVariables } from "../../helpers";
-// const { VITE_API_IMAGE } = getEnvVariables();
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 
 export const MovieCard = ({
   title,
   image,
-  isProfile = false,
   movie,
   movieId,
+  isInDashboard = false,
   mediaType = "movie",
 }) => {
   const newTitle =
     title?.charAt().toUpperCase() + title?.substring(1).toLowerCase();
-  // console.log({ mediaType });
+  // console.log({ movie });
 
   const pathTitle = title
     ?.replace(/[^\w\sáéíóú]/gi, "") // Reemplazar puntos, dos puntos y letras sin tilde por espacios
@@ -30,15 +28,14 @@ export const MovieCard = ({
     .join("-")
     .toLowerCase();
 
-  // console.log({ movieCard: movie });
+  const isActor = movie.known_for ? true : false;
 
   return (
-    <div className={clsx(
-      "rounded relative hover:cursor-pointer mx-1 h-[200px]",
-      {
-        "w-full" : isProfile
-      }
-    )}>
+    <div
+      className={clsx("rounded relative hover:cursor-pointer mx-1 h-[200px]", {
+        "w-full": !isInDashboard,
+      })}
+    >
       <LazyLoadImage
         alt={newTitle}
         className="rounded object-cover w-full h-full"
@@ -63,7 +60,7 @@ export const MovieCard = ({
           </span>
         </div>
       </Link>
-      <Icons movie={movie} isCard={true} />
+      {!isActor && <Icons movie={movie} isCard={true} />}
     </div>
   );
 };

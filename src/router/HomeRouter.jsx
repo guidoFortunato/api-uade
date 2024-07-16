@@ -15,7 +15,7 @@ export const HomeRouter = () => {
         <Route path="/series/:name/:id" element={<FilmDetails />} />
         <Route path="/actores/:name/:id" element={<ActorFilms />} />
         <Route path="/generos/:name/:id" element={<GenreFilms />} />
-        <Route path="/perfil" element={<Profile />} />
+        {/* <Route path="/perfil" element={<Profile />} /> */}
 
         <Route path="*" element={<Navigate to="/" />} />
       </Route>

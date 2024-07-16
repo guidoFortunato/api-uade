@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { getData, getGenres, getMoviesData } from "../helpers/";
+import { getData, getEnvVariables, getGenres, getMoviesData } from "../helpers/";
+import Cookies from "js-cookie";
+const { VITE_HOST } = getEnvVariables();
 
 // const { VITE_API_URL } = getEnvVariables();
 
@@ -7,13 +9,15 @@ export const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const UserProvider = ({ children }) => {
-  const [auth, setAuth] = useState(
-    JSON.parse(localStorage.getItem("token")) ? true : false
-  );
+  // const [auth, setAuth] = useState(
+  //   JSON.parse(localStorage.getItem("token")) ? true : false
+  // );
+  const [auth, setAuth] = useState(Cookies.get("ai_to") ? true : false);
   const [dataUser, setDataUser] = useState("");
-  const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("token")) || ""
-  );
+  // const [token, setToken] = useState(
+  //   JSON.parse(localStorage.getItem("token")) || ""
+  // );
+  const [token, setToken] = useState(Cookies.get("ai_to") || "");
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -27,7 +31,9 @@ const UserProvider = ({ children }) => {
   const [favoritesMovies, setFavoritesMovies] = useState([]);
   const [listMovies, setListMovies] = useState([]);
   const [toWatchMovies, setToWatchMovies] = useState([]);
-  const [selected, setSelected] = useState("");
+  const [selectedOption, setSelectedOption] = useState(
+    Cookies.get("selected") || "Películas"
+  );
   const [dataMovieDashboard, setDataMovieDashboard] = useState();
 
   // console.log({favoritesMovies})
@@ -49,11 +55,12 @@ const UserProvider = ({ children }) => {
         try {
           let myHeaders = new Headers();
           myHeaders.append("Content-Type", "application/json");
-          myHeaders.append(
-            "x-token",
-            JSON.parse(localStorage.getItem("token"))
-          );
-          const res = await fetch("http://localhost:4000/api/auth/datauser", {
+          // myHeaders.append(
+          //   "x-token",
+          //   JSON.parse(localStorage.getItem("token"))
+          // );
+          myHeaders.append("x-token", Cookies.get("ai_to"));
+          const res = await fetch(`${ VITE_HOST }/api/auth/datauser`, {
             method: "GET",
             headers: myHeaders,
           });
@@ -74,9 +81,7 @@ const UserProvider = ({ children }) => {
     if (dataUser !== "") {
       const getFavoritesMovies = async () => {
         // console.log({dataUser})
-        const data = await getMoviesData(
-          `/user/favorites/${dataUser.uid}`
-        );
+        const data = await getMoviesData(`/user/favorites/${dataUser.uid}`);
         setFavoritesMovies(data.favoriteMovies);
       };
       getFavoritesMovies();
@@ -86,9 +91,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     if (dataUser !== "") {
       const getVistasMovies = async () => {
-        const data = await getMoviesData(
-          `/user/watched/${dataUser.uid}`
-        );
+        const data = await getMoviesData(`/user/watched/${dataUser.uid}`);
         setListMovies(data.watchedMovies);
       };
       getVistasMovies();
@@ -98,9 +101,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     if (dataUser !== "") {
       const getToWatchMovies = async () => {
-        const data = await getMoviesData(
-          `/user/to-watch/${dataUser.uid}`
-        );
+        const data = await getMoviesData(`/user/to-watch/${dataUser.uid}`);
         // console.log({data})
         setToWatchMovies(data.toWatchMovies);
       };
@@ -209,64 +210,194 @@ const UserProvider = ({ children }) => {
   };
 
   const handleSelected = (value) => {
-    setSelected(value);
-    localStorage.setItem("selected", JSON.stringify(value));
+    setSelectedOption(value);
   };
 
   const handleFavoritesMovies = (movie) => {
-    // console.log({handleFavoritesMovie: movie})
+    // console.log({ handleFavoritesMovie: movie });
 
-    const { title, _id, image, movieId, media_type } = movie
-   
-    const existInFavorite = favoritesMovies.some(
-      (favoriteMovie) => favoriteMovie.movieId.toString() === movieId.toString() && favoriteMovie.media_type === media_type && favoriteMovie.title.toLowerCase() === title.toLowerCase()
-    );   
+    if (movie.id) {
+      const { title, id, backdrop_path, poster_path } = movie;
+      const media_type = movie.media_type
+        ? movie.media_type
+        : movie.known_for
+        ? "person"
+        : movie.name
+        ? "tv"
+        : "movie";
+      const image = backdrop_path ? backdrop_path : poster_path;
+      const movieId = id.toString();
 
-    if (!existInFavorite) {
-      const updatedFavorites = [...favoritesMovies, { title, _id, image, movieId, media_type }];
-      setFavoritesMovies(updatedFavorites);
-    } else {
-      const updatedFavorites = favoritesMovies.filter(
-        (favoriteMovie) => favoriteMovie.movieId.toString() !== movieId.toString() || favoriteMovie.media_type !== media_type || favoriteMovie.title.toLowerCase() !== title.toLowerCase()
+      const existInFavorite = favoritesMovies.some(
+        (favoriteMovie) =>
+          favoriteMovie.movieId.toString() === id.toString() &&
+          favoriteMovie.title.toLowerCase() === title.toLowerCase()
       );
-      setFavoritesMovies(updatedFavorites);
+
+      if (!existInFavorite) {
+        const updatedFavorites = [
+          ...favoritesMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setFavoritesMovies(updatedFavorites);
+      } else {
+        const updatedFavorites = favoritesMovies.filter(
+          (favoriteMovie) =>
+            favoriteMovie.movieId.toString() !== movieId.toString() ||
+            favoriteMovie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setFavoritesMovies(updatedFavorites);
+      }
+    } else {
+      const { title, _id, image, movieId, media_type } = movie;
+      const existInFavorite = favoritesMovies.some(
+        (favoriteMovie) =>
+          favoriteMovie.movieId.toString() === movieId.toString() &&
+          favoriteMovie.media_type === media_type &&
+          favoriteMovie.title.toLowerCase() === title.toLowerCase()
+      );
+
+      if (!existInFavorite) {
+        const updatedFavorites = [
+          ...favoritesMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setFavoritesMovies(updatedFavorites);
+      } else {
+        const updatedFavorites = favoritesMovies.filter(
+          (favoriteMovie) =>
+            favoriteMovie.movieId.toString() !== movieId.toString() ||
+            favoriteMovie.media_type !== media_type ||
+            favoriteMovie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setFavoritesMovies(updatedFavorites);
+      }
     }
   };
 
-  const handleListMovies = async(movie) => {
+  const handleListMovies = async (movie) => {
     // console.log({handleListMovie: movie})
-    
-    const { title, _id, image, movieId, media_type } = movie
-   
-    const isList = listMovies.some((listMovie) => listMovie.movieId.toString() === movieId.toString() && listMovie.media_type === media_type && listMovie.title.toLowerCase() === title.toLowerCase());
 
-    if (!isList) {
-      const updatedList = [...listMovies, { title, _id, image, movieId, media_type }];
-      setListMovies(updatedList);
-    } else {
-      const updatedList = listMovies.filter(
-        (listMovie) => listMovie.movieId.toString() !== movieId.toString() || listMovie.media_type !== media_type || listMovie.title.toLowerCase() !== title.toLowerCase()
+    if (movie.id) {
+      const { title, id, backdrop_path, poster_path } = movie;
+      const media_type = movie.media_type
+        ? movie.media_type
+        : movie.known_for
+        ? "person"
+        : movie.name
+        ? "tv"
+        : "movie";
+      const image = backdrop_path ? backdrop_path : poster_path;
+      const movieId = id.toString();
+
+      const isList = listMovies.some(
+        (listMovie) =>
+          listMovie.movieId.toString() === id.toString() &&
+          listMovie.title.toLowerCase() === title.toLowerCase()
       );
-      setListMovies(updatedList);
+
+      if (!isList) {
+        const updatedList = [
+          ...listMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setListMovies(updatedList);
+      } else {
+        const updatedList = listMovies.filter(
+          (listMovie) =>
+            listMovie.movieId.toString() !== movieId.toString() ||
+            listMovie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setListMovies(updatedList);
+      }
+    } else {
+      const { title, _id, image, movieId, media_type } = movie;
+
+      const isList = listMovies.some(
+        (listMovie) =>
+          listMovie.movieId.toString() === movieId.toString() &&
+          listMovie.media_type === media_type &&
+          listMovie.title.toLowerCase() === title.toLowerCase()
+      );
+
+      if (!isList) {
+        const updatedList = [
+          ...listMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setListMovies(updatedList);
+      } else {
+        const updatedList = listMovies.filter(
+          (listMovie) =>
+            listMovie.movieId.toString() !== movieId.toString() ||
+            listMovie.media_type !== media_type ||
+            listMovie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setListMovies(updatedList);
+      }
     }
   };
 
-  const handleToWatchMovies = async(movie) => {
-    
+  const handleToWatchMovies = async (movie) => {
     // console.log({handleToWatchMovie: movie})
-    
-    const { title, _id, image, movieId, media_type } = movie
-   
-    const isinToWatch = toWatchMovies.some((movie) => movie.movieId.toString() === movieId.toString() && movie.media_type === media_type && movie.title.toLowerCase() === title.toLowerCase());
 
-    if (!isinToWatch) {
-      const updatedList = [...toWatchMovies, { title, _id, image, movieId, media_type }];
-      setToWatchMovies(updatedList);
-    } else {
-      const updatedList = toWatchMovies.filter(
-        (movie) => movie.movieId.toString() !== movieId.toString() || movie.media_type !== media_type || movie.title.toLowerCase() !== title.toLowerCase()
+    if (movie.id) {
+      const { title, id, backdrop_path, poster_path } = movie;
+      const media_type = movie.media_type
+        ? movie.media_type
+        : movie.known_for
+        ? "person"
+        : movie.name
+        ? "tv"
+        : "movie";
+      const image = backdrop_path ? backdrop_path : poster_path;
+      const movieId = id.toString();
+
+      const isInToWatch = toWatchMovies.some(
+        (movie) =>
+          movie.movieId.toString() === id.toString() &&
+          movie.title.toLowerCase() === title.toLowerCase()
       );
-      setToWatchMovies(updatedList);
+
+      if (!isInToWatch) {
+        const updatedList = [
+          ...toWatchMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setToWatchMovies(updatedList);
+      } else {
+        const updatedList = toWatchMovies.filter(
+          (movie) =>
+            movie.movieId.toString() !== movieId.toString() ||
+            movie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setToWatchMovies(updatedList);
+      }
+    } else {
+      const { title, _id, image, movieId, media_type } = movie;
+
+      const isInToWatch = toWatchMovies.some(
+        (movie) =>
+          movie.movieId.toString() === movieId.toString() &&
+          movie.media_type === media_type &&
+          movie.title.toLowerCase() === title.toLowerCase()
+      );
+
+      if (!isInToWatch) {
+        const updatedList = [
+          ...toWatchMovies,
+          { title, _id, image, movieId, media_type },
+        ];
+        setToWatchMovies(updatedList);
+      } else {
+        const updatedList = toWatchMovies.filter(
+          (movie) =>
+            movie.movieId.toString() !== movieId.toString() ||
+            movie.media_type !== media_type ||
+            movie.title.toLowerCase() !== title.toLowerCase()
+        );
+        setToWatchMovies(updatedList);
+      }
     }
   };
 
@@ -290,7 +421,7 @@ const UserProvider = ({ children }) => {
         nowPlayingMovies,
         popularMovies,
         searchBarOpen,
-        selected,
+        selectedOption,
         seriesGenres,
         topRatedMovies,
         topRatedSeries,

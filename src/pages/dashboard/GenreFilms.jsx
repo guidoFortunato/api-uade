@@ -1,24 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useContext, useEffect, useState } from "react";
-import {
-  useNavigate,
-  useParams
-} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MovieCard, Spinner } from "../../components";
 import { UserContext } from "../../context/UserProvider";
 
-// const { VITE_API_URL, VITE_API_IMAGE } = getEnvVariables();
-
 export const GenreFilms = () => {
-  const { selected, topRatedMovies, topRatedSeries } = useContext(UserContext);
+  const { selected, topRatedMovies, topRatedSeries, popularMovies, nowPlayingMovies, upcomingMovies } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState(null);
   const [films, setFilms] = useState(null);
   const navigate = useNavigate();
   // const { pathname, search } = useLocation();
   const { name, id } = useParams();
-  console.log({ selected });
-  console.log({films})
+
+  // console.log({ selected });
+  // console.log({films})
 
   useEffect(() => {
     setTimeout(() => {
@@ -29,31 +25,36 @@ export const GenreFilms = () => {
   useEffect(() => {
     try {
       setIsLoading(true);
-      let newFilms;
-      if (selected === "movie") {
-        newFilms = topRatedMovies.filter((item) =>
-          item.genre_ids.includes(Number(id))
-        );
-        // console.log({ selectedPeliculas: newFilms });
-      }
-      if (selected === "tv") {
-        newFilms = topRatedSeries.filter((item) =>
-          item.genre_ids.includes(Number(id))
-        );
-        // console.log({ selectedSeries: newFilms });
-      }
-      if (selected === "both") {
-        const movieFilms = topRatedMovies.filter(item =>
-          item.genre_ids.includes(Number(id))
-        );
-        const tvFilms = topRatedSeries.filter(item =>
-          item.genre_ids.includes(Number(id))
-        );
-        newFilms = movieFilms.concat(tvFilms);
-        // console.log({ selectedSeries: newFilms });
-      }
-      console.log({newFilms})
-      setFilms(newFilms);
+      let ratedMovies;
+      let ratedSeries;
+      let moviesPopular;
+      let moviesPlaying;
+      let moviesUpcoming;
+      let total;
+
+      ratedMovies = topRatedMovies.filter((item) =>
+        item.genre_ids.includes(Number(id))
+      );
+
+      ratedSeries = topRatedSeries.filter((item) =>
+        item.genre_ids.includes(Number(id))
+      );
+
+      moviesPopular = popularMovies.filter((item) =>
+        item.genre_ids.includes(Number(id))
+      );
+
+      moviesPlaying = nowPlayingMovies.filter((item) =>
+        item.genre_ids.includes(Number(id))
+      );
+
+      moviesUpcoming = upcomingMovies.filter((item) =>
+        item.genre_ids.includes(Number(id))
+      );
+
+      total = [...ratedMovies, ...ratedSeries, ...moviesPopular, ...moviesPlaying, ...moviesUpcoming];
+
+      setFilms(total);
 
       setStatus(true);
     } catch (error) {
@@ -87,7 +88,7 @@ export const GenreFilms = () => {
       </div>
       <div className="container px-10 py-10 mx-auto">
         {films?.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 justify-items-center">
             {films.map((movie) => (
               <MovieCard
                 key={movie.id}
@@ -103,7 +104,15 @@ export const GenreFilms = () => {
                 }
                 description={movie.overview}
                 movie={movie}
-                mediaType={ movie.media_type ? movie.media_type : movie.title ? "movie" : movie.name ? "tv" : "person"}
+                mediaType={
+                  movie.media_type
+                    ? movie.media_type
+                    : movie.known_for
+                    ? "person"
+                    : movie.name
+                    ? "tv"
+                    : "movie"
+                }
               />
             ))}
           </div>

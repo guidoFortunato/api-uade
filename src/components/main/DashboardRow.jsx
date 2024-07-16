@@ -76,8 +76,9 @@ export const DashboardRow = ({ title, movies }) => {
             }
             description={movie.overview}
             movie={movie}
-            mediaType={ movie.media_type ? movie.media_type : movie.title ? "movie" : movie.name ? "tv" : "person"}
+            mediaType={ movie.media_type ? movie.media_type : movie.known_for ? "person" : movie.name ? "tv" : "movie"}
             isCard={true}
+            isInDashboard={true}
           />
         ))}
       </Slider>

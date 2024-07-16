@@ -76,19 +76,8 @@ body {
 }
 
 /*slider*/
-
-/* .slick-prev,
-.slick-next {
-  display: none; 
-
-}
-@media screen and (min-width: 768px) {
-  .slick-prev,
-.slick-next {
-  display: block; 
-
-}
- 
+/* .slick-slide{
+  margin: 0 4px
 } */
 
 .slick-disabled {

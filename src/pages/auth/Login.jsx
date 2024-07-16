@@ -1,12 +1,15 @@
 import clsx from "clsx";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import Cookies from "js-cookie";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
-import { alertInfo } from "../../helpers";
+import { alertInfo, getEnvVariables } from "../../helpers";
+
+const { VITE_HOST } = getEnvVariables();
 
 export const Login = () => {
   const {
@@ -25,7 +28,7 @@ export const Login = () => {
     try {
       setIsLoading(true);
 
-      const res = await fetch("http://localhost:4000/api/auth/", {
+      const res = await fetch(`${ VITE_HOST }/api/auth/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -42,7 +45,8 @@ export const Login = () => {
         return;
       }
 
-      localStorage.setItem("token", JSON.stringify(data.token));
+      Cookies.set("ai_to", data.token, { expires: 365 });
+      // localStorage.setItem("token", JSON.stringify(data.token));
       handleAuth(true);
       handleToken(data.token)
     } catch (error) {

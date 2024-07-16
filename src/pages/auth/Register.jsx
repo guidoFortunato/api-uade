@@ -1,12 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useState } from "react"
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import clsx from "clsx";
 import { IoMdClose } from "react-icons/io";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
 import { UserContext } from "../../context/UserProvider";
-import { alertInfo } from "../../helpers";
+import { alertInfo, getEnvVariables } from "../../helpers";
+
+const { VITE_HOST } = getEnvVariables();
 
 export const Register = () => {
   const { handleAuth, handleToken } = useContext(UserContext);
@@ -27,7 +30,7 @@ export const Register = () => {
       setIsLoading(true);
 
 
-      const res = await fetch("http://localhost:4000/api/auth/register", {
+      const res = await fetch(`${ VITE_HOST }/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -44,7 +47,8 @@ export const Register = () => {
         return;
       }
 
-      localStorage.setItem("token", JSON.stringify(data.token));
+      // localStorage.setItem("token", JSON.stringify(data.token));
+      Cookies.set("ai_to", data.token, { expires: 365 });
       handleAuth(true);
       handleToken(data.token)
     } catch (error) {

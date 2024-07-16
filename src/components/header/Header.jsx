@@ -1,9 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import clsx from "clsx";
-import { SideBar } from "./SideBar";
-import { SearchBar } from "./SearchBar";
-import { SideBar2 } from "./SideBar2";
-import { SideBar3 } from "./SideBar3";
 import { SideBar4 } from "./SideBar4";
 import { UserContext } from "../../context/UserProvider";
 

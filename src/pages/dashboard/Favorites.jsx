@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { MovieCard } from "../../components";
 import { UserContext } from "../../context/UserProvider";
 
@@ -22,7 +22,7 @@ export const Favorites = () => {
       </div>
       <div className="container px-10 py-10 mx-auto">
         {favoritesMovies.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 justify-items-center">
             {favoritesMovies?.map((movie, index) => (
               <MovieCard
                 key={index}
@@ -34,7 +34,7 @@ export const Favorites = () => {
                 }
                 movieId={movie.movieId}
                 movie={movie}
-                mediaType={ movie.media_type ? movie.media_type : movie.title ? "movie" : movie.name ? "tv" : "person"}
+                mediaType={ movie.media_type ? movie.media_type : movie.known_for ? "person" : movie.name ? "tv" : "movie"}
               />
             ))}
           </div>

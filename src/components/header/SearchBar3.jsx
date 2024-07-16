@@ -53,7 +53,7 @@ export const SearchBar3 = ({ myStyle }) => {
           type="text"
           id="search-navbar"
           className="block w-full p-2 ps-10 text-sm text-white border bg-transparent border-[#9e55fd] rounded focus:ring-[#9757ca] focus:border-[#9757ca] focus:outline-none"
-          placeholder="Buscar..."
+          placeholder="Películas, series..."
           value={value}
           onChange={handleValue}
           autoComplete="off"
