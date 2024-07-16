@@ -14,11 +14,6 @@ export const PassRecover = () => {
     navigate('/auth/login')
   });
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("click enviar");
-  // };
-
   return (
     <div className="bg-violet-dark p-7 rounded-lg bg-opacity-65 relative">
       <Link to="/auth/login">
