@@ -33,8 +33,9 @@ export const Icons = ({ movie, isCard = false }) => {
   const [like, setLike] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const [toWatch, setToWatch] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // console.log({favoritesMovies})
+  // console.log({isLoading})
 
   useEffect(() => {
     setFavorite(
@@ -66,12 +67,13 @@ export const Icons = ({ movie, isCard = false }) => {
     // console.log("entra a addFavorites");
     // console.log({ movie });
     try {
+      setIsLoading(true);
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
       myHeaders.append("x-token", Cookies.get("ai_to"));
 
-      const res = await fetch(`${ VITE_HOST }/api/user/favorites/`, {
+      const res = await fetch(`${VITE_HOST}/api/user/favorites/`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify({
@@ -108,6 +110,8 @@ export const Icons = ({ movie, isCard = false }) => {
       handleFavoritesMovies(data.movie);
     } catch (error) {
       console.log({ error });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -118,20 +122,18 @@ export const Icons = ({ movie, isCard = false }) => {
     // console.log({pathUrl})
 
     try {
+      setIsLoading(true);
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("x-token", Cookies.get("ai_to"));
       // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
       const id = movie.movieId ? movie.movieId : movie.id;
 
-      const res = await fetch(
-        `${ VITE_HOST }/api/user/favorites/${id}`,
-        {
-          method: "DELETE",
-          headers: myHeaders,
-          // body: JSON.stringify({ isIdDb: movie._id ? true : false }),
-        }
-      );
+      const res = await fetch(`${VITE_HOST}/api/user/favorites/${id}`, {
+        method: "DELETE",
+        headers: myHeaders,
+        // body: JSON.stringify({ isIdDb: movie._id ? true : false }),
+      });
       // console.log({res})
       const data = await res.json();
       // console.log({ data });
@@ -147,6 +149,8 @@ export const Icons = ({ movie, isCard = false }) => {
       handleFavoritesMovies(movie);
     } catch (error) {
       console.log({ error });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -154,12 +158,13 @@ export const Icons = ({ movie, isCard = false }) => {
     // console.log("entra a addWatched");
     // console.log({ movie });
     try {
+      setIsLoading(true);
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
       myHeaders.append("x-token", Cookies.get("ai_to"));
 
-      const res = await fetch(`${ VITE_HOST }/api/user/watched/`, {
+      const res = await fetch(`${VITE_HOST}/api/user/watched/`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify({
@@ -196,6 +201,8 @@ export const Icons = ({ movie, isCard = false }) => {
       handleListMovies(data.movie);
     } catch (error) {
       console.log({ error });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -204,6 +211,7 @@ export const Icons = ({ movie, isCard = false }) => {
     // const pathUrl = pathname === "/favoritos" ? "favorites" : "watched";
     // console.log({ movie });
     try {
+      setIsLoading(true);
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
@@ -211,7 +219,7 @@ export const Icons = ({ movie, isCard = false }) => {
 
       const id = movie.movieId ? movie.movieId : movie.id;
 
-      const res = await fetch(`${ VITE_HOST }/api/user/watched/${id}`, {
+      const res = await fetch(`${VITE_HOST}/api/user/watched/${id}`, {
         method: "DELETE",
         headers: myHeaders,
       });
@@ -230,6 +238,8 @@ export const Icons = ({ movie, isCard = false }) => {
       handleListMovies(movie);
     } catch (error) {
       console.log({ error });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -237,12 +247,13 @@ export const Icons = ({ movie, isCard = false }) => {
     // console.log("entra a addToWatch");
     // console.log({ movie });
     try {
+      setIsLoading(true);
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
       myHeaders.append("x-token", Cookies.get("ai_to"));
 
-      const res = await fetch(`${ VITE_HOST }/api/user/to-watch/`, {
+      const res = await fetch(`${VITE_HOST}/api/user/to-watch/`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify({
@@ -279,6 +290,8 @@ export const Icons = ({ movie, isCard = false }) => {
       handleToWatchMovies(data.movie);
     } catch (error) {
       console.log({ error });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -287,6 +300,7 @@ export const Icons = ({ movie, isCard = false }) => {
     // const pathUrl = pathname === "/favoritos" ? "favorites" : "watched";
     // console.log({ movie });
     try {
+      setIsLoading(true);
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       // myHeaders.append("x-token", JSON.parse(localStorage.getItem("token")));
@@ -294,7 +308,7 @@ export const Icons = ({ movie, isCard = false }) => {
 
       const id = movie.movieId ? movie.movieId : movie.id;
 
-      const res = await fetch(`${ VITE_HOST }/api/user/to-watch/${id}`, {
+      const res = await fetch(`${VITE_HOST}/api/user/to-watch/${id}`, {
         method: "DELETE",
         headers: myHeaders,
       });
@@ -313,6 +327,8 @@ export const Icons = ({ movie, isCard = false }) => {
       handleToWatchMovies(movie);
     } catch (error) {
       console.log({ error });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -320,65 +336,128 @@ export const Icons = ({ movie, isCard = false }) => {
     <span className={isCard ? "" : "relative"}>
       {favorite ? (
         <>
-          <FaHeart
-            onClick={removeFavorites}
-            className={clsx("absolute text-red-500 top-1 cursor-pointer", {
-              "left-1 text-lg": isCard,
-              "left-0 text-xl": !isCard,
-            })}
-          />
+          {isLoading ? (
+            <FaHeart
+              className={clsx("absolute text-red-500 top-1 cursor-pointer", {
+                "left-1 text-lg": isCard,
+                "left-0 text-xl": !isCard,
+                "text-blue-500": isLoading,
+              })}
+            />
+          ) : (
+            <FaHeart
+              onClick={removeFavorites}
+              className={clsx("absolute text-red-500 top-1 cursor-pointer", {
+                "left-1 text-lg": isCard,
+                "left-0 text-xl": !isCard,
+              })}
+            />
+          )}
         </>
       ) : (
         <>
-          <FaRegHeart
-            onClick={addFavorites}
-            className={clsx("absolute text-gray-300 top-1 cursor-pointer", {
-              "left-1 text-lg": isCard,
-              "left-0 text-xl": !isCard,
-            })}
-          />
+          {isLoading ? (
+            <FaRegHeart
+              className={clsx("absolute text-gray-300 top-1 cursor-pointer", {
+                "left-1 text-lg": isCard,
+                "left-0 text-xl": !isCard,
+              })}
+            />
+          ) : (
+            <FaRegHeart
+              onClick={addFavorites}
+              className={clsx("absolute text-gray-300 top-1 cursor-pointer", {
+                "left-1 text-lg": isCard,
+                "left-0 text-xl": !isCard,
+              })}
+            />
+          )}
         </>
       )}
       {like ? (
-        <FaStar
-          onClick={removeWatched}
-          // className={`absolute text-yellow-300 top-1 left-7 ${ isCard ? "text-lg" : "text-xl" } cursor-pointer`}
-          className={clsx(
-            "absolute text-yellow-300 top-1 left-7 cursor-pointer",
-            {
-              "text-lg": isCard,
-              "text-xl": !isCard,
-            }
+        <>
+          {isLoading ? (
+            <FaStar
+              className={clsx(
+                "absolute text-yellow-300 top-1 left-7 cursor-pointer",
+                {
+                  "text-lg": isCard,
+                  "text-xl": !isCard,
+                }
+              )}
+            />
+          ) : (
+            <FaStar
+              onClick={removeWatched}
+              // className={`absolute text-yellow-300 top-1 left-7 ${ isCard ? "text-lg" : "text-xl" } cursor-pointer`}
+              className={clsx(
+                "absolute text-yellow-300 top-1 left-7 cursor-pointer",
+                {
+                  "text-lg": isCard,
+                  "text-xl": !isCard,
+                }
+              )}
+            />
           )}
-        />
+        </>
       ) : (
-        <FaRegStar
-          onClick={addWatched}
-          // className={`absolute top-1 left-7 text-gray-300 ${ isCard ? "text-lg" : "text-xl" } cursor-pointer`}
-          className={clsx("absolute top-1  text-gray-300 cursor-pointer", {
-            "text-lg left-7": isCard,
-            "text-xl left-7": !isCard,
-          })}
-        />
+        <>
+          {isLoading ? (
+            <FaRegStar
+              className={clsx("absolute top-1  text-gray-300 cursor-pointer", {
+                "text-lg left-7": isCard,
+                "text-xl left-7": !isCard,
+              })}
+            />
+          ) : (
+            <FaRegStar
+              onClick={addWatched}
+              className={clsx("absolute top-1  text-gray-300 cursor-pointer", {
+                "text-lg left-7": isCard,
+                "text-xl left-7": !isCard,
+              })}
+            />
+          )}
+        </>
       )}
       {toWatch ? (
-        <BiSolidMoviePlay
-          onClick={removeToWatch}
-          // className={`absolute text-yellow-300 top-1 left-7 ${ isCard ? "text-lg" : "text-xl" } cursor-pointer`}
-          className={clsx("absolute text-[#FB8500] top-1 cursor-pointer", {
-            "text-lg left-[3.2rem]": isCard,
-            "text-xl left-14": !isCard,
-          })}
-        />
+        <>
+          {isLoading ? (
+            <BiSolidMoviePlay
+              className={clsx("absolute text-[#FB8500] top-1 cursor-pointer", {
+                "text-lg left-[3.2rem]": isCard,
+                "text-xl left-14": !isCard,
+              })}
+            />
+          ) : (
+            <BiSolidMoviePlay
+              onClick={removeToWatch}
+              className={clsx("absolute text-[#FB8500] top-1 cursor-pointer", {
+                "text-lg left-[3.2rem]": isCard,
+                "text-xl left-14": !isCard,
+              })}
+            />
+          )}
+        </>
       ) : (
-        <BiMoviePlay
-          onClick={addToWatch}
-          // className={`absolute top-1 left-7 text-gray-300 ${ isCard ? "text-lg" : "text-xl" } cursor-pointer`}
-          className={clsx("absolute top-1 text-gray-300 cursor-pointer", {
-            "text-lg left-[3.2rem]": isCard,
-            "text-xl left-14": !isCard,
-          })}
-        />
+        <>
+          {isLoading ? (
+            <BiMoviePlay
+              className={clsx("absolute top-1 text-gray-300 cursor-pointer", {
+                "text-lg left-[3.2rem]": isCard,
+                "text-xl left-14": !isCard,
+              })}
+            />
+          ) : (
+            <BiMoviePlay
+              onClick={addToWatch}
+              className={clsx("absolute top-1 text-gray-300 cursor-pointer", {
+                "text-lg left-[3.2rem]": isCard,
+                "text-xl left-14": !isCard,
+              })}
+            />
+          )}
+        </>
       )}
     </span>
   );
